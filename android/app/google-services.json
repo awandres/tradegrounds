@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "718060848663",
+    "project_id": "storegrounds",
+    "storage_bucket": "storegrounds.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:718060848663:android:1d84f83d4eb9dbe3f1fe52",
+        "android_client_info": {
+          "package_name": "com.storegrounds"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "718060848663-42krea1fcqvjjevk6it39m8pphrcm6mt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsqdfnET4_5_-cuzOaHQkSTsrRELdjYxI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "718060848663-42krea1fcqvjjevk6it39m8pphrcm6mt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
