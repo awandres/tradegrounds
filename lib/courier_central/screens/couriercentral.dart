@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'file:///D:/Tradegrounds/storegrounds/storegrounds/storegrounds/lib/global/widgets/custom_drawer.dart';
+import '../../global/widgets/custom_drawer.dart';
 
 class CourierCentral extends StatefulWidget {
   @override
