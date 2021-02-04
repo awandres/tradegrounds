@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'courier_central/screens/couriercentral.dart';
-import 'package:authentication/auth/auth.dart';
+import 'package:authentication/providers/auth.dart';
 import 'package:authentication/screens/login_screen.dart';
 import 'package:authentication/screens/splash_screen.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../auth/auth.dart';
+import '../providers/auth.dart';
 import '../models/http_exception.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -104,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Column(
                       children: <Widget>[
                         TextFormField(
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             labelText: 'E-Mail',
                             border: OutlineInputBorder(
                               borderRadius: const BorderRadius.all(
@@ -126,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           height: 20,
                         ),
                         TextFormField(
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             labelText: 'Password',
                             border: OutlineInputBorder(
                               borderRadius: const BorderRadius.all(
@@ -154,11 +154,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Text('New User ? '),
+                            const Text('New User ? '),
                             FlatButton(
-                              child: Text('Sign Up'),
+                              child: const Text('Sign Up'),
                               onPressed: (){},
-                              padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 4),
+                              padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 4),
                               materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                               textColor: Theme.of(context).primaryColor,
                             ),
@@ -168,12 +168,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           height: 20,
                         ),
                         RaisedButton(
-                          child: Text('LOGIN'),
+                          child: const Text('LOGIN'),
                           onPressed: _submit,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),
                           ),
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                               horizontal: 30.0, vertical: 8.0),
                           color: Theme.of(context).primaryColor,
                           textColor:
