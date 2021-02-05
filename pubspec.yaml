@@ -48,6 +48,7 @@ dev_dependencies:
 flutter:
   assets:
     - assets/images/storegroundsLogo.png
+    - assets/images/tradegroundsIg.png
     
   fonts:
     - family: Pacifico

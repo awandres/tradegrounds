@@ -31,8 +31,8 @@ class MyApp extends StatelessWidget {
             primaryColor: Color(0xff3EC9a8),
           ),
           home: auth.isAuth
-            ? CourierCentral()
-            :FutureBuilder(
+          ? CourierCentral()
+          : FutureBuilder(
               future: auth.tryAutoLogin(),
               builder: (ctx, authResultSnapshot) =>
                 authResultSnapshot.connectionState ==

@@ -1,6 +1,8 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:storegrounds/courier_central/screens/couriercentral.dart';
+import 'package:authentication/providers/auth.dart';
+import 'package:provider/provider.dart';
 
 class CustomDrawer extends StatelessWidget {
   _buildDrawerOption(Icon icon, String title, Function onTap) {
@@ -10,7 +12,7 @@ class CustomDrawer extends StatelessWidget {
         title,
         style: TextStyle(
           fontSize: 20.0,
-         fontFamily: 'Quicksand',
+          fontFamily: 'Quicksand',
         ),
       ),
       onTap: onTap,
@@ -77,12 +79,9 @@ class CustomDrawer extends StatelessWidget {
               child:
                   _buildDrawerOption(Icon(Icons.directions_run), 'Logout', () {
                 //logoutUser = true;
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => CourierCentral(),
-                  ),
-                );
+                Navigator.of(context).pop();
+                Navigator.of(context).pushReplacementNamed('/');
+                Provider.of<Auth>(context, listen: false).logout();
               }),
             ),
           ),
