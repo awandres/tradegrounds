@@ -83,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Container(
             height: deviceSize.height,
             width: deviceSize.width,
-            padding: EdgeInsets.only(bottom: 10, left: 40, right: 40, top: deviceSize.height*0.10),
+            padding: EdgeInsets.only(bottom: 10, left: 40, right: 40, top: (deviceSize.height*0.10)),
             child: LayoutBuilder(builder: (ctx, constraints) {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -197,8 +197,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(
                     height: 50,
                   ),
-                  Flexible(
-                    child: Positioned(
+                  
+                  Positioned(
                       bottom: 0,
                       child: Container(
                         height: 50,
@@ -225,7 +225,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
-                  )
+               
                 ],
               );
             }),
