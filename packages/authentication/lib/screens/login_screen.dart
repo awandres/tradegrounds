@@ -83,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Container(
             height: deviceSize.height,
             width: deviceSize.width,
-            padding: EdgeInsets.only(bottom: 10, left: 40, right: 40, top: 45),
+            padding: EdgeInsets.only(bottom: 10, left: 40, right: 40, top: deviceSize.height*0.10),
             child: LayoutBuilder(builder: (ctx, constraints) {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -103,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     padding: EdgeInsets.all(20),
                     child: Text(
                       'Storegrounds', 
-                      style: TextStyle(fontSize: 30),
+                      style: Theme.of(context).textTheme.title,
                     )
                   ),
                   Flexible(
@@ -197,30 +197,32 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(
                     height: 50,
                   ),
-                  Positioned(
-                    bottom: 0,
-                    child: Container(
-                      height: 50,
-                      width: deviceSize.width,
-                      padding: EdgeInsets.only(left: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          Image.asset(
-                            'assets/images/tradegroundsIg.png',
-                            fit: BoxFit.cover,
-                          ),
-                          SizedBox(width: 30,),
-                          FittedBox(
-                            child: Column(
-                              children: <Widget>[
-                                Text('Tradegrounds Inc. 2077'),
-                                Text('www.tradegrounds.info'),
-                                Text('v.0.0.1'),
-                              ],
+                  Flexible(
+                    child: Positioned(
+                      bottom: 0,
+                      child: Container(
+                        height: 50,
+                        width: deviceSize.width,
+                        padding: EdgeInsets.only(left: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/images/tradegroundsIg.png',
+                              fit: BoxFit.cover,
                             ),
-                          )
-                        ],
+                            SizedBox(width: 30,),
+                            FittedBox(
+                              child: Column(
+                                children: <Widget>[
+                                  Text('Tradegrounds Inc. 2077'),
+                                  Text('www.tradegrounds.info'),
+                                  Text('v.0.0.1'),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   )
