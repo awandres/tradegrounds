@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'courier_central/screens/couriercentral.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:storegrounds/authentication/auth_screen.dart';
+import 'package:authentication/screens/auth_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:io';
 

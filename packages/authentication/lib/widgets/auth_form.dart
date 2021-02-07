@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:storegrounds/settings/terms.dart';
+import 'package:authentication/docs/terms.dart';
 
 class AuthForm extends StatefulWidget {
   AuthForm(this.submitFn, this.isLoading);
