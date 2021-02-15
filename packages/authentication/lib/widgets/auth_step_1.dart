@@ -66,19 +66,21 @@ class _AuthStep1State extends State<AuthStep1> {
       TextFormField(
         key: ValueKey('password'),
         validator: (value) {
+          _userPassword = value;
           if (value.isEmpty || value.length < 7) {
             return 'Password must be at least 7 characters long.';
           }
           return null;
         },
         decoration: const InputDecoration(
-            isDense: true,
-            labelText: 'Password',
-            border: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(
-                const Radius.circular(20.0),
-              ),
-            )),
+          isDense: true,
+          labelText: 'Password',
+          border: OutlineInputBorder(
+            borderRadius: const BorderRadius.all(
+              const Radius.circular(20.0),
+            ),
+          ),
+        ),
         obscureText: true,
         onSaved: (value) {
           _userPassword = value;
