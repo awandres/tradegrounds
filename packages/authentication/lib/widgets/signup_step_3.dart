@@ -4,12 +4,12 @@ import 'package:provider/provider.dart';
 
 import 'package:authentication/providers/auth_provider.dart';
 
-class AuthStep3 extends StatefulWidget {
+class SignupStep3 extends StatefulWidget {
   @override
-  _AuthStep3State createState() => _AuthStep3State();
+  _SignupStep3State createState() => _SignupStep3State();
 }
 
-class _AuthStep3State extends State<AuthStep3> {
+class _SignupStep3State extends State<SignupStep3> {
   ScrollController _scrollController = ScrollController();
 
   @override

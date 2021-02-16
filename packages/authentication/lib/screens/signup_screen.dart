@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:authentication/providers/auth_provider.dart';
-import 'package:authentication/widgets/auth_step_1.dart';
-import 'package:authentication/widgets/auth_step_2.dart';
-import 'package:authentication/widgets/auth_step_3.dart';
+import 'package:authentication/widgets/signup_step_1.dart';
+import 'package:authentication/widgets/signup_step_2.dart';
+import 'package:authentication/widgets/signup_step_3.dart';
 
 class Signup extends StatelessWidget {
   @override
@@ -12,7 +12,7 @@ class Signup extends StatelessWidget {
     final deviceSize = MediaQuery.of(context).size;
 
     final authService = Provider.of<AuthProvider>(context);
-    int authStep = authService.authStep;
+    int signupStep = authService.signupStep;
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -38,7 +38,7 @@ class Signup extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  if (authStep == 1)
+                  if (signupStep == 1)
                     Flexible(
                       child: Container(
                         height: constraints.maxHeight * 0.3,
@@ -57,7 +57,7 @@ class Signup extends StatelessWidget {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
-                            if (authStep >= 2)
+                            if (signupStep >= 2)
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
@@ -68,8 +68,8 @@ class Signup extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                            if (authStep == 1) AuthStep1(),
-                            if (authStep == 1)
+                            if (signupStep == 1) SignupStep1(),
+                            if (signupStep == 1)
                               FlatButton(
                                 textColor: Theme.of(context).primaryColor,
                                 child: Text.rich(
@@ -87,9 +87,9 @@ class Signup extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                            if (authStep == 2) AuthStep2(),
-                            if (authStep == 3) AuthStep3(),
-                            if (authStep == 3)
+                            if (signupStep == 2) SignupStep2(),
+                            if (signupStep == 3) SignupStep3(),
+                            if (signupStep == 3)
                               SizedBox(height: 20)
                             else
                               SizedBox(height: 0),
@@ -104,12 +104,12 @@ class Signup extends StatelessWidget {
                                   .primaryTextTheme
                                   .button
                                   .color,
-                              child: Text((authStep == 2)
+                              child: Text((signupStep == 2)
                                   ? 'Next'
-                                  : (authStep == 3)
+                                  : (signupStep == 3)
                                       ? 'Submit'
                                       : 'Sign Up'),
-                              onPressed: (authStep < 3)
+                              onPressed: (signupStep < 3)
                                   ? authService.handleAuthStep
                                   : authService.submitData,
                             )

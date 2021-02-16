@@ -5,7 +5,7 @@ class AuthProvider with ChangeNotifier {
   ValidationItem _storeName = ValidationItem(null, null);
   ValidationItem _userEmail = ValidationItem(null, null);
   ValidationItem _userPassword = ValidationItem(null, null);
-  int _authStep = 1;
+  int _signupStep = 1;
   bool _termsAgreed = false;
   bool _termsValid = true;
   static GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
@@ -20,7 +20,7 @@ class AuthProvider with ChangeNotifier {
   bool get termsValid => _termsValid;
   GlobalKey get formKey => _formKey;
 
-  int get authStep => _authStep;
+  int get signupStep => _signupStep;
 
 //Setters
 
@@ -29,20 +29,20 @@ class AuthProvider with ChangeNotifier {
 
     if (isValid) {
       _formKey.currentState.save();
-      if (_authStep == 3) {
+      if (_signupStep == 3) {
         submitData();
       } else {
-        _authStep = _authStep + 1;
+        _signupStep = _signupStep + 1;
       }
-      print('auth step is $authStep');
+      print('auth step is $signupStep');
 
       notifyListeners();
     }
   }
 
   void handleBack() {
-    _authStep = _authStep - 1;
-    print('auth step is $authStep');
+    _signupStep = _signupStep - 1;
+    print('auth step is $signupStep');
     notifyListeners();
   }
 
@@ -95,7 +95,7 @@ class AuthProvider with ChangeNotifier {
 
     print(
         "StoreName: ${storeName.value}, UserEmail: ${userEmail.value}, User Password: ${userPassword.value} terms agreed is $termsAgreed");
-    _authStep = 1;
+    _signupStep = 1;
     print('you are now logged in');
     notifyListeners();
   }

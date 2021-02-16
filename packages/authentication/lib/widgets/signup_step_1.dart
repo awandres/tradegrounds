@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:authentication/providers/auth_provider.dart';
 
-class AuthStep1 extends StatefulWidget {
+class SignupStep1 extends StatefulWidget {
   @override
-  _AuthStep1State createState() => _AuthStep1State();
+  _SignupStep1State createState() => _SignupStep1State();
 }
 
-class _AuthStep1State extends State<AuthStep1> {
+class _SignupStep1State extends State<SignupStep1> {
   var _passwordToMatch;
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthProvider>(context);
-    print('authstep is ${authService.authStep} at step 1');
+    print('signupStep is ${authService.signupStep} at step 1');
     return Column(children: [
       TextFormField(
         decoration: InputDecoration(

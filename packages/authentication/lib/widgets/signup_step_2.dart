@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class AuthStep2 extends StatefulWidget {
+class SignupStep2 extends StatefulWidget {
   @override
-  _AuthStep2State createState() => _AuthStep2State();
+  _SignupStep2State createState() => _SignupStep2State();
 }
 
-class _AuthStep2State extends State<AuthStep2> {
+class _SignupStep2State extends State<SignupStep2> {
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
