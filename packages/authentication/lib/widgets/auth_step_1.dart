@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:authentication/providers/auth_provider.dart';
 
 class AuthStep1 extends StatefulWidget {
   @override
@@ -6,17 +8,17 @@ class AuthStep1 extends StatefulWidget {
 }
 
 class _AuthStep1State extends State<AuthStep1> {
-  String _userEmail = '';
-  String _storeName = '';
-  String _userPassword = '';
-
+  var _passwordToMatch;
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthProvider>(context);
+    print('authstep is ${authService.authStep} at step 1');
     return Column(children: [
       TextFormField(
-        decoration: const InputDecoration(
+        decoration: InputDecoration(
           isDense: true,
-          labelText: 'Business Name',
+          labelText: "Business Name",
+          errorText: authService.storeName.error,
           border: OutlineInputBorder(
             borderRadius: const BorderRadius.all(
               const Radius.circular(20.0),
@@ -31,33 +33,40 @@ class _AuthStep1State extends State<AuthStep1> {
           return null;
         },
         keyboardType: TextInputType.emailAddress,
-        onSaved: (value) {
-          _storeName = value;
+        // onChanged: (String value) {
+        //   authService.changeStoreName(value);
+        // },
+        onSaved: (String value) {
+          authService.changeStoreName(value);
         },
       ),
       SizedBox(
         height: 10,
       ),
       TextFormField(
-        key: ValueKey('email'),
-        decoration: const InputDecoration(
+        decoration: InputDecoration(
           isDense: true,
-          labelText: 'Email',
+          labelText: "Email",
+          errorText: authService.userEmail.error,
           border: OutlineInputBorder(
             borderRadius: const BorderRadius.all(
               const Radius.circular(20.0),
             ),
           ),
         ),
+        key: ValueKey('email'),
         validator: (value) {
           if (value.isEmpty || !value.contains('@')) {
-            return 'Please enter a valid email address';
+            return 'Please enter an email';
           }
           return null;
         },
         keyboardType: TextInputType.emailAddress,
-        onSaved: (value) {
-          _userEmail = value;
+        // onChanged: (String value) {
+        //   authService.changeUserEmail(value);
+        // },
+        onSaved: (String value) {
+          authService.changeUserEmail(value);
         },
       ),
       SizedBox(
@@ -65,15 +74,9 @@ class _AuthStep1State extends State<AuthStep1> {
       ),
       TextFormField(
         key: ValueKey('password'),
-        validator: (value) {
-          _userPassword = value;
-          if (value.isEmpty || value.length < 7) {
-            return 'Password must be at least 7 characters long.';
-          }
-          return null;
-        },
-        decoration: const InputDecoration(
+        decoration: InputDecoration(
           isDense: true,
+          errorText: authService.userPassword.error,
           labelText: 'Password',
           border: OutlineInputBorder(
             borderRadius: const BorderRadius.all(
@@ -82,8 +85,18 @@ class _AuthStep1State extends State<AuthStep1> {
           ),
         ),
         obscureText: true,
-        onSaved: (value) {
-          _userPassword = value;
+        validator: (value) {
+          _passwordToMatch = value;
+          if (value.isEmpty || value.length < 7) {
+            return 'Password must be at least 7 characters long.';
+          }
+          return null;
+        },
+        onChanged: (String value) {
+          authService.changeUserPassword(value);
+        },
+        onSaved: (String value) {
+          authService.changeUserPassword(value);
         },
       ),
       SizedBox(
@@ -93,8 +106,8 @@ class _AuthStep1State extends State<AuthStep1> {
         key: ValueKey('passwordConfirm'),
         validator: (value) {
           if (value.isEmpty ||
-              value.length != _userPassword.length ||
-              value != _userPassword) {
+              value.length != authService.userPassword.value.length ||
+              value != _passwordToMatch) {
             return 'Passwords do not match';
           }
           return null;

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:authentication/docs/terms.dart';
+import 'package:provider/provider.dart';
+
+import 'package:authentication/providers/auth_provider.dart';
 
 class AuthStep3 extends StatefulWidget {
   @override
@@ -9,15 +12,9 @@ class AuthStep3 extends StatefulWidget {
 class _AuthStep3State extends State<AuthStep3> {
   ScrollController _scrollController = ScrollController();
 
-  bool termsValid = true;
-  bool termsAgreed = false;
-
-  void _termsCheckChanged(bool value) {
-    setState(() => termsAgreed = !termsAgreed);
-  }
-
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthProvider>(context);
     final deviceSize = MediaQuery.of(context).size;
 
     return Column(
@@ -57,13 +54,13 @@ class _AuthStep3State extends State<AuthStep3> {
           ),
         ),
         CheckboxListTile(
-            value: termsAgreed,
-            onChanged: _termsCheckChanged,
+            value: authService.termsAgreed,
+            onChanged: authService.changeTermsAgreed,
             title:
                 new Text('I have read and agree to the terms and conditions'),
-            subtitle: !termsValid
+            subtitle: !authService.termsValid
                 ? Padding(
-                    padding: EdgeInsets.fromLTRB(12.0, 0, 0, 0),
+                    padding: EdgeInsets.fromLTRB(12.0, 10, 0, 0),
                     child: Text(
                       'Required field',
                       style: TextStyle(color: Color(0xFFe53935), fontSize: 12),
