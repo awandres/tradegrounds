@@ -24,6 +24,9 @@ dependencies:
   flutter:
     sdk: flutter
   provider: ^3.0.0
+  # cloud_firestore: ^0.13.5
+  # firebase_auth: ^0.16.1
+
 
   authentication:
     path: ./packages/authentication

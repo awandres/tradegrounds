@@ -92,6 +92,8 @@ class MyApp extends StatelessWidget {
                   ? SplashScreen()
                   : LoginScreen(),
             ),
+            // routes: 
+            // 'sign-up': (ctx)=>SignUpScreen(),
           ),
       ),
     );

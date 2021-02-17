@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth.dart';
 import '../models/http_exception.dart';
+import '../screens/Registration_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -79,158 +80,160 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
     return Scaffold(
-        body: SingleChildScrollView(
-          child: Container(
-            height: deviceSize.height,
-            width: deviceSize.width,
-            padding: EdgeInsets.only(bottom: 10, left: 40, right: 40, top: (deviceSize.height*0.10)),
-            child: LayoutBuilder(builder: (ctx, constraints) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Flexible(
-                    child: Container(
-                      height: constraints.maxHeight*0.4,
-                      width: double.infinity,
-                      child: Image.asset(
-                        'assets/images/storegroundsLogo.png',
-                        fit: BoxFit.cover,
-                      ),
+      body: SingleChildScrollView(
+        child: Container(
+          height: deviceSize.height,
+          width: deviceSize.width,
+          padding: EdgeInsets.only(
+              bottom: 10, left: 40, right: 40, top: (deviceSize.height * 0.10)),
+          child: LayoutBuilder(builder: (ctx, constraints) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Flexible(
+                  child: Container(
+                    height: constraints.maxHeight * 0.4,
+                    width: double.infinity,
+                    child: Image.asset(
+                      'assets/images/storegroundsLogo.png',
+                      fit: BoxFit.cover,
                     ),
                   ),
-                  Container(
+                ),
+                Container(
                     padding: EdgeInsets.all(20),
                     child: Text(
-                      'Storegrounds', 
+                      'Storegrounds',
                       style: Theme.of(context).textTheme.title,
-                    )
-                  ),
-                  Flexible(
-                    flex: deviceSize.width > 600 ? 2 : 1,
-                    child: Form(
-                      key: _formKey,
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: <Widget>[
-                            TextFormField(
-                              decoration: const InputDecoration(
+                    )),
+                Flexible(
+                  flex: deviceSize.width > 600 ? 2 : 1,
+                  child: Form(
+                    key: _formKey,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: <Widget>[
+                          TextFormField(
+                            decoration: const InputDecoration(
                                 labelText: 'E-Mail',
                                 border: OutlineInputBorder(
                                   borderRadius: const BorderRadius.all(
                                     const Radius.circular(20.0),
                                   ),
-                                )
-                              ),
-                              keyboardType: TextInputType.emailAddress,
-                              validator: (value) {
-                                if (value.isEmpty || !value.contains('@')) {
-                                  return 'Invalid email!';
-                                }
-                              },
-                              onSaved: (value) {
-                                _authData['email'] = value;
-                              },
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            TextFormField(
-                              decoration: const InputDecoration(
+                                )),
+                            keyboardType: TextInputType.emailAddress,
+                            validator: (value) {
+                              if (value.isEmpty || !value.contains('@')) {
+                                return 'Invalid email!';
+                              }
+                            },
+                            onSaved: (value) {
+                              _authData['email'] = value;
+                            },
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          TextFormField(
+                            decoration: const InputDecoration(
                                 labelText: 'Password',
                                 border: OutlineInputBorder(
                                   borderRadius: const BorderRadius.all(
                                     const Radius.circular(20.0),
                                   ),
-                                )
+                                )),
+                            obscureText: true,
+                            controller: _passwordController,
+                            validator: (value) {
+                              if (value.isEmpty || value.length < 5) {
+                                return 'Password is too short!';
+                              }
+                            },
+                            onSaved: (value) {
+                              _authData['password'] = value;
+                            },
+                          ),
+                          // if (_isLoading)
+                          //   CircularProgressIndicator()
+                          // else
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              const Text('New User ? '),
+                              FlatButton(
+                                child: const Text('Sign Up'),
+                                onPressed: () {
+                                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegistrationScreen()));
+                                },
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 30.0, vertical: 4),
+                                materialTapTargetSize:
+                                    MaterialTapTargetSize.shrinkWrap,
+                                textColor: Theme.of(context).primaryColor,
                               ),
-                              obscureText: true,
-                              controller: _passwordController,
-                              validator: (value) {
-                                if (value.isEmpty || value.length < 5) {
-                                  return 'Password is too short!';
-                                }
-                              },
-                              onSaved: (value) {
-                                _authData['password'] = value;
-                              },
+                            ],
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          RaisedButton(
+                            child: const Text('LOGIN'),
+                            onPressed: _submit,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
                             ),
-                            // if (_isLoading)
-                            //   CircularProgressIndicator()
-                            // else
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                const Text('New User ? '),
-                                FlatButton(
-                                  child: const Text('Sign Up'),
-                                  onPressed: (){},
-                                  padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 4),
-                                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                  textColor: Theme.of(context).primaryColor,
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            RaisedButton(
-                              child: const Text('LOGIN'),
-                              onPressed: _submit,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 30.0, vertical: 8.0),
-                              color: Theme.of(context).primaryColor,
-                              textColor:
-                                  Theme.of(context).primaryTextTheme.button.color,
-                            ),
-                          ],
-                        ),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 30.0, vertical: 8.0),
+                            color: Theme.of(context).primaryColor,
+                            textColor:
+                                Theme.of(context).primaryTextTheme.button.color,
+                          ),
+                        ],
                       ),
                     ),
                   ),
-                  SizedBox(
+                ),
+                SizedBox(
+                  height: 50,
+                ),
+                Positioned(
+                  bottom: 0,
+                  child: Container(
                     height: 50,
-                  ),
-                  
-                  Positioned(
-                      bottom: 0,
-                      child: Container(
-                        height: 50,
-                        width: deviceSize.width,
-                        padding: EdgeInsets.only(left: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Image.asset(
-                              'assets/images/tradegroundsIg.png',
-                              fit: BoxFit.cover,
-                            ),
-                            SizedBox(width: 30,),
-                            FittedBox(
-                              child: Column(
-                                children: <Widget>[
-                                  Text('Tradegrounds Inc. 2077'),
-                                  Text('www.tradegrounds.info'),
-                                  Text('v.0.0.1'),
-                                ],
-                              ),
-                            )
-                          ],
+                    width: deviceSize.width,
+                    padding: EdgeInsets.only(left: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Image.asset(
+                          'assets/images/tradegroundsIg.png',
+                          fit: BoxFit.cover,
                         ),
-                      ),
+                        SizedBox(
+                          width: 30,
+                        ),
+                        FittedBox(
+                          child: Column(
+                            children: <Widget>[
+                              Text('Tradegrounds Inc. 2077'),
+                              Text('www.tradegrounds.info'),
+                              Text('v.0.0.1'),
+                            ],
+                          ),
+                        )
+                      ],
                     ),
-               
-                ],
-              );
-            }),
-          ),
+                  ),
+                ),
+              ],
+            );
+          }),
         ),
+      ),
     );
   }
 }
