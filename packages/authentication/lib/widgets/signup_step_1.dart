@@ -18,7 +18,7 @@ class _SignupStep1State extends State<SignupStep1> {
         decoration: InputDecoration(
           isDense: true,
           labelText: "Business Name",
-          errorText: authService.storeName.error,
+          // errorText: authService.storeName.error,
           border: OutlineInputBorder(
             borderRadius: const BorderRadius.all(
               const Radius.circular(20.0),
@@ -47,7 +47,7 @@ class _SignupStep1State extends State<SignupStep1> {
         decoration: InputDecoration(
           isDense: true,
           labelText: "Email",
-          errorText: authService.userEmail.error,
+          // errorText: authService.userEmail.error,
           border: OutlineInputBorder(
             borderRadius: const BorderRadius.all(
               const Radius.circular(20.0),
@@ -76,7 +76,7 @@ class _SignupStep1State extends State<SignupStep1> {
         key: ValueKey('password'),
         decoration: InputDecoration(
           isDense: true,
-          errorText: authService.userPassword.error,
+          // errorText: authService.userPassword.error,
           labelText: 'Password',
           border: OutlineInputBorder(
             borderRadius: const BorderRadius.all(
@@ -106,7 +106,7 @@ class _SignupStep1State extends State<SignupStep1> {
         key: ValueKey('passwordConfirm'),
         validator: (value) {
           if (value.isEmpty ||
-              value.length != authService.userPassword.value.length ||
+              value.length != authService.userPassword.length ||
               value != _passwordToMatch) {
             return 'Passwords do not match';
           }

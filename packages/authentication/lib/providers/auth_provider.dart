@@ -4,12 +4,21 @@ import 'dart:convert';
 
 import 'package:authentication/models/http_exception.dart';
 import 'package:authentication/models/validation_item.dart';
+import 'package:authentication/models/user_data.dart';
 
 class AuthProvider with ChangeNotifier {
-  // Form
-  ValidationItem _storeName = ValidationItem(null, null);
-  ValidationItem _userEmail = ValidationItem(null, null);
-  ValidationItem _userPassword = ValidationItem(null, null);
+  UserData _userData = UserData(null, null, null);
+
+  //Getters
+  String get storeName => _userData.storeName;
+  String get userEmail => _userData.userEmail;
+  String get userPassword => _userData.userPassword;
+// Form
+
+  bool get termsAgreed => _termsAgreed;
+  bool get termsValid => _termsValid;
+  GlobalKey get formKey => _formKey;
+  int get signupStep => _signupStep;
   int _signupStep = 1;
   bool _termsAgreed = false;
   bool _termsValid = true;
@@ -23,14 +32,7 @@ class AuthProvider with ChangeNotifier {
   String _userId;
 
 //Getters
-// Form
-  ValidationItem get storeName => _storeName;
-  ValidationItem get userEmail => _userEmail;
-  ValidationItem get userPassword => _userPassword;
-  bool get termsAgreed => _termsAgreed;
-  bool get termsValid => _termsValid;
-  GlobalKey get formKey => _formKey;
-  int get signupStep => _signupStep;
+// TEST CODE FOR DYNAMIC AUTH GOES HERE
 
 // Firebase
   bool get isAuth {
@@ -73,28 +75,21 @@ class AuthProvider with ChangeNotifier {
 
   void changeStoreName(String value) {
     if (value.length > 0) {
-      _storeName = ValidationItem(value, null);
-    } else {
-      _storeName =
-          ValidationItem(null, "Please enter a name for your business");
+      _userData.storeName = value;
     }
     notifyListeners();
   }
 
   void changeUserEmail(String value) {
     if (value.length >= 3 && value.contains('@')) {
-      _userEmail = ValidationItem(value, null);
-    } else {
-      _userEmail = ValidationItem(null, "Please Enter a Valid Email Address");
+      _userData.userEmail = value;
     }
     notifyListeners();
   }
 
   void changeUserPassword(String value) {
     if (value.length >= 7) {
-      _userPassword = ValidationItem(value, null);
-    } else {
-      _userPassword = ValidationItem(null, "Must be at least 7 characters");
+      _userData.userPassword = value;
     }
     notifyListeners();
   }
@@ -176,8 +171,7 @@ class AuthProvider with ChangeNotifier {
       return;
     }
     // THIS IS WHERE FIREBASE AUTH WOULD OCCUR
-    print(
-        "StoreName: ${storeName.value}, UserEmail: ${userEmail.value}, User Password: ${userPassword.value} terms agreed is $termsAgreed");
+    print('User Data is $_userData');
 
     if (!_formKey.currentState.validate()) {
       return;
@@ -191,8 +185,8 @@ class AuthProvider with ChangeNotifier {
 
     try {
       await signup(
-        userEmail.value,
-        userPassword.value,
+        userEmail,
+        userPassword,
       );
     } on HttpException catch (error) {
       var errorMessage = 'Authentication Failed';
@@ -222,3 +216,15 @@ class AuthProvider with ChangeNotifier {
     }
   }
 }
+
+// TEST CODE FOR DYNAMIC AUTH
+
+// ValidationItem _storeName = ValidationItem(null, null);
+// ValidationItem _userEmail = ValidationItem(null, null);
+// ValidationItem _userPassword = ValidationItem(null, null);
+// ValidationItem get storeName => _storeName;
+// ValidationItem get userEmail => _userEmail;
+// ValidationItem get userPassword => _userPassword;
+// ValidationItem get storeName => _storeName;
+// ValidationItem get userEmail => _userEmail;
+// ValidationItem get userPassword => _userPassword;
