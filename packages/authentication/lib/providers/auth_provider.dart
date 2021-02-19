@@ -120,7 +120,10 @@ class AuthProvider with ChangeNotifier {
           },
         ),
       );
+      print('$response');
       final responseData = json.decode(response.body);
+      print('$responseData');
+
       if (responseData['error'] != null) {
         throw HttpException(responseData['error']['message']);
       }
@@ -171,7 +174,8 @@ class AuthProvider with ChangeNotifier {
       return;
     }
     // THIS IS WHERE FIREBASE AUTH WOULD OCCUR
-    print('User Data is $_userData');
+    print(
+        'User Data is ${_userData.userEmail}, ${_userData.userPassword}, ${_userData.storeName} ');
 
     if (!_formKey.currentState.validate()) {
       return;
