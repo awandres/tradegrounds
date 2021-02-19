@@ -107,7 +107,7 @@ class AuthProvider with ChangeNotifier {
   Future<void> _authenticate(
       String email, String password, String urlSegment) async {
     final url =
-        'https://identitytoolkit.googleapis.com/v1/$urlSegment?AIzaSyDsqdfnET4_5_-cuzOaHQkSTsrRELdjYxI';
+        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDsqdfnET4_5_-cuzOaHQkSTsrRELdjYxI';
 
     try {
       final response = await http.post(
