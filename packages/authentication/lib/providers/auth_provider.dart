@@ -5,14 +5,32 @@ import 'dart:convert';
 import 'package:authentication/models/http_exception.dart';
 import 'package:authentication/models/validation_item.dart';
 import 'package:authentication/models/user_data.dart';
+import 'package:authentication/models/business_location.dart';
 
 class AuthProvider with ChangeNotifier {
-  UserData _userData = UserData(null, null, null);
+  UserData _userData = UserData(
+    null,
+    null,
+    null,
+    null,
+    null,
+  );
+
+  BusinessLocation _businessLocation = BusinessLocation(
+    null,
+    null,
+    null,
+    null,
+    null,
+  );
 
   //Getters
   String get storeName => _userData.storeName;
   String get userEmail => _userData.userEmail;
   String get userPassword => _userData.userPassword;
+  String get businessCategory => _userData.businessCategory;
+  String get phoneNumber => _userData.phoneNumber;
+
 // Form
 
   bool get termsAgreed => _termsAgreed;
@@ -58,10 +76,11 @@ class AuthProvider with ChangeNotifier {
 
     if (isValid) {
       _formKey.currentState.save();
-      if (_signupStep == 3) {
+
+      if (_signupStep == 4) {
         submitData();
       } else {
-        _signupStep = _signupStep + 1;
+        ++_signupStep;
       }
       print('auth step is $signupStep');
 
@@ -74,6 +93,8 @@ class AuthProvider with ChangeNotifier {
     print('auth step is $signupStep');
     notifyListeners();
   }
+
+// UserData Setters
 
   void changeStoreName(String value) {
     if (value.length > 0) {
@@ -95,6 +116,50 @@ class AuthProvider with ChangeNotifier {
     }
     notifyListeners();
   }
+
+  void changeBusinessCategory(String value) {
+    _userData.businessCategory = value;
+    notifyListeners();
+  }
+
+  void changeBusinessPhoneNumber(String value) {
+    _userData.phoneNumber = value;
+    notifyListeners();
+  }
+
+// Business Location Setters
+  void setBusinessStreetAddress(value) {
+    _businessLocation.streetAddress = value;
+  }
+
+  void setBusinessAddressUnit(value) {
+    _businessLocation.unit = value;
+  }
+
+  void setBusinessCity(value) {
+    _businessLocation.city = value;
+  }
+
+  void setBusinessState(value) {
+    _businessLocation.state = value;
+  }
+
+  void setBusinessZip(value) {
+    _businessLocation.zip = value;
+  }
+
+  // TODO: Set relevant business properties in one function
+
+  // void setBusinessLocation(streetAddress, unit, city, state, zip) {
+  //   _businessLocation.streetAddress = streetAddress;
+  //   _businessLocation.unit = unit;
+  //   _businessLocation.city = city;
+  //   _businessLocation.state = state;
+  //   _businessLocation.zip = zip;
+  //   print(
+  //       'business info is $_businessLocation street address: ${_businessLocation.streetAddress} , unit ${_businessLocation.unit}, city: ${_businessLocation.city} state: ${_businessLocation.state}, zip: ${_businessLocation.zip}');
+  //   notifyListeners();
+  // }
 
   void changeTermsAgreed(bool value) {
     _termsAgreed = value;
@@ -127,7 +192,6 @@ class AuthProvider with ChangeNotifier {
           },
         ),
       );
-      print('$response');
       final responseData = json.decode(response.body);
       print('$responseData');
 
@@ -163,7 +227,9 @@ class AuthProvider with ChangeNotifier {
       return;
     }
     print(
-        'User Data is ${_userData.userEmail}, ${_userData.userPassword}, ${_userData.storeName} ');
+        'User Data is ${_userData.userEmail}, ${_userData.userPassword}, ${_userData.storeName}, ${_userData.businessCategory} phone number: ${_userData.phoneNumber}');
+    print(
+        'business info is $_businessLocation street address: ${_businessLocation.streetAddress} , unit ${_businessLocation.unit}, city: ${_businessLocation.city} state: ${_businessLocation.state}, zip: ${_businessLocation.zip}');
 
     if (!_formKey.currentState.validate()) {
       return;

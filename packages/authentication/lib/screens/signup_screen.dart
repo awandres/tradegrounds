@@ -4,6 +4,7 @@ import 'package:authentication/providers/auth_provider.dart';
 import 'package:authentication/widgets/signup_step_1.dart';
 import 'package:authentication/widgets/signup_step_2.dart';
 import 'package:authentication/widgets/signup_step_3.dart';
+import 'package:authentication/widgets/signup_step_4.dart';
 
 class Signup extends StatelessWidget {
   @override
@@ -69,27 +70,10 @@ class Signup extends StatelessWidget {
                                 ],
                               ),
                             if (signupStep == 1) SignupStep1(),
-                            if (signupStep == 1)
-                              FlatButton(
-                                textColor: Theme.of(context).primaryColor,
-                                child: Text.rich(
-                                  TextSpan(
-                                    text: 'Login? ',
-                                    children: <TextSpan>[
-                                      TextSpan(
-                                        text: 'Click Here',
-                                        style: TextStyle(
-                                          decoration: TextDecoration.underline,
-                                          color: Colors.blue,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
                             if (signupStep == 2) SignupStep2(),
                             if (signupStep == 3) SignupStep3(),
-                            if (signupStep == 3)
+                            if (signupStep == 4) SignupStep4(),
+                            if (signupStep == 4)
                               SizedBox(height: 20)
                             else
                               SizedBox(height: 0),
@@ -107,12 +91,12 @@ class Signup extends StatelessWidget {
                                     .primaryTextTheme
                                     .button
                                     .color,
-                                child: Text((signupStep == 2)
+                                child: Text((signupStep > 1 && signupStep < 4)
                                     ? 'Next'
-                                    : (signupStep == 3)
+                                    : (signupStep == 4)
                                         ? 'Submit'
                                         : 'Sign Up'),
-                                onPressed: (signupStep < 3)
+                                onPressed: (signupStep < 4)
                                     ? authService.handleAuthStep
                                     : authService.submitData,
                               )
