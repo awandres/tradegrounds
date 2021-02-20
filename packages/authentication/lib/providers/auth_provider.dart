@@ -17,11 +17,13 @@ class AuthProvider with ChangeNotifier {
 
   bool get termsAgreed => _termsAgreed;
   bool get termsValid => _termsValid;
+  bool get isLoading => _isLoading;
   GlobalKey get formKey => _formKey;
   int get signupStep => _signupStep;
   int _signupStep = 1;
   bool _termsAgreed = false;
   bool _termsValid = true;
+  bool _isLoading = false;
   static GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   // bool isValid = false;
   var isValid;
@@ -102,12 +104,17 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void toggleLoading() {
+    _isLoading = !_isLoading;
+    notifyListeners();
+  }
+
   // Firebase API Logic
 
   Future<void> _authenticate(
       String email, String password, String urlSegment) async {
     final url =
-        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDsqdfnET4_5_-cuzOaHQkSTsrRELdjYxI';
+        'https://identitytoolkit.googleapis.com/v1/$urlSegment?key=AIzaSyDsqdfnET4_5_-cuzOaHQkSTsrRELdjYxI';
 
     try {
       final response = await http.post(
@@ -148,24 +155,6 @@ class AuthProvider with ChangeNotifier {
     return _authenticate(email, password, 'accounts:signInWithPassword');
   }
 
-  // NEED TO FIGURE OUT HOW ERROR DIALOG WILL BE PASSED TO CONTEXT
-
-  //   void _showErrorDialog(String message) {
-  //   showDialog(
-  //       context: context,
-  //       builder: (ctx) => AlertDialog(
-  //               title: Text('An Error Occured'),
-  //               content: Text(message),
-  //               actions: <Widget>[
-  //                 FlatButton(
-  //                   child: Text('Okay'),
-  //                   onPressed: () {
-  //                     Navigator.of(ctx).pop();
-  //                   },
-  //                 )
-  //               ]));
-  // }
-
   void submitData() async {
     if (!_termsAgreed) {
       print('terms agreed is required');
@@ -173,19 +162,15 @@ class AuthProvider with ChangeNotifier {
       notifyListeners();
       return;
     }
-    // THIS IS WHERE FIREBASE AUTH WOULD OCCUR
     print(
         'User Data is ${_userData.userEmail}, ${_userData.userPassword}, ${_userData.storeName} ');
 
     if (!_formKey.currentState.validate()) {
       return;
     }
-    _formKey.currentState.save();
 
-    // REMOVING LOADING FUNCTIONALITY UNTIL AUTH TESTING
-    // setState(() {
-    //   _isLoading = true;
-    // });
+    _formKey.currentState.save();
+    toggleLoading();
 
     try {
       await signup(
@@ -201,23 +186,11 @@ class AuthProvider with ChangeNotifier {
       } else if (error.toString().contains('EMAIL_NOT_FOUND')) {
         errorMessage = 'Could not find a user with that email.';
       }
-
-      // NEED TO FIGURE OUT HOW ERROR DIALOG WILL BE PASSED TO CONTEXT
-
-      //   _showErrorDialog(errorMessage);
-      // } catch (error) {
-      //   var errorMessage = 'Coul not authenticate you. Please try again later.';
-      //   _showErrorDialog(errorMessage);
-      // }
-
-// REMOVING LOADING FUNCTIONALITY UNTIL AUTH TESTING
-      // setState(() {
-      //   _isLoading = false;
-      // });
-      _signupStep = 1;
-      print('you are now logged in');
-      notifyListeners();
     }
+    toggleLoading();
+    _signupStep = 1;
+    print('you are now logged in');
+    notifyListeners();
   }
 }
 
@@ -232,3 +205,29 @@ class AuthProvider with ChangeNotifier {
 // ValidationItem get storeName => _storeName;
 // ValidationItem get userEmail => _userEmail;
 // ValidationItem get userPassword => _userPassword;
+
+// NEED TO FIGURE OUT HOW ERROR DIALOG WILL BE PASSED TO CONTEXT
+
+//   _showErrorDialog(errorMessage);
+// } catch (error) {
+//   var errorMessage = 'Coul not authenticate you. Please try again later.';
+//   _showErrorDialog(errorMessage);
+// }
+
+// NEED TO FIGURE OUT HOW ERROR DIALOG WILL BE PASSED TO CONTEXT
+
+//   void _showErrorDialog(String message) {
+//   showDialog(
+//       context: context,
+//       builder: (ctx) => AlertDialog(
+//               title: Text('An Error Occured'),
+//               content: Text(message),
+//               actions: <Widget>[
+//                 FlatButton(
+//                   child: Text('Okay'),
+//                   onPressed: () {
+//                     Navigator.of(ctx).pop();
+//                   },
+//                 )
+//               ]));
+// }

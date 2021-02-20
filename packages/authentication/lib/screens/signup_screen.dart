@@ -93,26 +93,29 @@ class Signup extends StatelessWidget {
                               SizedBox(height: 20)
                             else
                               SizedBox(height: 0),
-                            RaisedButton(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 30.0, vertical: 8.0),
-                              color: Theme.of(context).primaryColor,
-                              textColor: Theme.of(context)
-                                  .primaryTextTheme
-                                  .button
-                                  .color,
-                              child: Text((signupStep == 2)
-                                  ? 'Next'
-                                  : (signupStep == 3)
-                                      ? 'Submit'
-                                      : 'Sign Up'),
-                              onPressed: (signupStep < 3)
-                                  ? authService.handleAuthStep
-                                  : authService.submitData,
-                            )
+                            if (authService.isLoading)
+                              CircularProgressIndicator(),
+                            if (!authService.isLoading)
+                              RaisedButton(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 30.0, vertical: 8.0),
+                                color: Theme.of(context).primaryColor,
+                                textColor: Theme.of(context)
+                                    .primaryTextTheme
+                                    .button
+                                    .color,
+                                child: Text((signupStep == 2)
+                                    ? 'Next'
+                                    : (signupStep == 3)
+                                        ? 'Submit'
+                                        : 'Sign Up'),
+                                onPressed: (signupStep < 3)
+                                    ? authService.handleAuthStep
+                                    : authService.submitData,
+                              )
                           ],
                         ),
                       ),
