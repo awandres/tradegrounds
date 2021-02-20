@@ -35,7 +35,11 @@ class _SignupStep4State extends State<SignupStep4> {
                     Container(
                       // A fixed-height child.
                       alignment: Alignment.center,
-                      child: Text('Terms & Agreements'),
+                      child: Text(
+                        'Terms and Conditions',
+                        style: Theme.of(context).textTheme.title,
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                     SizedBox(
                       height: 30,
