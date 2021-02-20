@@ -7,6 +7,9 @@ import 'package:authentication/models/validation_item.dart';
 import 'package:authentication/models/user_data.dart';
 import 'package:authentication/models/business_location.dart';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 class AuthProvider with ChangeNotifier {
   UserData _userData = UserData(
     null,
@@ -50,6 +53,7 @@ class AuthProvider with ChangeNotifier {
   String _token;
   DateTime _expiryDate;
   String _userId;
+  final _auth = FirebaseAuth.instance;
 
 //Getters
 // TEST CODE FOR DYNAMIC AUTH GOES HERE
@@ -220,6 +224,8 @@ class AuthProvider with ChangeNotifier {
   }
 
   void submitData() async {
+    AuthResult authResult;
+
     if (!_termsAgreed) {
       print('terms agreed is required');
       _termsValid = false;
@@ -239,10 +245,27 @@ class AuthProvider with ChangeNotifier {
     toggleLoading();
 
     try {
-      await signup(
-        userEmail.trim(),
-        userPassword.trim(),
-      );
+      // await signup(
+      //   userEmail.trim(),
+      //   userPassword.trim(),
+      // );
+      authResult = await _auth.createUserWithEmailAndPassword(
+          email: userEmail.trim(), password: userPassword.trim());
+      await Firestore.instance
+          .collection('businesses')
+          .document(authResult.user.uid)
+          .setData({
+        'address': {
+          'streetAddress': _businessLocation.streetAddress,
+          'unit': _businessLocation.unit,
+          'city': _businessLocation.city,
+          'state': _businessLocation.state,
+          'zip': _businessLocation.zip,
+        },
+        'storename': _userData.storeName,
+        'category': _userData.businessCategory,
+        'phoneNumber': _userData.phoneNumber,
+      });
     } on HttpException catch (error) {
       var errorMessage = 'Authentication Failed';
       if (error.toString().contains('EMAIL_EXISTS')) {
