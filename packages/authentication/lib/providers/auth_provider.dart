@@ -174,8 +174,8 @@ class AuthProvider with ChangeNotifier {
 
     try {
       await signup(
-        userEmail,
-        userPassword,
+        userEmail.trim(),
+        userPassword.trim(),
       );
     } on HttpException catch (error) {
       var errorMessage = 'Authentication Failed';
