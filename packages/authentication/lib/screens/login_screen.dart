@@ -60,9 +60,9 @@ class _LoginScreenState extends State<LoginScreen> {
       } else if (error.toString().contains('WEAK_PASSWORD')) {
         errorMessage = 'This password is too weak.';
       } else if (error.toString().contains('EMAIL_NOT_FOUND')) {
-        errorMessage = 'Could not find a user with that email.';
+        errorMessage = 'Email or password is incorrect.';
       } else if (error.toString().contains('INVALID_PASSWORD')) {
-        errorMessage = 'Invalid password.';
+        errorMessage = 'Email or password is incorrect.';
       }
       _showErrorDialog(errorMessage);
     } catch (error) {
@@ -95,9 +95,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Container(
                     height: constraints.maxHeight * 0.4,
                     width: double.infinity,
-                    child: Image.asset(
-                      'assets/images/storegroundsLogo.png',
-                      fit: BoxFit.cover,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      child: Image.asset(
+                        'assets/images/storegroundsLogo.png',
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ),
@@ -115,7 +118,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Column(
                         children: <Widget>[
                           TextFormField(
+                          
                             decoration: const InputDecoration(
+                                isDense: true,
                                 labelText: 'E-Mail',
                                 border: OutlineInputBorder(
                                   borderRadius: const BorderRadius.all(
@@ -137,6 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           TextFormField(
                             decoration: const InputDecoration(
+                              isDense: true,
                                 labelText: 'Password',
                                 border: OutlineInputBorder(
                                   borderRadius: const BorderRadius.all(
@@ -178,7 +184,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ],
                           ),
                           SizedBox(
-                            height: 20,
+                            height: 10,
                           ),
                           RaisedButton(
                             child: const Text('LOGIN'),
