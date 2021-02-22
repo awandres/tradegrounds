@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth.dart';
 import '../models/http_exception.dart';
-import '../screens/Registration_screen.dart';
+import '../screens/reference_Registration_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override

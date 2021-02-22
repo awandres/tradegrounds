@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'auth_step_1.dart';
-import 'auth_step_2.dart';
-import 'auth_step_3.dart';
+import 'reference_auth_step_1.dart';
+import 'reference_auth_step_2.dart';
+import 'reference_auth_step_3.dart';
 
 class AuthForm extends StatefulWidget {
   AuthForm(this.submitFn, this.isLoading);
