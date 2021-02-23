@@ -12,7 +12,7 @@ class AuthFormField extends StatefulWidget {
   final String validatorErrorMessage;
   final TextInputAction actionKeyboard;
   final TextCapitalization textCapitalization;
-  final fieldController;
+  final TextEditingController fieldController;
   final Function onSavedFunction;
   final Function onChangedFunction;
   final List<TextInputFormatter> inputFormatters;
