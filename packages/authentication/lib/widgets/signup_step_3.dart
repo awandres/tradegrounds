@@ -51,8 +51,6 @@ class _SignupStep3State extends State<SignupStep3> {
         onSavedFunction: (String value) {
           authService.setBusinessAddressUnit(value);
         },
-        validatorFunction: requiredValidator,
-        validatorErrorMessage: 'Please enter a street address',
       ),
       SizedBox(
         height: 10,
