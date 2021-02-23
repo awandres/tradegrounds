@@ -91,14 +91,30 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Flexible(
-                  child: Container(
-                    height: constraints.maxHeight * 0.4,
-                    width: double.infinity,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                      child: Image.asset(
-                        'assets/images/storegroundsLogo.png',
-                        fit: BoxFit.cover,
+                  child: Material(
+                    elevation: 10.0,
+                    shadowColor: Colors.black,
+                    borderRadius: const BorderRadius.all(const Radius.circular(20.0)),
+                    child: Container(
+                      // decoration: BoxDecoration(
+                      //   borderRadius: BorderRadius.all(Radius.circular(20)),
+                      //   boxShadow: [
+                      //     BoxShadow(
+                      //       color: Colors.grey.withOpacity(0.5),
+                      //       spreadRadius: 5,
+                      //       blurRadius: 7,
+                      //       offset: Offset(0, 20), // changes position of shadow
+                      //     ),
+                      //   ]
+                      // ),
+                      height: constraints.maxHeight * 0.4,
+                      width: double.infinity,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        child: Image.asset(
+                          'assets/images/storegroundsLogo.png',
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
@@ -120,11 +136,13 @@ class _LoginScreenState extends State<LoginScreen> {
                             elevation: 10.0,
                             shadowColor: Colors.black,
                             borderRadius: const BorderRadius.all(
-                              const Radius.circular(20.0)
-                            ),
+                                const Radius.circular(20.0)),
                             child: TextFormField(
                               decoration: const InputDecoration(
-                                
+                                labelStyle: TextStyle(
+                                  fontFamily: 'Quicksand',
+                                  fontWeight: FontWeight.bold,
+                                ),
                                 isDense: true,
                                 labelText: 'E-Mail',
                                 border: OutlineInputBorder(
@@ -151,17 +169,21 @@ class _LoginScreenState extends State<LoginScreen> {
                             elevation: 10.0,
                             shadowColor: Colors.black,
                             borderRadius: const BorderRadius.all(
-                              const Radius.circular(20.0)
-                            ),
-                            child:TextFormField(
+                                const Radius.circular(20.0)),
+                            child: TextFormField(
                               decoration: const InputDecoration(
+                                labelStyle: TextStyle(
+                                  fontFamily: 'Quicksand',
+                                  fontWeight: FontWeight.bold,
+                                ),
                                 isDense: true,
-                                  labelText: 'Password',
-                                  border: OutlineInputBorder(
-                                    borderRadius: const BorderRadius.all(
-                                      const Radius.circular(20.0),
-                                    ),
-                                  )),
+                                labelText: 'Password',
+                                border: OutlineInputBorder(
+                                  borderRadius: const BorderRadius.all(
+                                    const Radius.circular(20.0),
+                                  ),
+                                )
+                              ),
                               obscureText: true,
                               controller: _passwordController,
                               validator: (value) {
@@ -183,9 +205,21 @@ class _LoginScreenState extends State<LoginScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              const Text('New User ? '),
+                              const Text(
+                                'New User ? ', 
+                                style: TextStyle(
+                                  fontFamily: 'Quicksand',
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                               FlatButton(
-                                child: const Text('Sign Up'),
+                                child: const Text(
+                                  'Sign Up',
+                                  style: TextStyle(
+                                    fontFamily: 'Quicksand',
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                                 onPressed: () {
                                   // Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegistrationScreen()));
                                 },
@@ -201,7 +235,13 @@ class _LoginScreenState extends State<LoginScreen> {
                             height: 10,
                           ),
                           RaisedButton(
-                            child: const Text('LOGIN'),
+                            child: const Text(
+                              'LOGIN',
+                              style: TextStyle(
+                                fontFamily: 'Quicksand',
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                             onPressed: _submit,
                             elevation: 10,
                             shape: RoundedRectangleBorder(
@@ -240,9 +280,27 @@ class _LoginScreenState extends State<LoginScreen> {
                         FittedBox(
                           child: Column(
                             children: <Widget>[
-                              Text('Tradegrounds Inc. 2077'),
-                              Text('www.tradegrounds.info'),
-                              Text('v.0.0.1'),
+                              Text(
+                                'Tradegrounds Inc. 2077',
+                                style: TextStyle(
+                                  fontFamily: 'Quicksand',
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                'www.tradegrounds.info',
+                                style: TextStyle(
+                                  fontFamily: 'Quicksand',
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                'v.0.0.1',
+                                style: TextStyle(
+                                  fontFamily: 'Quicksand',
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                             ],
                           ),
                         )
