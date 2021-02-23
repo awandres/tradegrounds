@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth.dart';
 import '../models/http_exception.dart';
-import '../screens/reference_Registration_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -117,48 +116,63 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: <Widget>[
-                          TextFormField(
-                          
-                            decoration: const InputDecoration(
+                          Material(
+                            elevation: 10.0,
+                            shadowColor: Colors.black,
+                            borderRadius: const BorderRadius.all(
+                              const Radius.circular(20.0)
+                            ),
+                            child: TextFormField(
+                              decoration: const InputDecoration(
+                                
                                 isDense: true,
                                 labelText: 'E-Mail',
                                 border: OutlineInputBorder(
                                   borderRadius: const BorderRadius.all(
                                     const Radius.circular(20.0),
                                   ),
-                                )),
-                            keyboardType: TextInputType.emailAddress,
-                            validator: (value) {
-                              if (value.isEmpty || !value.contains('@')) {
-                                return 'Invalid email!';
-                              }
-                            },
-                            onSaved: (value) {
-                              _authData['email'] = value;
-                            },
+                                )
+                              ),
+                              keyboardType: TextInputType.emailAddress,
+                              validator: (value) {
+                                if (value.isEmpty || !value.contains('@')) {
+                                  return 'Invalid email!';
+                                }
+                              },
+                              onSaved: (value) {
+                                _authData['email'] = value;
+                              },
+                            ),
                           ),
                           SizedBox(
                             height: 20,
                           ),
-                          TextFormField(
-                            decoration: const InputDecoration(
-                              isDense: true,
-                                labelText: 'Password',
-                                border: OutlineInputBorder(
-                                  borderRadius: const BorderRadius.all(
-                                    const Radius.circular(20.0),
-                                  ),
-                                )),
-                            obscureText: true,
-                            controller: _passwordController,
-                            validator: (value) {
-                              if (value.isEmpty || value.length < 5) {
-                                return 'Password is too short!';
-                              }
-                            },
-                            onSaved: (value) {
-                              _authData['password'] = value;
-                            },
+                          Material(
+                            elevation: 10.0,
+                            shadowColor: Colors.black,
+                            borderRadius: const BorderRadius.all(
+                              const Radius.circular(20.0)
+                            ),
+                            child:TextFormField(
+                              decoration: const InputDecoration(
+                                isDense: true,
+                                  labelText: 'Password',
+                                  border: OutlineInputBorder(
+                                    borderRadius: const BorderRadius.all(
+                                      const Radius.circular(20.0),
+                                    ),
+                                  )),
+                              obscureText: true,
+                              controller: _passwordController,
+                              validator: (value) {
+                                if (value.isEmpty || value.length < 5) {
+                                  return 'Password is too short!';
+                                }
+                              },
+                              onSaved: (value) {
+                                _authData['password'] = value;
+                              },
+                            ),
                           ),
                           // if (_isLoading)
                           //   CircularProgressIndicator()
@@ -173,7 +187,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               FlatButton(
                                 child: const Text('Sign Up'),
                                 onPressed: () {
-                                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegistrationScreen()));
+                                  // Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegistrationScreen()));
                                 },
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 30.0, vertical: 4),
@@ -189,6 +203,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           RaisedButton(
                             child: const Text('LOGIN'),
                             onPressed: _submit,
+                            elevation: 10,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30),
                             ),
