@@ -1,18 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-/// *  textInputType - The type of information for which to optimize the text input control.
-/// *  hintText - Text that suggests what sort of input the field accepts.
-/// *  prefixIcon - Pass Icon if required
-/// *  defaultText - If there is predefined value is there for a text field
-/// *  focusNode - Currently focus node
-/// *  obscureText - Is Password field?
-/// *  controller - Text controller
-/// *  functionValidate - Validation function(currently I have used to check empty field)
-/// *  parametersValidate - Value to validate
-/// *  actionKeyboard - Keyboard action eg. next, done, search, etc
-/// *  onSubmitField - Done click action
-/// *  onFieldTap - On focus on TextField
 class AuthFormField extends StatefulWidget {
   final TextInputType keyboardType;
   final bool obscureText;
