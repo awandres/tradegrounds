@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
 
+import 'package:authentication/widgets/auth_form_field.dart';
+
 import 'package:authentication/controllers/phone_controller.dart';
 import 'package:authentication/providers/auth_provider.dart';
 import 'package:authentication/docs/business_categories.dart';
@@ -29,33 +31,17 @@ class _SignupStep2State extends State<SignupStep2> {
           textAlign: TextAlign.center,
         ),
         SizedBox(height: 30),
-        TextFormField(
-          autofocus: false,
-          decoration: InputDecoration(
-            isDense: true,
-            labelText: "Business Name",
-            // errorText: authService.storeName.error,
-            border: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(
-                const Radius.circular(20.0),
-              ),
-            ),
-          ),
-          textCapitalization: TextCapitalization.words,
-          key: ValueKey('storename'),
-          validator: (value) {
-            if (value.isEmpty) {
-              return 'Please enter a store name';
-            }
-            return null;
-          },
+        AuthFormField(
+          valueKey: 'storename',
+          labelText: 'Business Name',
           keyboardType: TextInputType.name,
-          // onChanged: (String value) {
-          //   authService.changeStoreName(value);
-          // },
-          onSaved: (String value) {
+          actionKeyboard: TextInputAction.next,
+          textCapitalization: TextCapitalization.words,
+          onSavedFunction: (String value) {
             authService.changeStoreName(value);
           },
+          validatorFunction: requiredValidator,
+          validatorErrorMessage: 'Please enter a store name',
         ),
         SizedBox(height: 10),
         DropdownButtonFormField(
@@ -89,34 +75,46 @@ class _SignupStep2State extends State<SignupStep2> {
           ).toList(),
         ),
         SizedBox(height: 10),
-        TextFormField(
-          controller: maskedController,
-          autofocus: false,
-          decoration: InputDecoration(
-            isDense: true,
-            labelText: "Business Phone Number",
-            border: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(
-                const Radius.circular(20.0),
-              ),
-            ),
-          ),
-          key: ValueKey('phoneNumber'),
-          validator: (value) {
-            if (value.isEmpty) {
-              return 'Please enter a phone number';
-            }
-            return null;
-          },
-          // inputFormatters: [
-          //   FilteringTextInputFormatter.digitsOnly,
-          //   LengthLimitingTextInputFormatter(10),
-          // ],
+        AuthFormField(
+          valueKey: 'phoneNumber',
+          labelText: 'Business Phone Number',
+          fieldController: maskedController,
           keyboardType: TextInputType.phone,
-          onSaved: (String value) {
+          actionKeyboard: TextInputAction.go,
+          onSavedFunction: (String value) {
             authService.changeBusinessPhoneNumber(value);
           },
+          validatorFunction: phoneNumberValidator,
+          validatorErrorMessage: 'Please enter a valid phone number',
         ),
+        // TextFormField(
+        //   controller: maskedController,
+        //   autofocus: false,
+        //   decoration: InputDecoration(
+        //     isDense: true,
+        //     labelText: "Business Phone Number",
+        //     border: OutlineInputBorder(
+        //       borderRadius: const BorderRadius.all(
+        //         const Radius.circular(20.0),
+        //       ),
+        //     ),
+        //   ),
+        //   key: ValueKey('phoneNumber'),
+        //   validator: (value) {
+        //     if (value.isEmpty) {
+        //       return 'Please enter a phone number';
+        //     }
+        //     return null;
+        //   },
+        //   // inputFormatters: [
+        //   //   FilteringTextInputFormatter.digitsOnly,
+        //   //   LengthLimitingTextInputFormatter(10),
+        //   // ],
+        //   keyboardType: TextInputType.phone,
+        //   onSaved: (String value) {
+        //     authService.changeBusinessPhoneNumber(value);
+        //   },
+        // ),
         SizedBox(
           height: 20,
         )

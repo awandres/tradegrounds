@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:authentication/docs/terms.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
+
+import 'package:authentication/widgets/auth_form_field.dart';
 
 import 'package:authentication/providers/auth_provider.dart';
 
@@ -26,132 +27,82 @@ class _SignupStep3State extends State<SignupStep3> {
         textAlign: TextAlign.center,
       ),
       SizedBox(height: 30),
-      TextFormField(
-        decoration: InputDecoration(
-          isDense: true,
-          labelText: "Street Address",
-          border: OutlineInputBorder(
-            borderRadius: const BorderRadius.all(
-              const Radius.circular(20.0),
-            ),
-          ),
-        ),
-        textCapitalization: TextCapitalization.words,
-        key: ValueKey('streetAddress'),
-        validator: (value) {
-          if (value.isEmpty) {
-            return 'Please enter an address';
-          }
-          return null;
-        },
+      AuthFormField(
+        valueKey: 'streetAddress',
+        labelText: 'Street Address',
         keyboardType: TextInputType.streetAddress,
-        onSaved: (String value) {
+        actionKeyboard: TextInputAction.next,
+        textCapitalization: TextCapitalization.words,
+        onSavedFunction: (String value) {
           authService.setBusinessStreetAddress(value);
         },
+        validatorFunction: requiredValidator,
+        validatorErrorMessage: 'Please enter a street address',
       ),
       SizedBox(
         height: 10,
       ),
-      TextFormField(
-        key: ValueKey('unit'),
-        decoration: InputDecoration(
-          isDense: true,
-          labelText: 'Unit, Apartment, etc.',
-          border: OutlineInputBorder(
-            borderRadius: const BorderRadius.all(
-              const Radius.circular(20.0),
-            ),
-          ),
-        ),
-        textCapitalization: TextCapitalization.words,
+      AuthFormField(
+        valueKey: 'unit',
+        labelText: 'Unit, Apartment, etc.',
         keyboardType: TextInputType.text,
-        onSaved: (String value) {
+        actionKeyboard: TextInputAction.next,
+        textCapitalization: TextCapitalization.words,
+        onSavedFunction: (String value) {
           authService.setBusinessAddressUnit(value);
         },
+        validatorFunction: requiredValidator,
+        validatorErrorMessage: 'Please enter a street address',
       ),
       SizedBox(
         height: 10,
       ),
-      TextFormField(
-        key: ValueKey('city'),
-        validator: (value) {
-          if (value.isEmpty) {
-            return 'City Required';
-          }
-          return null;
-        },
-        decoration: InputDecoration(
-          isDense: true,
-          labelText: 'City',
-          border: OutlineInputBorder(
-            borderRadius: const BorderRadius.all(
-              const Radius.circular(20.0),
-            ),
-          ),
-        ),
-        textCapitalization: TextCapitalization.words,
+      AuthFormField(
+        valueKey: 'city',
+        labelText: 'City',
         keyboardType: TextInputType.text,
-        onSaved: (String value) {
+        actionKeyboard: TextInputAction.next,
+        textCapitalization: TextCapitalization.words,
+        onSavedFunction: (String value) {
           authService.setBusinessCity(value);
         },
+        validatorFunction: requiredValidator,
+        validatorErrorMessage: 'City Required',
       ),
       SizedBox(height: 10),
-      TextFormField(
-        key: ValueKey('state'),
-        validator: (value) {
-          if (value.isEmpty) {
-            return 'State Required';
-          }
-          return null;
+      AuthFormField(
+        valueKey: 'state',
+        labelText: 'State',
+        keyboardType: TextInputType.text,
+        actionKeyboard: TextInputAction.next,
+        textCapitalization: TextCapitalization.characters,
+        onSavedFunction: (String value) {
+          authService.setBusinessState(value);
         },
+        validatorFunction: requiredValidator,
+        validatorErrorMessage: 'State Required',
         inputFormatters: [
           LengthLimitingTextInputFormatter(2),
         ],
-        textCapitalization: TextCapitalization.characters,
-        keyboardType: TextInputType.text,
-        decoration: InputDecoration(
-          isDense: true,
-          labelText: 'State',
-          border: OutlineInputBorder(
-            borderRadius: const BorderRadius.all(
-              const Radius.circular(20.0),
-            ),
-          ),
-        ),
-        onSaved: (String value) {
-          authService.setBusinessState(value);
-        },
       ),
       SizedBox(height: 10),
-      TextFormField(
-        key: ValueKey('zipCode'),
-        validator: (value) {
-          if (value.isEmpty) {
-            return 'Zip Code Required';
-          }
-          return null;
+      AuthFormField(
+        valueKey: 'zipCode',
+        labelText: 'Zip Code',
+        keyboardType: TextInputType.number,
+        actionKeyboard: TextInputAction.next,
+        textCapitalization: TextCapitalization.characters,
+        onSavedFunction: (String value) {
+          authService.setBusinessZip(value);
         },
+        validatorFunction: requiredValidator,
+        validatorErrorMessage: 'Zip Code Required',
         inputFormatters: [
           FilteringTextInputFormatter.digitsOnly,
           LengthLimitingTextInputFormatter(5),
         ],
-        keyboardType: TextInputType.number,
-        decoration: InputDecoration(
-          isDense: true,
-          labelText: 'Zip Code',
-          border: OutlineInputBorder(
-            borderRadius: const BorderRadius.all(
-              const Radius.circular(20.0),
-            ),
-          ),
-        ),
-        onSaved: (String value) {
-          authService.setBusinessZip(value);
-        },
       ),
-      SizedBox(
-        height: 20,
-      )
+      SizedBox(height: 20)
     ]);
   }
 }
