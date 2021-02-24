@@ -90,43 +90,42 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Flexible(
-                  child: Material(
-                    elevation: 10.0,
-                    shadowColor: Colors.black,
-                    borderRadius: const BorderRadius.all(const Radius.circular(20.0)),
-                    child: Container(
-                      // decoration: BoxDecoration(
-                      //   borderRadius: BorderRadius.all(Radius.circular(20)),
-                      //   boxShadow: [
-                      //     BoxShadow(
-                      //       color: Colors.grey.withOpacity(0.5),
-                      //       spreadRadius: 5,
-                      //       blurRadius: 7,
-                      //       offset: Offset(0, 20), // changes position of shadow
-                      //     ),
-                      //   ]
-                      // ),
-                      height: constraints.maxHeight * 0.4,
-                      width: double.infinity,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        child: Image.asset(
-                          'assets/images/storegroundsLogo.png',
-                          fit: BoxFit.cover,
-                        ),
+                Material(
+                  elevation: 10.0,
+                  shadowColor: Colors.black,
+                  borderRadius: const BorderRadius.all(const Radius.circular(20.0)),
+                  child: Container(
+                    // decoration: BoxDecoration(
+                    //   borderRadius: BorderRadius.all(Radius.circular(20)),
+                    //   boxShadow: [
+                    //     BoxShadow(
+                    //       color: Colors.grey.withOpacity(0.5),
+                    //       spreadRadius: 5,
+                    //       blurRadius: 7,
+                    //       offset: Offset(0, 20), // changes position of shadow
+                    //     ),
+                    //   ]
+                    // ),
+                    height: constraints.maxHeight * 0.35,
+                    width: double.infinity,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      child: Image.asset(
+                        'assets/images/storegroundsLogo.png',
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
                 ),
                 Container(
-                    padding: EdgeInsets.all(20),
-                    child: Text(
-                      'Storegrounds',
-                      style: Theme.of(context).textTheme.title,
-                    )),
-                Flexible(
-                  flex: deviceSize.width > 600 ? 2 : 1,
+                  padding: EdgeInsets.all(20),
+                  child: Text(
+                    'Storegrounds',
+                    style: Theme.of(context).textTheme.title,
+                  )
+                ),
+                Container(
+                  height: constraints.maxHeight*0.40,
                   child: Form(
                     key: _formKey,
                     child: SingleChildScrollView(
@@ -253,22 +252,41 @@ class _LoginScreenState extends State<LoginScreen> {
                             textColor:
                                 Theme.of(context).primaryTextTheme.button.color,
                           ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          FlatButton(
+                                child: const Text(
+                                  'Forgot User ID or Password ?',
+                                  style: TextStyle(
+                                    fontFamily: 'Quicksand',
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  // Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegistrationScreen()));
+                                },
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 30.0, vertical: 4),
+                                materialTapTargetSize:
+                                    MaterialTapTargetSize.shrinkWrap,
+                                textColor: Colors.black,
+                              ),
                         ],
                       ),
                     ),
                   ),
                 ),
                 SizedBox(
-                  height: 50,
+                  height: 15,
                 ),
-                Positioned(
-                  bottom: 0,
-                  child: Container(
-                    height: 50,
+                Container(
+                    height: constraints.maxHeight*0.07,
                     width: deviceSize.width,
-                    padding: EdgeInsets.only(left: 20),
+                    // color: Colors.black,
+                    // padding: EdgeInsets.only(left: 20),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Image.asset(
                           'assets/images/tradegroundsIg.png',
@@ -307,7 +325,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                   ),
-                ),
               ],
             );
           }),
