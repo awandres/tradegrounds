@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth.dart';
 import '../models/http_exception.dart';
+import './password_reset_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -257,14 +258,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           FlatButton(
                                 child: const Text(
-                                  'Forgot User ID or Password ?',
+                                  'Forgot your Password ?',
                                   style: TextStyle(
                                     fontFamily: 'Quicksand',
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                                 onPressed: () {
-                                  // Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegistrationScreen()));
+                                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => PasswordResetScreen()));
                                 },
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 30.0, vertical: 4),
