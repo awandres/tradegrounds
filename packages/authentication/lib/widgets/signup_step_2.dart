@@ -45,9 +45,9 @@ class _SignupStep2State extends State<SignupStep2> {
         ),
         SizedBox(height: 10),
         Material(
-          elevation: 10.0,
+          elevation: 5.0,
           shadowColor: Colors.black,
-          borderRadius: const BorderRadius.all(const Radius.circular(20.0)),
+          borderRadius: const BorderRadius.all(const Radius.circular(10.0)),
           child: DropdownButtonFormField(
             style: TextStyle(
               fontSize: 16,
@@ -68,7 +68,7 @@ class _SignupStep2State extends State<SignupStep2> {
               contentPadding: const EdgeInsets.all(10.5),
               border: OutlineInputBorder(
                 borderRadius: const BorderRadius.all(
-                  const Radius.circular(20.0),
+                  const Radius.circular(10.0),
                 ),
               ),
             ),
