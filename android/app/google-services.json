@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "718060848663",
+    "firebase_url": "https://storegrounds-default-rtdb.firebaseio.com",
     "project_id": "storegrounds",
     "storage_bucket": "storegrounds.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "718060848663-kiblk8qvpski5p4t14p3e5j6666sdmrc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.storegrounds",
+            "certificate_hash": "c66311683eb0a513320badcbc037bd036704e128"
+          }
+        },
         {
           "client_id": "718060848663-42krea1fcqvjjevk6it39m8pphrcm6mt.apps.googleusercontent.com",
           "client_type": 3

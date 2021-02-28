@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import '../../global/widgets/custom_drawer.dart';
 
-class CourierCentral extends StatefulWidget {
+class LoginScreen extends StatefulWidget {
   @override
-  _CourierCentralState createState() => _CourierCentralState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _CourierCentralState extends State<CourierCentral>
+class _LoginScreenState extends State<LoginScreen>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
   PageController _pageController;
@@ -26,8 +25,7 @@ class _CourierCentralState extends State<CourierCentral>
           ),
         ),
       ),
-      drawer: CustomDrawer(),
-      body: Text('USER DASH'),
+      body: Text('LOGIN SCREEN'),
     );
   }
 }
