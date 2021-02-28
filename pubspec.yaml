@@ -25,6 +25,10 @@ dependencies:
     sdk: flutter
   provider: ^4.0.4
 
+  # cloud_firestore: ^0.13.5
+  # firebase_auth: ^0.16.1
+
+
   authentication:
     path: ./packages/authentication
 
@@ -52,7 +56,9 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter:
   assets:
-        - assets/images/storegrounds_swoop.png
+    - assets/images/storegroundsLogo.png
+    - assets/images/tradegroundsIg.png
+    - assets/images/storegrounds_swoop.png
 
   fonts:
     - family: Pacifico
