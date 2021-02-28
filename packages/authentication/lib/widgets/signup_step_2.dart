@@ -18,9 +18,8 @@ class _SignupStep2State extends State<SignupStep2> {
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
     final authService = Provider.of<AuthProvider>(context);
-    var maskedController = MaskedTextController(mask: '(000) 000-0000');
-
-    String _dropDownValue;
+    var maskedController = MaskedTextController(
+        mask: '(000) 000-0000', text: authService.phoneNumber);
 
     return Column(
       children: [
@@ -34,6 +33,7 @@ class _SignupStep2State extends State<SignupStep2> {
         AuthFormField(
           valueKey: 'storename',
           labelText: 'Business Name',
+          initialValue: authService.storeName,
           keyboardType: TextInputType.name,
           actionKeyboard: TextInputAction.next,
           textCapitalization: TextCapitalization.words,
@@ -44,40 +44,52 @@ class _SignupStep2State extends State<SignupStep2> {
           validatorErrorMessage: 'Please enter a store name',
         ),
         SizedBox(height: 10),
-        DropdownButtonFormField(
-          hint: authService.businessCategory == null
-              ? Text('Business Category')
-              : Text(
-                  authService.businessCategory,
+        Material(
+          elevation: 10.0,
+          shadowColor: Colors.black,
+          borderRadius: const BorderRadius.all(const Radius.circular(20.0)),
+          child: DropdownButtonFormField(
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.black.withOpacity(0.8),
+              fontFamily: 'Quicksand',
+              fontWeight: FontWeight.w700,
+            ),
+            hint: authService.businessCategory == null
+                ? Text('Business Category')
+                : Text(
+                    authService.businessCategory,
+                  ),
+            onChanged: (value) => {
+              authService.changeBusinessCategory(value),
+              setState(() {}),
+            },
+            decoration: InputDecoration(
+              isDense: true,
+              contentPadding: const EdgeInsets.all(10.5),
+              border: OutlineInputBorder(
+                borderRadius: const BorderRadius.all(
+                  const Radius.circular(20.0),
                 ),
-          onChanged: (value) => {
-            authService.changeBusinessCategory(value),
-            setState(() {}),
-          },
-          decoration: InputDecoration(
-            isDense: true,
-            contentPadding: const EdgeInsets.all(10.5),
-            border: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(
-                const Radius.circular(20.0),
               ),
             ),
+            isExpanded: true,
+            iconSize: 30.0,
+            items: categories.map(
+              (value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              },
+            ).toList(),
           ),
-          isExpanded: true,
-          iconSize: 30.0,
-          items: categories.map(
-            (value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            },
-          ).toList(),
         ),
         SizedBox(height: 10),
         AuthFormField(
           valueKey: 'phoneNumber',
           labelText: 'Business Phone Number',
+          // initialValue: authService.phoneNumber,
           fieldController: maskedController,
           keyboardType: TextInputType.phone,
           actionKeyboard: TextInputAction.go,
@@ -87,34 +99,7 @@ class _SignupStep2State extends State<SignupStep2> {
           validatorFunction: phoneNumberValidator,
           validatorErrorMessage: 'Please enter a valid phone number',
         ),
-        // TextFormField(
-        //   controller: maskedController,
-        //   autofocus: false,
-        //   decoration: InputDecoration(
-        //     isDense: true,
-        //     labelText: "Business Phone Number",
-        //     border: OutlineInputBorder(
-        //       borderRadius: const BorderRadius.all(
-        //         const Radius.circular(20.0),
-        //       ),
-        //     ),
-        //   ),
-        //   key: ValueKey('phoneNumber'),
-        //   validator: (value) {
-        //     if (value.isEmpty) {
-        //       return 'Please enter a phone number';
-        //     }
-        //     return null;
-        //   },
-        //   // inputFormatters: [
-        //   //   FilteringTextInputFormatter.digitsOnly,
-        //   //   LengthLimitingTextInputFormatter(10),
-        //   // ],
-        //   keyboardType: TextInputType.phone,
-        //   onSaved: (String value) {
-        //     authService.changeBusinessPhoneNumber(value);
-        //   },
-        // ),
+        //
         SizedBox(
           height: 20,
         )

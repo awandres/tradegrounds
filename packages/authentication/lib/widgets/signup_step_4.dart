@@ -60,14 +60,23 @@ class _SignupStep4State extends State<SignupStep4> {
         CheckboxListTile(
             value: authService.termsAgreed,
             onChanged: authService.changeTermsAgreed,
-            title:
-                new Text('I have read and agree to the terms and conditions'),
+            title: new Text(
+              'I have read and agree to the terms and conditions',
+              style: TextStyle(
+                fontFamily: 'Quicksand',
+                fontWeight: FontWeight.w500,
+              ),
+            ),
             subtitle: !authService.termsValid
                 ? Padding(
                     padding: EdgeInsets.fromLTRB(12.0, 10, 0, 0),
                     child: Text(
                       'Required field',
-                      style: TextStyle(color: Color(0xFFe53935), fontSize: 12),
+                      style: TextStyle(
+                          fontFamily: 'Quicksand',
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFFe53935),
+                          fontSize: 12),
                     ),
                   )
                 : null,

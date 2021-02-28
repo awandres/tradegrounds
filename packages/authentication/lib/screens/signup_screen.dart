@@ -58,12 +58,18 @@ class Signup extends StatelessWidget {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
-                            if (signupStep >= 2)
+                            if (signupStep >= 3)
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   FlatButton(
-                                    child: Text('< Back'),
+                                    child: Text(
+                                      '< Back',
+                                      style: TextStyle(
+                                        fontFamily: 'Quicksand',
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
                                     textColor: Colors.grey,
                                     onPressed: authService.handleBack,
                                   ),
@@ -81,6 +87,7 @@ class Signup extends StatelessWidget {
                               CircularProgressIndicator(),
                             if (!authService.isLoading)
                               RaisedButton(
+                                elevation: 10,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30),
                                 ),
@@ -91,11 +98,17 @@ class Signup extends StatelessWidget {
                                     .primaryTextTheme
                                     .button
                                     .color,
-                                child: Text((signupStep > 1 && signupStep < 4)
-                                    ? 'Next'
-                                    : (signupStep == 4)
-                                        ? 'Submit'
-                                        : 'Sign Up'),
+                                child: Text(
+                                  (signupStep > 1 && signupStep < 4)
+                                      ? 'Next'
+                                      : (signupStep == 4)
+                                          ? 'Submit'
+                                          : 'Sign Up',
+                                  style: TextStyle(
+                                    fontFamily: 'Quicksand',
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                                 onPressed: (signupStep < 4)
                                     ? authService.handleAuthStep
                                     : authService.submitData,

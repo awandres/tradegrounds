@@ -30,6 +30,7 @@ class _SignupStep3State extends State<SignupStep3> {
       AuthFormField(
         valueKey: 'streetAddress',
         labelText: 'Street Address',
+        initialValue: authService.streetAddress,
         keyboardType: TextInputType.streetAddress,
         actionKeyboard: TextInputAction.next,
         textCapitalization: TextCapitalization.words,
@@ -45,12 +46,14 @@ class _SignupStep3State extends State<SignupStep3> {
       AuthFormField(
         valueKey: 'unit',
         labelText: 'Unit, Apartment, etc.',
+        initialValue: authService.unit,
         keyboardType: TextInputType.text,
         actionKeyboard: TextInputAction.next,
         textCapitalization: TextCapitalization.words,
         onSavedFunction: (String value) {
           authService.setBusinessAddressUnit(value);
         },
+        validatorFunction: noValidation,
       ),
       SizedBox(
         height: 10,
@@ -58,6 +61,7 @@ class _SignupStep3State extends State<SignupStep3> {
       AuthFormField(
         valueKey: 'city',
         labelText: 'City',
+        initialValue: authService.city,
         keyboardType: TextInputType.text,
         actionKeyboard: TextInputAction.next,
         textCapitalization: TextCapitalization.words,
@@ -71,6 +75,7 @@ class _SignupStep3State extends State<SignupStep3> {
       AuthFormField(
         valueKey: 'state',
         labelText: 'State',
+        initialValue: authService.state,
         keyboardType: TextInputType.text,
         actionKeyboard: TextInputAction.next,
         textCapitalization: TextCapitalization.characters,
@@ -80,13 +85,15 @@ class _SignupStep3State extends State<SignupStep3> {
         validatorFunction: requiredValidator,
         validatorErrorMessage: 'State Required',
         inputFormatters: [
-          LengthLimitingTextInputFormatter(2),
+          FilteringTextInputFormatter.singleLineFormatter,
+          LengthLimitingTextInputFormatter(3),
         ],
       ),
       SizedBox(height: 10),
       AuthFormField(
         valueKey: 'zipCode',
         labelText: 'Zip Code',
+        initialValue: authService.zip,
         keyboardType: TextInputType.number,
         actionKeyboard: TextInputAction.next,
         textCapitalization: TextCapitalization.characters,

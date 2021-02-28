@@ -6,6 +6,8 @@ class AuthFormField extends StatefulWidget {
   final bool obscureText;
   final bool isDense;
   final String labelText;
+  final String initialValue;
+
   final String valueKey;
   final TextEditingController controller;
   final Function validatorFunction;
@@ -19,6 +21,7 @@ class AuthFormField extends StatefulWidget {
 
   const AuthFormField({
     this.isDense = true,
+    this.initialValue,
     this.labelText,
     this.valueKey,
     this.keyboardType = TextInputType.text,
@@ -43,26 +46,36 @@ var passwordToMatch;
 class _AuthFormFieldState extends State<AuthFormField> {
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: widget.fieldController,
-      obscureText: widget.obscureText,
-      inputFormatters: widget.inputFormatters,
-      decoration: InputDecoration(
-        isDense: widget.isDense,
-        labelText: widget.labelText,
-        border: OutlineInputBorder(
-          borderRadius: const BorderRadius.all(
-            const Radius.circular(20.0),
+    return Material(
+      elevation: 10.0,
+      shadowColor: Colors.black,
+      borderRadius: const BorderRadius.all(const Radius.circular(20.0)),
+      child: TextFormField(
+        initialValue: widget.initialValue,
+        controller: widget.fieldController,
+        obscureText: widget.obscureText,
+        inputFormatters: widget.inputFormatters,
+        decoration: InputDecoration(
+          labelStyle: TextStyle(
+            fontFamily: 'Quicksand',
+            fontWeight: FontWeight.bold,
+          ),
+          isDense: widget.isDense,
+          labelText: widget.labelText,
+          border: OutlineInputBorder(
+            borderRadius: const BorderRadius.all(
+              const Radius.circular(20.0),
+            ),
           ),
         ),
+        textCapitalization: widget.textCapitalization,
+        key: ValueKey(widget.valueKey),
+        validator: (value) {
+          return widget.validatorFunction(value, widget.validatorErrorMessage);
+        },
+        keyboardType: widget.keyboardType,
+        onSaved: widget.onSavedFunction,
       ),
-      textCapitalization: widget.textCapitalization,
-      key: ValueKey(widget.valueKey),
-      validator: (value) {
-        return widget.validatorFunction(value, widget.validatorErrorMessage);
-      },
-      keyboardType: widget.keyboardType,
-      onSaved: widget.onSavedFunction,
     );
   }
 }
@@ -73,6 +86,10 @@ String emailValidation(value, validatorErrorMessage) {
   if (value.isEmpty || !value.contains('@')) {
     return validatorErrorMessage;
   }
+  return null;
+}
+
+String noValidation(value, validatorErrorMessage) {
   return null;
 }
 

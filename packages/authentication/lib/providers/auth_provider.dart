@@ -34,6 +34,12 @@ class AuthProvider with ChangeNotifier {
   String get businessCategory => _userData.businessCategory;
   String get phoneNumber => _userData.phoneNumber;
 
+  String get streetAddress => _businessLocation.streetAddress;
+  String get unit => _businessLocation.unit;
+  String get city => _businessLocation.city;
+  String get state => _businessLocation.state;
+  String get zip => _businessLocation.zip;
+
 // Form
 
   bool get termsAgreed => _termsAgreed;
@@ -127,6 +133,7 @@ class AuthProvider with ChangeNotifier {
   }
 
   void changeBusinessPhoneNumber(String value) {
+    print('changing phone');
     _userData.phoneNumber = value;
     notifyListeners();
   }
@@ -134,22 +141,27 @@ class AuthProvider with ChangeNotifier {
 // Business Location Setters
   void setBusinessStreetAddress(value) {
     _businessLocation.streetAddress = value;
+    notifyListeners();
   }
 
   void setBusinessAddressUnit(value) {
     _businessLocation.unit = value;
+    notifyListeners();
   }
 
   void setBusinessCity(value) {
     _businessLocation.city = value;
+    notifyListeners();
   }
 
   void setBusinessState(value) {
     _businessLocation.state = value;
+    notifyListeners();
   }
 
   void setBusinessZip(value) {
     _businessLocation.zip = value;
+    notifyListeners();
   }
 
   // TODO: Set relevant business properties in one function

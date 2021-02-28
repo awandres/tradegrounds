@@ -9,11 +9,9 @@ class SignupStep1 extends StatefulWidget {
 }
 
 class _SignupStep1State extends State<SignupStep1> {
-  var _passwordToMatch;
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthProvider>(context);
-    print('signupStep is ${authService.signupStep} at step 1');
     return Column(
       children: [
         AuthFormField(
@@ -59,6 +57,10 @@ class _SignupStep1State extends State<SignupStep1> {
           textColor: Theme.of(context).primaryColor,
           child: Text.rich(
             TextSpan(
+              style: TextStyle(
+                fontFamily: 'Quicksand',
+                fontWeight: FontWeight.bold,
+              ),
               text: 'Login? ',
               children: <TextSpan>[
                 TextSpan(
