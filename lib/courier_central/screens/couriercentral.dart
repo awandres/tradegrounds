@@ -27,8 +27,7 @@ class _CourierCentralState extends State<CourierCentral>
         ),
       ),
       drawer: CustomDrawer(),
-      body: Text('get it done fellas!'
-      ),
+      body: Text('USER DASH'),
     );
   }
 }

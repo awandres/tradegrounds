@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+
 import 'courier_central/screens/couriercentral.dart';
 import 'package:authentication/providers/auth.dart';
 import 'package:authentication/screens/login_screen.dart';
@@ -8,6 +10,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:io';
 
+
+import 'package:firebase_auth/firebase_auth.dart';
+
+import 'package:authentication/screens/signup_screen.dart';
+import 'package:authentication/providers/signup_provider.dart';
+import 'dart:io';
 
 void main() {
   // To lock screen orientation
