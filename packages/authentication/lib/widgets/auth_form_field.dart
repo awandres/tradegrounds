@@ -50,9 +50,9 @@ class _AuthFormFieldState extends State<AuthFormField> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      elevation: 10.0,
+      elevation: 5.0,
       shadowColor: Colors.black,
-      borderRadius: const BorderRadius.all(const Radius.circular(20.0)),
+      borderRadius: const BorderRadius.all(const Radius.circular(8.0)),
       child: TextFormField(
         autovalidateMode: widget.autovalidateMode,
         initialValue: widget.initialValue,
@@ -70,7 +70,7 @@ class _AuthFormFieldState extends State<AuthFormField> {
           labelText: widget.labelText,
           border: OutlineInputBorder(
             borderRadius: const BorderRadius.all(
-              const Radius.circular(20.0),
+              const Radius.circular(8.0),
             ),
           ),
         ),

@@ -21,39 +21,44 @@ class _SignupStep4State extends State<SignupStep4> {
       children: [
         SingleChildScrollView(
           controller: _scrollController,
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              maxHeight: (deviceSize.height * 0.6),
-            ),
-            child: ListView(
-              controller: _scrollController,
-              children: [
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    Container(
-                      // A fixed-height child.
-                      alignment: Alignment.center,
-                      child: Text(
-                        'Terms and Conditions',
-                        style: Theme.of(context).textTheme.title,
-                        textAlign: TextAlign.center,
+          child: Material(
+            elevation: 5.0,
+            shadowColor: Colors.black,
+            borderRadius: const BorderRadius.all(const Radius.circular(8.0)),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxHeight: (deviceSize.height * 0.6),
+              ),
+              child: ListView(
+                controller: _scrollController,
+                children: [
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      Container(
+                        // A fixed-height child.
+                        alignment: Alignment.center,
+                        child: Text(
+                          'Terms and Conditions',
+                          style: Theme.of(context).textTheme.title,
+                          textAlign: TextAlign.center,
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      child: Text(termsText),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-              ],
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Container(
+                        alignment: Alignment.center,
+                        child: Text(termsText),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
