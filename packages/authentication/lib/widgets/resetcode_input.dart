@@ -9,7 +9,7 @@ class ResetCode extends StatefulWidget {
 }
 
 class _ResetCodeState extends State<ResetCode> {
-  final GlobalKey<FormState> _formKey = GlobalKey();
+  final GlobalKey<FormState> _resetKey = GlobalKey();
   var _isLoading = false;
   Map<String, String> _payload = {
     'resetCode': '',
@@ -34,11 +34,11 @@ class _ResetCodeState extends State<ResetCode> {
   }
 
   Future<void> _submit() async {
-    if (!_formKey.currentState.validate()) {
+    if (!_resetKey.currentState.validate()) {
       // Invalid!
       return;
     }
-    _formKey.currentState.save();
+    _resetKey.currentState.save();
     setState(() {
       _isLoading = true;
     });
@@ -92,25 +92,26 @@ class _ResetCodeState extends State<ResetCode> {
             _payload['resetCode'] = value;
           },
         ),
-        _isLoading ? RaisedButton(
-            child: const Text(
-              'Submit Code',
-              style: TextStyle(
-                fontFamily: 'Quicksand',
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            onPressed: _submit,
-            elevation: 10,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30),
-            ),
-            padding: const EdgeInsets.symmetric(
-                horizontal: 30.0, vertical: 8.0),
-            color: Theme.of(context).primaryColor,
-            textColor:
-                Theme.of(context).primaryTextTheme.button.color,
-          ): CircularProgressIndicator(),
+        _isLoading
+            ? RaisedButton(
+                child: const Text(
+                  'Submit Code',
+                  style: TextStyle(
+                    fontFamily: 'Quicksand',
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                onPressed: _submit,
+                elevation: 10,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8.0),
+                color: Theme.of(context).primaryColor,
+                textColor: Theme.of(context).primaryTextTheme.button.color,
+              )
+            : CircularProgressIndicator(),
       ],
     );
   }

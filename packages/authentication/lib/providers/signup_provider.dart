@@ -10,7 +10,7 @@ import 'package:authentication/models/business_location.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class AuthProvider with ChangeNotifier {
+class SignupProvider with ChangeNotifier {
   UserData _userData = UserData(
     null,
     null,
@@ -45,13 +45,13 @@ class AuthProvider with ChangeNotifier {
   bool get termsAgreed => _termsAgreed;
   bool get termsValid => _termsValid;
   bool get isLoading => _isLoading;
-  GlobalKey get formKey => _formKey;
+  GlobalKey get signupKey => _signupKey;
   int get signupStep => _signupStep;
   int _signupStep = 1;
   bool _termsAgreed = false;
   bool _termsValid = true;
   bool _isLoading = false;
-  static GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+  static GlobalKey<FormState> _signupKey = new GlobalKey<FormState>();
   // bool isValid = false;
   var isValid;
 
@@ -82,10 +82,10 @@ class AuthProvider with ChangeNotifier {
 //Form Logic
 
   void handleSignupStep() {
-    var isValid = _formKey.currentState.validate();
+    var isValid = _signupKey.currentState.validate();
 
     if (isValid) {
-      _formKey.currentState.save();
+      _signupKey.currentState.save();
 
       if (_signupStep == 4) {
         submitData();
@@ -249,11 +249,11 @@ class AuthProvider with ChangeNotifier {
     print(
         'business info is $_businessLocation street address: ${_businessLocation.streetAddress} , unit ${_businessLocation.unit}, city: ${_businessLocation.city} state: ${_businessLocation.state}, zip: ${_businessLocation.zip}');
 
-    if (!_formKey.currentState.validate()) {
+    if (!_signupKey.currentState.validate()) {
       return;
     }
 
-    _formKey.currentState.save();
+    _signupKey.currentState.save();
     toggleLoading();
 
     try {

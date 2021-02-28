@@ -14,7 +14,7 @@ class _SignupStep4State extends State<SignupStep4> {
 
   @override
   Widget build(BuildContext context) {
-    final signupService = Provider.of<AuthProvider>(context);
+    final signupService = Provider.of<SignupProvider>(context);
     final deviceSize = MediaQuery.of(context).size;
 
     return Column(

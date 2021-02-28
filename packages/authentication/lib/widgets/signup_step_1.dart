@@ -13,7 +13,7 @@ class SignupStep1 extends StatefulWidget {
 class _SignupStep1State extends State<SignupStep1> {
   @override
   Widget build(BuildContext context) {
-    final signupService = Provider.of<AuthProvider>(context);
+    final signupService = Provider.of<SignupProvider>(context);
     return Column(
       children: [
         AuthFormField(

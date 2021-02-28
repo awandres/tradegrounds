@@ -10,7 +10,7 @@
 // }
 
 // class _LoginScreenState extends State<LoginScreen> {
-//   final GlobalKey<FormState> _formKey = GlobalKey();
+//   final GlobalKey<FormState> _signupKey = GlobalKey();
 //   Map<String, String> _authData = {
 //     'email': '',
 //     'password': '',
@@ -37,11 +37,11 @@
 //   }
 
 //   Future<void> _submit() async {
-//     if (!_formKey.currentState.validate()) {
+//     if (!_signupKey.currentState.validate()) {
 //       // Invalid!
 //       return;
 //     }
-//     _formKey.currentState.save();
+//     _signupKey.currentState.save();
 //     setState(() {
 //       _isLoading = true;
 //     });
@@ -128,7 +128,7 @@
 //                 Container(
 //                   height: constraints.maxHeight*0.40,
 //                   child: Form(
-//                     key: _formKey,
+//                     key: _signupKey,
 //                     child: SingleChildScrollView(
 //                       child: Column(
 //                         children: <Widget>[

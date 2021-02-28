@@ -11,7 +11,7 @@ class EmailInput extends StatefulWidget {
 class _EmailInputState extends State<EmailInput> {
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<FormState> _formKey = GlobalKey();
+    final GlobalKey<FormState> _resetKey = GlobalKey();
     var _isLoading = false;
 
     Map<String, String> _payload = {
@@ -37,11 +37,11 @@ class _EmailInputState extends State<EmailInput> {
     }
 
     Future<void> _submit() async {
-      if (!_formKey.currentState.validate()) {
+      if (!_resetKey.currentState.validate()) {
         // Invalid!
         return;
       }
-      _formKey.currentState.save();
+      _resetKey.currentState.save();
       setState(() {
         _isLoading = true;
       });
@@ -56,7 +56,7 @@ class _EmailInputState extends State<EmailInput> {
         var errorMessage = 'This email does not exist.';
         _showErrorDialog(errorMessage);
       } catch (error) {
-        const errorMessage ='Network error. try again later';
+        const errorMessage = 'Network error. try again later';
         _showErrorDialog(errorMessage);
       }
 
@@ -76,7 +76,7 @@ class _EmailInputState extends State<EmailInput> {
           return Container(
               width: constraints.maxWidth * 0.5,
               child: Form(
-                key: _formKey,
+                key: _resetKey,
                 child: Column(
                   children: <Widget>[
                     Container(

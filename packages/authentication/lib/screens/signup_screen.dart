@@ -9,10 +9,10 @@ import 'package:authentication/widgets/signup_step_4.dart';
 class Signup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // final _formKey = GlobalKey<FormState>();
+    // final _signupKey = GlobalKey<FormState>();
     final deviceSize = MediaQuery.of(context).size;
 
-    final signupService = Provider.of<AuthProvider>(context);
+    final signupService = Provider.of<SignupProvider>(context);
     int signupStep = signupService.signupStep;
 
     return Scaffold(
@@ -53,7 +53,7 @@ class Signup extends StatelessWidget {
                   Flexible(
                     flex: deviceSize.width > 600 ? 2 : 1,
                     child: Form(
-                      key: signupService.formKey,
+                      key: signupService.signupKey,
                       child: SingleChildScrollView(
                         child: Column(
                           mainAxisSize: MainAxisSize.min,

@@ -17,7 +17,7 @@ class _SignupStep2State extends State<SignupStep2> {
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
-    final signupService = Provider.of<AuthProvider>(context);
+    final signupService = Provider.of<SignupProvider>(context);
     var maskedController = MaskedTextController(
         mask: '(000) 000-0000', text: signupService.phoneNumber);
 

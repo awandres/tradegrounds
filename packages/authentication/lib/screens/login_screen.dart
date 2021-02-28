@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../providers/auth.dart';
 import '../models/http_exception.dart';
 import './password_reset_screen.dart';
+import 'package:authentication/screens/signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -10,7 +11,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final GlobalKey<FormState> _formKey = GlobalKey();
+  final GlobalKey<FormState> _loginKey = GlobalKey();
   Map<String, String> _authData = {
     'email': '',
     'password': '',
@@ -37,11 +38,11 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> _submit() async {
-    if (!_formKey.currentState.validate()) {
+    if (!_loginKey.currentState.validate()) {
       // Invalid!
       return;
     }
-    _formKey.currentState.save();
+    _loginKey.currentState.save();
     setState(() {
       _isLoading = true;
     });
@@ -94,7 +95,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 Material(
                   elevation: 10.0,
                   shadowColor: Colors.black,
-                  borderRadius: const BorderRadius.all(const Radius.circular(20.0)),
+                  borderRadius:
+                      const BorderRadius.all(const Radius.circular(20.0)),
                   child: Container(
                     // decoration: BoxDecoration(
                     //   borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -119,16 +121,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.all(20),
-                  child: Text(
-                    'Storegrounds',
-                    style: Theme.of(context).textTheme.title,
-                  )
-                ),
+                    padding: EdgeInsets.all(20),
+                    child: Text(
+                      'Storegrounds',
+                      style: Theme.of(context).textTheme.title,
+                    )),
                 Container(
-                  height: constraints.maxHeight*0.40,
+                  height: constraints.maxHeight * 0.40,
                   child: Form(
-                    key: _formKey,
+                    key: _loginKey,
                     child: SingleChildScrollView(
                       child: Column(
                         children: <Widget>[
@@ -139,18 +140,17 @@ class _LoginScreenState extends State<LoginScreen> {
                                 const Radius.circular(20.0)),
                             child: TextFormField(
                               decoration: const InputDecoration(
-                                labelStyle: TextStyle(
-                                  fontFamily: 'Quicksand',
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                isDense: true,
-                                labelText: 'E-Mail',
-                                border: OutlineInputBorder(
-                                  borderRadius: const BorderRadius.all(
-                                    const Radius.circular(20.0),
+                                  labelStyle: TextStyle(
+                                    fontFamily: 'Quicksand',
+                                    fontWeight: FontWeight.bold,
                                   ),
-                                )
-                              ),
+                                  isDense: true,
+                                  labelText: 'E-Mail',
+                                  border: OutlineInputBorder(
+                                    borderRadius: const BorderRadius.all(
+                                      const Radius.circular(20.0),
+                                    ),
+                                  )),
                               keyboardType: TextInputType.emailAddress,
                               validator: (value) {
                                 if (value.isEmpty || !value.contains('@')) {
@@ -172,18 +172,17 @@ class _LoginScreenState extends State<LoginScreen> {
                                 const Radius.circular(20.0)),
                             child: TextFormField(
                               decoration: const InputDecoration(
-                                labelStyle: TextStyle(
-                                  fontFamily: 'Quicksand',
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                isDense: true,
-                                labelText: 'Password',
-                                border: OutlineInputBorder(
-                                  borderRadius: const BorderRadius.all(
-                                    const Radius.circular(20.0),
+                                  labelStyle: TextStyle(
+                                    fontFamily: 'Quicksand',
+                                    fontWeight: FontWeight.bold,
                                   ),
-                                )
-                              ),
+                                  isDense: true,
+                                  labelText: 'Password',
+                                  border: OutlineInputBorder(
+                                    borderRadius: const BorderRadius.all(
+                                      const Radius.circular(20.0),
+                                    ),
+                                  )),
                               obscureText: true,
                               controller: _passwordController,
                               validator: (value) {
@@ -206,7 +205,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               const Text(
-                                'New User ? ', 
+                                'New User ? ',
                                 style: TextStyle(
                                   fontFamily: 'Quicksand',
                                   fontWeight: FontWeight.bold,
@@ -221,7 +220,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                 ),
                                 onPressed: () {
-                                  // Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegistrationScreen()));
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => Signup()));
                                 },
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 30.0, vertical: 4),
@@ -257,22 +257,23 @@ class _LoginScreenState extends State<LoginScreen> {
                             height: 10,
                           ),
                           FlatButton(
-                                child: const Text(
-                                  'Forgot your Password ?',
-                                  style: TextStyle(
-                                    fontFamily: 'Quicksand',
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                onPressed: () {
-                                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => PasswordResetScreen()));
-                                },
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 30.0, vertical: 4),
-                                materialTapTargetSize:
-                                    MaterialTapTargetSize.shrinkWrap,
-                                textColor: Colors.black,
+                            child: const Text(
+                              'Forgot your Password ?',
+                              style: TextStyle(
+                                fontFamily: 'Quicksand',
+                                fontWeight: FontWeight.bold,
                               ),
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => PasswordResetScreen()));
+                            },
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 30.0, vertical: 4),
+                            materialTapTargetSize:
+                                MaterialTapTargetSize.shrinkWrap,
+                            textColor: Colors.black,
+                          ),
                         ],
                       ),
                     ),
@@ -282,50 +283,50 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 15,
                 ),
                 Container(
-                    height: constraints.maxHeight*0.07,
-                    width: deviceSize.width,
-                    // color: Colors.black,
-                    // padding: EdgeInsets.only(left: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Image.asset(
-                          'assets/images/tradegroundsIg.png',
-                          fit: BoxFit.cover,
+                  height: constraints.maxHeight * 0.07,
+                  width: deviceSize.width,
+                  // color: Colors.black,
+                  // padding: EdgeInsets.only(left: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Image.asset(
+                        'assets/images/tradegroundsIg.png',
+                        fit: BoxFit.cover,
+                      ),
+                      SizedBox(
+                        width: 30,
+                      ),
+                      FittedBox(
+                        child: Column(
+                          children: <Widget>[
+                            Text(
+                              'Tradegrounds Inc. 2077',
+                              style: TextStyle(
+                                fontFamily: 'Quicksand',
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              'www.tradegrounds.info',
+                              style: TextStyle(
+                                fontFamily: 'Quicksand',
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              'v.0.0.1',
+                              style: TextStyle(
+                                fontFamily: 'Quicksand',
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
                         ),
-                        SizedBox(
-                          width: 30,
-                        ),
-                        FittedBox(
-                          child: Column(
-                            children: <Widget>[
-                              Text(
-                                'Tradegrounds Inc. 2077',
-                                style: TextStyle(
-                                  fontFamily: 'Quicksand',
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                'www.tradegrounds.info',
-                                style: TextStyle(
-                                  fontFamily: 'Quicksand',
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                'v.0.0.1',
-                                style: TextStyle(
-                                  fontFamily: 'Quicksand',
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
+                      )
+                    ],
                   ),
+                ),
               ],
             );
           }),

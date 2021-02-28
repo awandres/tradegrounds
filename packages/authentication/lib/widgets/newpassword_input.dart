@@ -11,7 +11,7 @@ class NewPassword extends StatefulWidget {
 class _NewPasswordState extends State<NewPassword> {
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<FormState> _formKey = GlobalKey();
+    final GlobalKey<FormState> _resetKey = GlobalKey();
     var _isLoading = false;
 
     Map<String, String> _payload = {'newPassword': ''};
@@ -35,11 +35,11 @@ class _NewPasswordState extends State<NewPassword> {
     }
 
     Future<void> _submit() async {
-      if (!_formKey.currentState.validate()) {
+      if (!_resetKey.currentState.validate()) {
         // Invalid!
         return;
       }
-      _formKey.currentState.save();
+      _resetKey.currentState.save();
       setState(() {
         _isLoading = true;
       });
@@ -73,7 +73,7 @@ class _NewPasswordState extends State<NewPassword> {
     }
 
     return Column(
-      children: <Widget> [
+      children: <Widget>[
         TextFormField(
           // controller: _passwordController,
           decoration: const InputDecoration(
@@ -99,25 +99,26 @@ class _NewPasswordState extends State<NewPassword> {
             _payload['newPassword'] = value;
           },
         ),
-        _isLoading ? RaisedButton(
-          child: const Text(
-            'Submit',
-            style: TextStyle(
-              fontFamily: 'Quicksand',
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          onPressed: _submit,
-          elevation: 10,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
-          ),
-          padding: const EdgeInsets.symmetric(
-              horizontal: 30.0, vertical: 8.0),
-          color: Theme.of(context).primaryColor,
-          textColor:
-              Theme.of(context).primaryTextTheme.button.color,
-        ): CircularProgressIndicator(),
+        _isLoading
+            ? RaisedButton(
+                child: const Text(
+                  'Submit',
+                  style: TextStyle(
+                    fontFamily: 'Quicksand',
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                onPressed: _submit,
+                elevation: 10,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8.0),
+                color: Theme.of(context).primaryColor,
+                textColor: Theme.of(context).primaryTextTheme.button.color,
+              )
+            : CircularProgressIndicator(),
       ],
     );
   }
