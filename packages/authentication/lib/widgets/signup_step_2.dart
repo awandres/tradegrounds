@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:authentication/widgets/auth_form_field.dart';
 
 import 'package:authentication/controllers/phone_controller.dart';
-import 'package:authentication/providers/auth_provider.dart';
+import 'package:authentication/providers/signup_provider.dart';
 import 'package:authentication/docs/business_categories.dart';
 
 class SignupStep2 extends StatefulWidget {
@@ -17,9 +17,9 @@ class _SignupStep2State extends State<SignupStep2> {
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
-    final authService = Provider.of<AuthProvider>(context);
+    final signupService = Provider.of<AuthProvider>(context);
     var maskedController = MaskedTextController(
-        mask: '(000) 000-0000', text: authService.phoneNumber);
+        mask: '(000) 000-0000', text: signupService.phoneNumber);
 
     return Column(
       children: [
@@ -33,12 +33,12 @@ class _SignupStep2State extends State<SignupStep2> {
         AuthFormField(
           valueKey: 'storename',
           labelText: 'Business Name',
-          initialValue: authService.storeName,
+          initialValue: signupService.storeName,
           keyboardType: TextInputType.name,
           textInputAction: TextInputAction.next,
           textCapitalization: TextCapitalization.words,
           onSavedFunction: (String value) {
-            authService.changeStoreName(value);
+            signupService.changeStoreName(value);
           },
           validatorFunction: requiredValidator,
           validatorErrorMessage: 'Please enter a store name',
@@ -55,14 +55,13 @@ class _SignupStep2State extends State<SignupStep2> {
               fontFamily: 'Quicksand',
               fontWeight: FontWeight.w700,
             ),
-            hint: authService.businessCategory == null
+            hint: signupService.businessCategory == null
                 ? Text('Business Category')
                 : Text(
-                    authService.businessCategory,
+                    signupService.businessCategory,
                   ),
             onChanged: (value) => {
-              authService.changeBusinessCategory(value),
-              setState(() {}),
+              signupService.changeBusinessCategory(value),
             },
             decoration: InputDecoration(
               isDense: true,
@@ -89,12 +88,12 @@ class _SignupStep2State extends State<SignupStep2> {
         AuthFormField(
           valueKey: 'phoneNumber',
           labelText: 'Business Phone Number',
-          // initialValue: authService.phoneNumber,
+          // initialValue: signupService.phoneNumber,
           fieldController: maskedController,
           keyboardType: TextInputType.phone,
           textInputAction: TextInputAction.go,
           onSavedFunction: (String value) {
-            authService.changeBusinessPhoneNumber(value);
+            signupService.changeBusinessPhoneNumber(value);
           },
           validatorFunction: phoneNumberValidator,
           validatorErrorMessage: 'Please enter a valid phone number',

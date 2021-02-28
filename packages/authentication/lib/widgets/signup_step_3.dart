@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 
 import 'package:authentication/widgets/auth_form_field.dart';
 
-import 'package:authentication/providers/auth_provider.dart';
+import 'package:authentication/providers/signup_provider.dart';
 
 class SignupStep3 extends StatefulWidget {
   @override
@@ -22,7 +22,7 @@ class _SignupStep3State extends State<SignupStep3> {
 
   @override
   Widget build(BuildContext context) {
-    final authService = Provider.of<AuthProvider>(context);
+    final signupService = Provider.of<AuthProvider>(context);
     final deviceSize = MediaQuery.of(context).size;
 
     return Column(children: [
@@ -36,12 +36,12 @@ class _SignupStep3State extends State<SignupStep3> {
       AuthFormField(
         valueKey: 'streetAddress',
         labelText: 'Street Address',
-        initialValue: authService.streetAddress,
+        initialValue: signupService.streetAddress,
         keyboardType: TextInputType.streetAddress,
         textInputAction: TextInputAction.next,
         textCapitalization: TextCapitalization.words,
         onSavedFunction: (String value) {
-          authService.setBusinessStreetAddress(value);
+          signupService.setBusinessStreetAddress(value);
         },
         onFieldSubmitted: handleSubmitted,
         autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -54,12 +54,12 @@ class _SignupStep3State extends State<SignupStep3> {
       AuthFormField(
         valueKey: 'unit',
         labelText: 'Unit, Apartment, etc.',
-        initialValue: authService.unit,
+        initialValue: signupService.unit,
         keyboardType: TextInputType.text,
         textInputAction: TextInputAction.next,
         textCapitalization: TextCapitalization.words,
         onSavedFunction: (String value) {
-          authService.setBusinessAddressUnit(value);
+          signupService.setBusinessAddressUnit(value);
         },
         onFieldSubmitted: handleSubmitted,
         validatorFunction: noValidation,
@@ -70,12 +70,12 @@ class _SignupStep3State extends State<SignupStep3> {
       AuthFormField(
         valueKey: 'city',
         labelText: 'City',
-        initialValue: authService.city,
+        initialValue: signupService.city,
         keyboardType: TextInputType.text,
         textInputAction: TextInputAction.next,
         textCapitalization: TextCapitalization.words,
         onSavedFunction: (String value) {
-          authService.setBusinessCity(value);
+          signupService.setBusinessCity(value);
         },
         autovalidateMode: AutovalidateMode.onUserInteraction,
         validatorFunction: requiredValidator,
@@ -85,12 +85,12 @@ class _SignupStep3State extends State<SignupStep3> {
       AuthFormField(
         valueKey: 'state',
         labelText: 'State',
-        initialValue: authService.state,
+        initialValue: signupService.state,
         keyboardType: TextInputType.text,
         textInputAction: TextInputAction.next,
         textCapitalization: TextCapitalization.characters,
         onSavedFunction: (String value) {
-          authService.setBusinessState(value);
+          signupService.setBusinessState(value);
         },
         autovalidateMode: AutovalidateMode.onUserInteraction,
         validatorFunction: requiredValidator,
@@ -104,12 +104,12 @@ class _SignupStep3State extends State<SignupStep3> {
       AuthFormField(
         valueKey: 'zipCode',
         labelText: 'Zip Code',
-        initialValue: authService.zip,
+        initialValue: signupService.zip,
         keyboardType: TextInputType.number,
         textInputAction: TextInputAction.go,
         textCapitalization: TextCapitalization.characters,
         onSavedFunction: (String value) {
-          authService.setBusinessZip(value);
+          signupService.setBusinessZip(value);
         },
         autovalidateMode: AutovalidateMode.onUserInteraction,
         validatorFunction: requiredValidator,

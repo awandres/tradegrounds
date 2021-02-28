@@ -81,7 +81,7 @@ class AuthProvider with ChangeNotifier {
 
 //Form Logic
 
-  void handleAuthStep() {
+  void handleSignupStep() {
     var isValid = _formKey.currentState.validate();
 
     if (isValid) {

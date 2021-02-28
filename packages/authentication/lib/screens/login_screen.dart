@@ -25,7 +25,7 @@ class _LoginScreenState extends State<LoginScreen>
           ),
         ),
       ),
-      body: Text('USER DASH'),
+      body: Text('LOGIN SCREEN'),
     );
   }
 }

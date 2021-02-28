@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:authentication/providers/auth_provider.dart';
+import 'package:authentication/providers/signup_provider.dart';
 import 'package:authentication/widgets/signup_step_1.dart';
 import 'package:authentication/widgets/signup_step_2.dart';
 import 'package:authentication/widgets/signup_step_3.dart';
@@ -12,8 +12,8 @@ class Signup extends StatelessWidget {
     // final _formKey = GlobalKey<FormState>();
     final deviceSize = MediaQuery.of(context).size;
 
-    final authService = Provider.of<AuthProvider>(context);
-    int signupStep = authService.signupStep;
+    final signupService = Provider.of<AuthProvider>(context);
+    int signupStep = signupService.signupStep;
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -53,7 +53,7 @@ class Signup extends StatelessWidget {
                   Flexible(
                     flex: deviceSize.width > 600 ? 2 : 1,
                     child: Form(
-                      key: authService.formKey,
+                      key: signupService.formKey,
                       child: SingleChildScrollView(
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
@@ -71,7 +71,7 @@ class Signup extends StatelessWidget {
                                       ),
                                     ),
                                     textColor: Colors.grey,
-                                    onPressed: authService.handleBack,
+                                    onPressed: signupService.handleBack,
                                   ),
                                 ],
                               ),
@@ -83,9 +83,9 @@ class Signup extends StatelessWidget {
                               SizedBox(height: 20)
                             else
                               SizedBox(height: 0),
-                            if (authService.isLoading)
+                            if (signupService.isLoading)
                               CircularProgressIndicator(),
-                            if (!authService.isLoading)
+                            if (!signupService.isLoading)
                               RaisedButton(
                                 elevation: 10,
                                 shape: RoundedRectangleBorder(
@@ -110,8 +110,8 @@ class Signup extends StatelessWidget {
                                   ),
                                 ),
                                 onPressed: (signupStep < 4)
-                                    ? authService.handleAuthStep
-                                    : authService.submitData,
+                                    ? signupService.handleSignupStep
+                                    : signupService.submitData,
                               )
                           ],
                         ),

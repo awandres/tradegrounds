@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:authentication/docs/terms.dart';
 import 'package:provider/provider.dart';
 
-import 'package:authentication/providers/auth_provider.dart';
+import 'package:authentication/providers/signup_provider.dart';
 
 class SignupStep4 extends StatefulWidget {
   @override
@@ -14,7 +14,7 @@ class _SignupStep4State extends State<SignupStep4> {
 
   @override
   Widget build(BuildContext context) {
-    final authService = Provider.of<AuthProvider>(context);
+    final signupService = Provider.of<AuthProvider>(context);
     final deviceSize = MediaQuery.of(context).size;
 
     return Column(
@@ -58,8 +58,8 @@ class _SignupStep4State extends State<SignupStep4> {
           ),
         ),
         CheckboxListTile(
-            value: authService.termsAgreed,
-            onChanged: authService.changeTermsAgreed,
+            value: signupService.termsAgreed,
+            onChanged: signupService.changeTermsAgreed,
             title: new Text(
               'I have read and agree to the terms and conditions',
               style: TextStyle(
@@ -67,7 +67,7 @@ class _SignupStep4State extends State<SignupStep4> {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            subtitle: !authService.termsValid
+            subtitle: !signupService.termsValid
                 ? Padding(
                     padding: EdgeInsets.fromLTRB(12.0, 10, 0, 0),
                     child: Text(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:authentication/screens/login_screen.dart';
 
-import 'package:authentication/providers/auth_provider.dart';
+import 'package:authentication/providers/signup_provider.dart';
 import 'package:authentication/widgets/auth_form_field.dart';
 
 class SignupStep1 extends StatefulWidget {
@@ -13,7 +13,7 @@ class SignupStep1 extends StatefulWidget {
 class _SignupStep1State extends State<SignupStep1> {
   @override
   Widget build(BuildContext context) {
-    final authService = Provider.of<AuthProvider>(context);
+    final signupService = Provider.of<AuthProvider>(context);
     return Column(
       children: [
         AuthFormField(
@@ -22,9 +22,8 @@ class _SignupStep1State extends State<SignupStep1> {
           keyboardType: TextInputType.emailAddress,
           textInputAction: TextInputAction.next,
           onSavedFunction: (String value) {
-            authService.changeUserEmail(value);
+            signupService.changeUserEmail(value);
           },
-          autovalidateMode: AutovalidateMode.onUserInteraction,
           validatorFunction: emailValidation,
           validatorErrorMessage: 'Please enter a valid email',
         ),
@@ -37,12 +36,12 @@ class _SignupStep1State extends State<SignupStep1> {
           obscureText: true,
           textInputAction: TextInputAction.next,
           onSavedFunction: (String value) {
-            authService.changeUserPassword(value);
+            signupService.changeUserPassword(value);
           },
           validatorFunction: passwordValidator,
           validatorErrorMessage: 'Please enter a password',
           onChangedFunction: (String value) {
-            authService.changeUserPassword(value);
+            signupService.changeUserPassword(value);
           },
         ),
         SizedBox(

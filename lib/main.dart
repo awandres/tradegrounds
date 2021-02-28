@@ -7,7 +7,7 @@ import 'courier_central/screens/couriercentral.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:authentication/screens/signup_screen.dart';
-import 'package:authentication/providers/auth_provider.dart';
+import 'package:authentication/providers/signup_provider.dart';
 import 'dart:io';
 
 void main() {
