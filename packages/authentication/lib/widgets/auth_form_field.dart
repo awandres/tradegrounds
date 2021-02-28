@@ -7,14 +7,15 @@ class AuthFormField extends StatefulWidget {
   final bool isDense;
   final String labelText;
   final String initialValue;
-
   final String valueKey;
+  final AutovalidateMode autovalidateMode;
   final TextEditingController controller;
   final Function validatorFunction;
   final String validatorErrorMessage;
-  final TextInputAction actionKeyboard;
+  final TextInputAction textInputAction;
   final TextCapitalization textCapitalization;
   final TextEditingController fieldController;
+  final Function onFieldSubmitted;
   final Function onSavedFunction;
   final Function onChangedFunction;
   final List<TextInputFormatter> inputFormatters;
@@ -22,18 +23,20 @@ class AuthFormField extends StatefulWidget {
   const AuthFormField({
     this.isDense = true,
     this.initialValue,
+    this.autovalidateMode = AutovalidateMode.disabled,
     this.labelText,
     this.valueKey,
     this.keyboardType = TextInputType.text,
     this.obscureText = false,
     this.controller,
+    this.onFieldSubmitted,
     this.validatorFunction,
     this.validatorErrorMessage,
     this.onSavedFunction,
     this.onChangedFunction,
     this.fieldController,
     this.textCapitalization = TextCapitalization.none,
-    this.actionKeyboard = TextInputAction.next,
+    this.textInputAction = TextInputAction.next,
     this.inputFormatters,
   });
 
@@ -51,10 +54,13 @@ class _AuthFormFieldState extends State<AuthFormField> {
       shadowColor: Colors.black,
       borderRadius: const BorderRadius.all(const Radius.circular(20.0)),
       child: TextFormField(
+        autovalidateMode: widget.autovalidateMode,
         initialValue: widget.initialValue,
         controller: widget.fieldController,
         obscureText: widget.obscureText,
+        onFieldSubmitted: widget.onFieldSubmitted,
         inputFormatters: widget.inputFormatters,
+        textInputAction: widget.textInputAction,
         decoration: InputDecoration(
           labelStyle: TextStyle(
             fontFamily: 'Quicksand',

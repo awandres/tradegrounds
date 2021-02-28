@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:authentication/screens/login_screen.dart';
+
 import 'package:authentication/providers/auth_provider.dart';
 import 'package:authentication/widgets/auth_form_field.dart';
 
@@ -18,10 +20,11 @@ class _SignupStep1State extends State<SignupStep1> {
           valueKey: 'email',
           labelText: 'Email',
           keyboardType: TextInputType.emailAddress,
-          actionKeyboard: TextInputAction.next,
+          textInputAction: TextInputAction.next,
           onSavedFunction: (String value) {
             authService.changeUserEmail(value);
           },
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           validatorFunction: emailValidation,
           validatorErrorMessage: 'Please enter a valid email',
         ),
@@ -32,7 +35,7 @@ class _SignupStep1State extends State<SignupStep1> {
           valueKey: 'password',
           labelText: 'Password',
           obscureText: true,
-          actionKeyboard: TextInputAction.next,
+          textInputAction: TextInputAction.next,
           onSavedFunction: (String value) {
             authService.changeUserPassword(value);
           },
@@ -49,17 +52,22 @@ class _SignupStep1State extends State<SignupStep1> {
           valueKey: 'passwordConfirm',
           labelText: 'Confirm Password',
           obscureText: true,
-          actionKeyboard: TextInputAction.go,
+          textInputAction: TextInputAction.done,
           validatorFunction: passwordMatchValidator,
           validatorErrorMessage: 'Passwords do not match',
         ),
         FlatButton(
           textColor: Theme.of(context).primaryColor,
+          onPressed: () {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => LoginScreen()));
+          },
           child: Text.rich(
             TextSpan(
               style: TextStyle(
                 fontFamily: 'Quicksand',
                 fontWeight: FontWeight.bold,
+                color: Colors.black87,
               ),
               text: 'Login? ',
               children: <TextSpan>[

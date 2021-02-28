@@ -13,6 +13,12 @@ class SignupStep3 extends StatefulWidget {
 
 class _SignupStep3State extends State<SignupStep3> {
   ScrollController _scrollController = ScrollController();
+  FocusScopeNode _focusScopeNode = FocusScopeNode();
+
+  void handleSubmitted(String value) {
+    print('handling submit');
+    _focusScopeNode.nextFocus();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +38,13 @@ class _SignupStep3State extends State<SignupStep3> {
         labelText: 'Street Address',
         initialValue: authService.streetAddress,
         keyboardType: TextInputType.streetAddress,
-        actionKeyboard: TextInputAction.next,
+        textInputAction: TextInputAction.next,
         textCapitalization: TextCapitalization.words,
         onSavedFunction: (String value) {
           authService.setBusinessStreetAddress(value);
         },
+        onFieldSubmitted: handleSubmitted,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         validatorFunction: requiredValidator,
         validatorErrorMessage: 'Please enter a street address',
       ),
@@ -48,11 +56,12 @@ class _SignupStep3State extends State<SignupStep3> {
         labelText: 'Unit, Apartment, etc.',
         initialValue: authService.unit,
         keyboardType: TextInputType.text,
-        actionKeyboard: TextInputAction.next,
+        textInputAction: TextInputAction.next,
         textCapitalization: TextCapitalization.words,
         onSavedFunction: (String value) {
           authService.setBusinessAddressUnit(value);
         },
+        onFieldSubmitted: handleSubmitted,
         validatorFunction: noValidation,
       ),
       SizedBox(
@@ -63,11 +72,12 @@ class _SignupStep3State extends State<SignupStep3> {
         labelText: 'City',
         initialValue: authService.city,
         keyboardType: TextInputType.text,
-        actionKeyboard: TextInputAction.next,
+        textInputAction: TextInputAction.next,
         textCapitalization: TextCapitalization.words,
         onSavedFunction: (String value) {
           authService.setBusinessCity(value);
         },
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         validatorFunction: requiredValidator,
         validatorErrorMessage: 'City Required',
       ),
@@ -77,11 +87,12 @@ class _SignupStep3State extends State<SignupStep3> {
         labelText: 'State',
         initialValue: authService.state,
         keyboardType: TextInputType.text,
-        actionKeyboard: TextInputAction.next,
+        textInputAction: TextInputAction.next,
         textCapitalization: TextCapitalization.characters,
         onSavedFunction: (String value) {
           authService.setBusinessState(value);
         },
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         validatorFunction: requiredValidator,
         validatorErrorMessage: 'State Required',
         inputFormatters: [
@@ -95,11 +106,12 @@ class _SignupStep3State extends State<SignupStep3> {
         labelText: 'Zip Code',
         initialValue: authService.zip,
         keyboardType: TextInputType.number,
-        actionKeyboard: TextInputAction.next,
+        textInputAction: TextInputAction.go,
         textCapitalization: TextCapitalization.characters,
         onSavedFunction: (String value) {
           authService.setBusinessZip(value);
         },
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         validatorFunction: requiredValidator,
         validatorErrorMessage: 'Zip Code Required',
         inputFormatters: [

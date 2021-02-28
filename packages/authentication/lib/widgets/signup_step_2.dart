@@ -35,7 +35,7 @@ class _SignupStep2State extends State<SignupStep2> {
           labelText: 'Business Name',
           initialValue: authService.storeName,
           keyboardType: TextInputType.name,
-          actionKeyboard: TextInputAction.next,
+          textInputAction: TextInputAction.next,
           textCapitalization: TextCapitalization.words,
           onSavedFunction: (String value) {
             authService.changeStoreName(value);
@@ -92,7 +92,7 @@ class _SignupStep2State extends State<SignupStep2> {
           // initialValue: authService.phoneNumber,
           fieldController: maskedController,
           keyboardType: TextInputType.phone,
-          actionKeyboard: TextInputAction.go,
+          textInputAction: TextInputAction.go,
           onSavedFunction: (String value) {
             authService.changeBusinessPhoneNumber(value);
           },
