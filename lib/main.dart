@@ -7,7 +7,7 @@ import 'package:authentication/providers/auth.dart';
 import 'package:authentication/screens/login_screen.dart';
 import 'package:authentication/screens/splash_screen.dart';
 import 'package:flutter/services.dart';
-import 'dart:io';
+
 
 import 'package:firebase_auth/firebase_auth.dart';
 

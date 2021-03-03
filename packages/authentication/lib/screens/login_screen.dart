@@ -1,3 +1,4 @@
+import 'package:authentication/widgets/diaglog_box.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth.dart';
@@ -22,18 +23,11 @@ class _LoginScreenState extends State<LoginScreen> {
   void _showErrorDialog(String message) {
     showDialog(
       context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text('An Error Occurred!'),
-        content: Text(message),
-        actions: <Widget>[
-          FlatButton(
-            child: Text('Okay'),
-            onPressed: () {
-              Navigator.of(ctx).pop();
-            },
-          )
-        ],
-      ),
+      builder: (ctx) => CustomDialogBox(
+        title : 'Uh Oh!', 
+        errorMsg: message,
+        btnText: 'back',
+      )
     );
   }
 
@@ -195,64 +189,92 @@ class _LoginScreenState extends State<LoginScreen> {
                               },
                             ),
                           ),
-                          // if (_isLoading)
-                          //   CircularProgressIndicator()
-                          // else
                           SizedBox(
                             height: 10,
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              const Text(
-                                'New User ? ',
+                          FlatButton(
+                            textColor: Theme.of(context).primaryColor,
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => Signup()));
+                            },
+                            child: Text.rich(
+                              TextSpan(
+                                style: TextStyle(
+                                  fontFamily: 'Quicksand',
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black87,
+                                ),
+                                text: 'New User? ',
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: 'Click Here',
+                                    style: TextStyle(
+                                      decoration: TextDecoration.underline,
+                                      color: Theme.of(context).primaryColor,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.center,
+                          //   children: <Widget>[
+                          //     const Text(
+                          //       'New User ? ',
+                          //       style: TextStyle(
+                          //         fontFamily: 'Quicksand',
+                          //         fontWeight: FontWeight.bold,
+                          //       ),
+                          //     ),
+                          //     FlatButton(
+                          //       child: const Text(
+                          //         'Sign Up',
+                          //         style: TextStyle(
+                          //           fontFamily: 'Quicksand',
+                          //           fontWeight: FontWeight.bold,
+                          //         ),
+                          //       ),
+                          //       onPressed: () {
+                          //         Navigator.of(context).push(MaterialPageRoute(
+                          //             builder: (context) => Signup()));
+                          //       },
+                          //       padding: const EdgeInsets.symmetric(
+                          //           horizontal: 30.0, vertical: 4),
+                          //       materialTapTargetSize:
+                          //           MaterialTapTargetSize.shrinkWrap,
+                          //       textColor: Theme.of(context).primaryColor,
+                          //     ),
+                          //   ],
+                          // ),
+                          // SizedBox(
+                          //   height: 10,
+                          // ),
+                          if (_isLoading)
+                            CircularProgressIndicator()
+                          else
+                            RaisedButton(
+                              child: const Text(
+                                'LOGIN',
                                 style: TextStyle(
                                   fontFamily: 'Quicksand',
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              FlatButton(
-                                child: const Text(
-                                  'Sign Up',
-                                  style: TextStyle(
-                                    fontFamily: 'Quicksand',
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                onPressed: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => Signup()));
-                                },
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 30.0, vertical: 4),
-                                materialTapTargetSize:
-                                    MaterialTapTargetSize.shrinkWrap,
-                                textColor: Theme.of(context).primaryColor,
+                              onPressed: _submit,
+                              elevation: 10,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
                               ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          RaisedButton(
-                            child: const Text(
-                              'LOGIN',
-                              style: TextStyle(
-                                fontFamily: 'Quicksand',
-                                fontWeight: FontWeight.bold,
-                              ),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 30.0, vertical: 8.0),
+                              color: Theme.of(context).primaryColor,
+                              textColor: Theme.of(context)
+                                  .primaryTextTheme
+                                  .button
+                                  .color,
                             ),
-                            onPressed: _submit,
-                            elevation: 10,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 30.0, vertical: 8.0),
-                            color: Theme.of(context).primaryColor,
-                            textColor:
-                                Theme.of(context).primaryTextTheme.button.color,
-                          ),
                           SizedBox(
                             height: 10,
                           ),

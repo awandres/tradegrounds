@@ -58,8 +58,7 @@ class _SignupStep1State extends State<SignupStep1> {
         FlatButton(
           textColor: Theme.of(context).primaryColor,
           onPressed: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => LoginScreen()));
+            Navigator.of(context).pop();
           },
           child: Text.rich(
             TextSpan(
@@ -74,7 +73,7 @@ class _SignupStep1State extends State<SignupStep1> {
                   text: 'Click Here',
                   style: TextStyle(
                     decoration: TextDecoration.underline,
-                    color: Colors.blue,
+                    color: Theme.of(context).primaryColor,
                   ),
                 ),
               ],
