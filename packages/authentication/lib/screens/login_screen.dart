@@ -127,34 +127,29 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: <Widget>[
-                          Material(
-                            elevation: 10.0,
-                            shadowColor: Colors.black,
-                            borderRadius: const BorderRadius.all(
-                                const Radius.circular(20.0)),
-                            child: TextFormField(
-                              decoration: const InputDecoration(
-                                  labelStyle: TextStyle(
-                                    fontFamily: 'Quicksand',
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  isDense: true,
-                                  labelText: 'E-Mail',
-                                  border: OutlineInputBorder(
-                                    borderRadius: const BorderRadius.all(
-                                      const Radius.circular(20.0),
-                                    ),
-                                  )),
-                              keyboardType: TextInputType.emailAddress,
-                              validator: (value) {
-                                if (value.isEmpty || !value.contains('@')) {
-                                  return 'Invalid email!';
-                                }
-                              },
-                              onSaved: (value) {
-                                _authData['email'] = value;
-                              },
+                          TextFormField(
+                            decoration: const InputDecoration(
+                              labelStyle: TextStyle(
+                                fontFamily: 'Quicksand',
+                                fontWeight: FontWeight.bold,
+                              ),
+                              isDense: true,
+                              labelText: 'E-Mail',
+                              border: OutlineInputBorder(
+                                borderRadius: const BorderRadius.all(
+                                  const Radius.circular(20.0),
+                                ),
+                              )
                             ),
+                            keyboardType: TextInputType.emailAddress,
+                            validator: (value) {
+                              if (value.isEmpty || !value.contains('@')) {
+                                return 'Invalid email!';
+                              }
+                            },
+                            onSaved: (value) {
+                              _authData['email'] = value;
+                            },
                           ),
                           SizedBox(
                             height: 20,

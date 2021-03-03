@@ -24,12 +24,15 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
         Container(
           padding: EdgeInsets.only(top: 100),
           decoration: BoxDecoration(
-              shape: BoxShape.rectangle,
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.black, offset: Offset(0, 10), blurRadius: 10),
-              ]),
+            // borderRadius: Radius.,
+            borderRadius: BorderRadius.circular(8),
+            shape: BoxShape.rectangle,
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.black, offset: Offset(0, 10), blurRadius: 10),
+            ]
+          ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
@@ -38,11 +41,15 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
               ),
               Text(
                 widget.errorMsg,
-                style: TextStyle(fontSize: 14),
+                style: TextStyle(
+                  fontSize: 18,
+                  fontFamily: 'Quicksand',
+                  fontWeight: FontWeight.bold
+                ),
                 textAlign: TextAlign.center,
               ),
               SizedBox(
-                height: 22,
+                height: 32,
               ),
               Align(
                 alignment: Alignment.center,
@@ -77,13 +84,20 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
           left: 0,
           right: 0,
           child: Container(
-              // height: 30,
-              padding: EdgeInsets.all(10),
+            // height: 30,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(8),
+                topRight: Radius.circular(8)
+              ),
               color: Colors.amber,
-              child: Text(
-                widget.title,
-                style: Theme.of(context).textTheme.title,
-              )),
+            ),
+            padding: EdgeInsets.all(10),
+            child: Text(
+              widget.title,
+              style: Theme.of(context).textTheme.title,
+            )
+          ),
         ),
       ],
     );
@@ -92,6 +106,9 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+      ),
       elevation: 0,
       backgroundColor: Colors.amber,
       child: contentBox(context),
