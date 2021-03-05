@@ -28,9 +28,37 @@ class CustomDrawer extends StatelessWidget {
             padding: EdgeInsets.only(top: 90),
             child: Column(
               children: <Widget>[
+                Container(
+                  child: Row(
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.all(22),
+                        child: CircleAvatar(radius: 32,)
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            'Testing Inc',
+                            style: Theme.of(context).textTheme.title,
+                          ),
+                          Text(
+                            'Customers Served',
+                            style: TextStyle(fontFamily:'Quicksand',),
+                          ),
+                          Text(
+                            'Deliveries Made',
+                            style: TextStyle(fontFamily:'Quicksand',),
+                          ),
+                      
+                        ],
+                      )
+                    ],
+                  ),
+                ),
                 _buildDrawerOption(
                   Icon(Icons.dashboard),
-                  'Home',
+                  'Delivery Dashboard',
                   () => Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
@@ -40,7 +68,7 @@ class CustomDrawer extends StatelessWidget {
                 ),
                 _buildDrawerOption(
                   Icon(Icons.supervised_user_circle, color: Colors.deepPurple),
-                  'Find Your Calling',
+                  'Delivery Calendar',
                   () => Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -51,7 +79,7 @@ class CustomDrawer extends StatelessWidget {
                 ),
                 _buildDrawerOption(
                   Icon(Icons.chat),
-                  'Convo',
+                  'Product Center',
                   () => Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
@@ -61,7 +89,7 @@ class CustomDrawer extends StatelessWidget {
                 ),
                 _buildDrawerOption(
                   Icon(Icons.add_location),
-                  'Search Criteria',
+                  'MyCourier',
                   () => Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -74,7 +102,7 @@ class CustomDrawer extends StatelessWidget {
                       Icons.play_arrow,
                       color: Colors.black,
                     ),
-                    'Level Up AuRa',
+                    'Billing/Payments',
                     () {}),
                 _buildDrawerOption(Icon(Icons.settings), 'Settings', () {}),
               ],

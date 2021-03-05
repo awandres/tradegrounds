@@ -1,10 +1,10 @@
-import 'package:authentication/widgets/diaglog_box.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth.dart';
 import '../models/http_exception.dart';
 import './password_reset_screen.dart';
-import 'package:authentication/screens/signup_screen.dart';
+import '../widgets/dialog_box.dart';
+import '../screens/signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -115,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 Container(
-                    padding: EdgeInsets.all(20),
+                    padding: EdgeInsets.all(8.0),
                     child: Text(
                       'Storegrounds',
                       style: Theme.of(context).textTheme.title,
@@ -127,29 +127,35 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: <Widget>[
-                          TextFormField(
-                            decoration: const InputDecoration(
-                              labelStyle: TextStyle(
-                                fontFamily: 'Quicksand',
-                                fontWeight: FontWeight.bold,
-                              ),
-                              isDense: true,
-                              labelText: 'E-Mail',
-                              border: OutlineInputBorder(
-                                borderRadius: const BorderRadius.all(
-                                  const Radius.circular(20.0),
+                          Material(
+                            elevation: 10.0,
+                            shadowColor: Colors.black,
+                            borderRadius: const BorderRadius.all(
+                                const Radius.circular(8.0)),
+                            child: TextFormField(
+                              decoration: const InputDecoration(
+                                labelStyle: TextStyle(
+                                  fontFamily: 'Quicksand',
+                                  fontWeight: FontWeight.bold,
                                 ),
-                              )
+                                isDense: true,
+                                labelText: 'E-Mail',
+                                border: OutlineInputBorder(
+                                  borderRadius: const BorderRadius.all(
+                                    const Radius.circular(8.0),
+                                  ),
+                                )
+                              ),
+                              keyboardType: TextInputType.emailAddress,
+                              validator: (value) {
+                                if (value.isEmpty || !value.contains('@')) {
+                                  return 'Invalid email!';
+                                }
+                              },
+                              onSaved: (value) {
+                                _authData['email'] = value;
+                              },
                             ),
-                            keyboardType: TextInputType.emailAddress,
-                            validator: (value) {
-                              if (value.isEmpty || !value.contains('@')) {
-                                return 'Invalid email!';
-                              }
-                            },
-                            onSaved: (value) {
-                              _authData['email'] = value;
-                            },
                           ),
                           SizedBox(
                             height: 20,
@@ -158,7 +164,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             elevation: 10.0,
                             shadowColor: Colors.black,
                             borderRadius: const BorderRadius.all(
-                                const Radius.circular(20.0)),
+                                const Radius.circular(8.0)),
                             child: TextFormField(
                               decoration: const InputDecoration(
                                   labelStyle: TextStyle(
@@ -169,7 +175,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   labelText: 'Password',
                                   border: OutlineInputBorder(
                                     borderRadius: const BorderRadius.all(
-                                      const Radius.circular(20.0),
+                                      const Radius.circular(8.0),
                                     ),
                                   )),
                               obscureText: true,

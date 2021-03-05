@@ -8,9 +8,9 @@ class CustomDialogBox extends StatefulWidget {
 
   const CustomDialogBox({
     Key key,
-    this.title,
-    this.errorMsg,
-    this.btnText,
+    @required this.title,
+    @required this.errorMsg,
+    @required this.btnText,
   }) : super(key: key);
 
   @override

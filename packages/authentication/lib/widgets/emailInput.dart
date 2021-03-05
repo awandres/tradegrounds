@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:authentication/providers/password_reset.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import '../models/http_exception.dart';
+import '../widgets/dialog_box.dart';
 
 class EmailInput extends StatefulWidget {
   @override
@@ -21,17 +24,10 @@ class _EmailInputState extends State<EmailInput> {
     void _showErrorDialog(String message) {
       showDialog(
         context: context,
-        builder: (ctx) => AlertDialog(
-          title: Text('An Error Occurred!'),
-          content: Text(message),
-          actions: <Widget>[
-            FlatButton(
-              child: Text('Okay'),
-              onPressed: () {
-                Navigator.of(ctx).pop();
-              },
-            )
-          ],
+        builder: (ctx) => CustomDialogBox(
+          title: 'Uh Oh!',
+          errorMsg: message,
+          btnText: 'back',
         ),
       );
     }
@@ -51,6 +47,8 @@ class _EmailInputState extends State<EmailInput> {
             .sendPasswordResetEmail(_payload['email']);
         Scaffold.of(context)
             .showSnackBar(SnackBar(content: Text('password reset email sent')));
+        sleep(Duration(seconds: 8));
+        Navigator.of(context).pop();
       } on HttpException catch (error) {
         print(error);
         var errorMessage = 'This email does not exist.';
