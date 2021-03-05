@@ -83,6 +83,7 @@ class MyApp extends StatelessWidget {
               primarySwatch: Colors.blue,
               visualDensity: VisualDensity.adaptivePlatformDensity,
               primaryColor: Color.fromRGBO(255, 195, 1, 1),
+              highlightColor: Color.fromRGBO(255, 195, 1, 1),
               textTheme: ThemeData.light().textTheme.copyWith(
                   title: TextStyle(
                       fontSize: 29,

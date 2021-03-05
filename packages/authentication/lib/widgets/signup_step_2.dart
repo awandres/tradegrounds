@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 
 import 'package:authentication/widgets/auth_form_field.dart';
 

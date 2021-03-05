@@ -28,17 +28,18 @@ class Signup extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Container(
-                    width: deviceSize.width,
-                    decoration: BoxDecoration(
-                        color: Color.fromRGBO(255, 195, 1, 1),
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                    child: Text(
-                      'Storegrounds',
-                      style: Theme.of(context).textTheme.title,
-                      textAlign: TextAlign.center,
+                  if (signupStep < 4)
+                    Container(
+                      width: deviceSize.width,
+                      decoration: BoxDecoration(
+                          color: Color.fromRGBO(255, 195, 1, 1),
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                      child: Text(
+                        'Storegrounds',
+                        style: Theme.of(context).textTheme.title,
+                        textAlign: TextAlign.center,
+                      ),
                     ),
-                  ),
                   if (signupStep == 1)
                     Flexible(
                       child: Container(
