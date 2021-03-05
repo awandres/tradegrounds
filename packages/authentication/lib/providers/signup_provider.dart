@@ -52,7 +52,6 @@ class SignupProvider with ChangeNotifier {
   bool _termsValid = true;
   bool _isLoading = false;
   static GlobalKey<FormState> _signupKey = new GlobalKey<FormState>();
-  // bool isValid = false;
   var isValid;
 
   // Firebase
