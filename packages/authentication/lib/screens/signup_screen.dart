@@ -21,7 +21,7 @@ class Signup extends StatelessWidget {
           height: deviceSize.height,
           width: deviceSize.width,
           padding: EdgeInsets.only(
-              bottom: 0, left: 40, right: 40, top: (deviceSize.height * 0.05)),
+              bottom: 0, left: 40, right: 40, top: (deviceSize.height * 0.10)),
           child: LayoutBuilder(
             builder: (ctx, constraints) {
               return Column(

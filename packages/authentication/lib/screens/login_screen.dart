@@ -3,7 +3,8 @@ import 'package:provider/provider.dart';
 import '../providers/auth.dart';
 import '../models/http_exception.dart';
 import './password_reset_screen.dart';
-import 'package:authentication/screens/signup_screen.dart';
+import '../widgets/dialog_box.dart';
+import '../screens/signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -22,18 +23,11 @@ class _LoginScreenState extends State<LoginScreen> {
   void _showErrorDialog(String message) {
     showDialog(
       context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text('An Error Occurred!'),
-        content: Text(message),
-        actions: <Widget>[
-          FlatButton(
-            child: Text('Okay'),
-            onPressed: () {
-              Navigator.of(ctx).pop();
-            },
-          )
-        ],
-      ),
+      builder: (ctx) => CustomDialogBox(
+        title : 'Uh Oh!', 
+        errorMsg: message,
+        btnText: 'back',
+      )
     );
   }
 
@@ -121,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 Container(
-                    padding: EdgeInsets.all(20),
+                    padding: EdgeInsets.all(8.0),
                     child: Text(
                       'Storegrounds',
                       style: Theme.of(context).textTheme.title,
@@ -137,20 +131,21 @@ class _LoginScreenState extends State<LoginScreen> {
                             elevation: 10.0,
                             shadowColor: Colors.black,
                             borderRadius: const BorderRadius.all(
-                                const Radius.circular(20.0)),
+                                const Radius.circular(8.0)),
                             child: TextFormField(
                               decoration: const InputDecoration(
-                                  labelStyle: TextStyle(
-                                    fontFamily: 'Quicksand',
-                                    fontWeight: FontWeight.bold,
+                                labelStyle: TextStyle(
+                                  fontFamily: 'Quicksand',
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                isDense: true,
+                                labelText: 'E-Mail',
+                                border: OutlineInputBorder(
+                                  borderRadius: const BorderRadius.all(
+                                    const Radius.circular(8.0),
                                   ),
-                                  isDense: true,
-                                  labelText: 'E-Mail',
-                                  border: OutlineInputBorder(
-                                    borderRadius: const BorderRadius.all(
-                                      const Radius.circular(20.0),
-                                    ),
-                                  )),
+                                )
+                              ),
                               keyboardType: TextInputType.emailAddress,
                               validator: (value) {
                                 if (value.isEmpty || !value.contains('@')) {
@@ -169,7 +164,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             elevation: 10.0,
                             shadowColor: Colors.black,
                             borderRadius: const BorderRadius.all(
-                                const Radius.circular(20.0)),
+                                const Radius.circular(8.0)),
                             child: TextFormField(
                               decoration: const InputDecoration(
                                   labelStyle: TextStyle(
@@ -180,7 +175,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   labelText: 'Password',
                                   border: OutlineInputBorder(
                                     borderRadius: const BorderRadius.all(
-                                      const Radius.circular(20.0),
+                                      const Radius.circular(8.0),
                                     ),
                                   )),
                               obscureText: true,
@@ -195,64 +190,92 @@ class _LoginScreenState extends State<LoginScreen> {
                               },
                             ),
                           ),
-                          // if (_isLoading)
-                          //   CircularProgressIndicator()
-                          // else
                           SizedBox(
                             height: 10,
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              const Text(
-                                'New User ? ',
+                          FlatButton(
+                            textColor: Theme.of(context).primaryColor,
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => Signup()));
+                            },
+                            child: Text.rich(
+                              TextSpan(
+                                style: TextStyle(
+                                  fontFamily: 'Quicksand',
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black87,
+                                ),
+                                text: 'New User? ',
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: 'Click Here',
+                                    style: TextStyle(
+                                      decoration: TextDecoration.underline,
+                                      color: Theme.of(context).primaryColor,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.center,
+                          //   children: <Widget>[
+                          //     const Text(
+                          //       'New User ? ',
+                          //       style: TextStyle(
+                          //         fontFamily: 'Quicksand',
+                          //         fontWeight: FontWeight.bold,
+                          //       ),
+                          //     ),
+                          //     FlatButton(
+                          //       child: const Text(
+                          //         'Sign Up',
+                          //         style: TextStyle(
+                          //           fontFamily: 'Quicksand',
+                          //           fontWeight: FontWeight.bold,
+                          //         ),
+                          //       ),
+                          //       onPressed: () {
+                          //         Navigator.of(context).push(MaterialPageRoute(
+                          //             builder: (context) => Signup()));
+                          //       },
+                          //       padding: const EdgeInsets.symmetric(
+                          //           horizontal: 30.0, vertical: 4),
+                          //       materialTapTargetSize:
+                          //           MaterialTapTargetSize.shrinkWrap,
+                          //       textColor: Theme.of(context).primaryColor,
+                          //     ),
+                          //   ],
+                          // ),
+                          // SizedBox(
+                          //   height: 10,
+                          // ),
+                          if (_isLoading)
+                            CircularProgressIndicator()
+                          else
+                            RaisedButton(
+                              child: const Text(
+                                'LOGIN',
                                 style: TextStyle(
                                   fontFamily: 'Quicksand',
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              FlatButton(
-                                child: const Text(
-                                  'Sign Up',
-                                  style: TextStyle(
-                                    fontFamily: 'Quicksand',
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                onPressed: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => Signup()));
-                                },
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 30.0, vertical: 4),
-                                materialTapTargetSize:
-                                    MaterialTapTargetSize.shrinkWrap,
-                                textColor: Theme.of(context).primaryColor,
+                              onPressed: _submit,
+                              elevation: 10,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
                               ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          RaisedButton(
-                            child: const Text(
-                              'LOGIN',
-                              style: TextStyle(
-                                fontFamily: 'Quicksand',
-                                fontWeight: FontWeight.bold,
-                              ),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 30.0, vertical: 8.0),
+                              color: Theme.of(context).primaryColor,
+                              textColor: Theme.of(context)
+                                  .primaryTextTheme
+                                  .button
+                                  .color,
                             ),
-                            onPressed: _submit,
-                            elevation: 10,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 30.0, vertical: 8.0),
-                            color: Theme.of(context).primaryColor,
-                            textColor:
-                                Theme.of(context).primaryTextTheme.button.color,
-                          ),
                           SizedBox(
                             height: 10,
                           ),
