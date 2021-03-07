@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'package:storegrounds/delivery_dashboard/screens/deliverydashboard.dart';
 
-import 'courier_central/screens/couriercentral.dart';
+import 'delivery_dashboard/screens/deliverydashboard.dart';
 import 'package:authentication/providers/auth.dart';
 import 'package:authentication/screens/login_screen.dart';
 import 'package:authentication/screens/splash_screen.dart';
@@ -89,7 +90,7 @@ class MyApp extends StatelessWidget {
                       fontFamily: 'Pacifico',
                       fontWeight: FontWeight.bold))),
           home: auth.isAuth
-              ? CourierCentral()
+              ? DeliveryDashboard()
               : FutureBuilder(
                   future: auth.tryAutoLogin(),
                   builder: (ctx, authResultSnapshot) =>

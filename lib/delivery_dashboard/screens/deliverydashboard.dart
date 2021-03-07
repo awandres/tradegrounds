@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import '../../global/widgets/custom_drawer.dart';
 
-class CourierCentral extends StatefulWidget {
+class DeliveryDashboard extends StatefulWidget {
   @override
-  _CourierCentralState createState() => _CourierCentralState();
+  _DeliveryDashboardState createState() => _DeliveryDashboardState();
 }
 
-class _CourierCentralState extends State<CourierCentral>
+class _DeliveryDashboardState extends State<DeliveryDashboard>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
   PageController _pageController;

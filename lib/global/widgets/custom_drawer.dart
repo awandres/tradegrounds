@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:storegrounds/courier_central/screens/couriercentral.dart';
+import 'package:storegrounds/delivery_dashboard/screens/deliverydashboard.dart';
 import 'package:authentication/providers/auth.dart';
 import 'package:provider/provider.dart';
 
@@ -62,7 +62,7 @@ class CustomDrawer extends StatelessWidget {
                   () => Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => CourierCentral(),
+                      builder: (_) => DeliveryDashboard(),
                     ),
                   ),
                 ),
@@ -72,7 +72,7 @@ class CustomDrawer extends StatelessWidget {
                   () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => CourierCentral(),
+                      builder: (_) => DeliveryDashboard(),
                       // user will need to build to x screen i.e. Homescreen, etc.
                     ),
                   ),
@@ -83,7 +83,7 @@ class CustomDrawer extends StatelessWidget {
                   () => Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => CourierCentral(),
+                      builder: (_) => DeliveryDashboard(),
                     ),
                   ),
                 ),
@@ -93,7 +93,7 @@ class CustomDrawer extends StatelessWidget {
                   () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => CourierCentral(),
+                      builder: (_) => DeliveryDashboard(),
                     ),
                   ),
                 ),
