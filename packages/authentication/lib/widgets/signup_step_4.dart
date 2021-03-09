@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:authentication/docs/terms.dart';
 import 'package:provider/provider.dart';
+import 'dart:convert';
 
 import 'package:authentication/providers/signup_provider.dart';
 
@@ -16,6 +17,8 @@ class _SignupStep4State extends State<SignupStep4> {
   Widget build(BuildContext context) {
     final signupService = Provider.of<SignupProvider>(context);
     final deviceSize = MediaQuery.of(context).size;
+    final terms = termsObject;
+    print('terms object is $terms');
 
     return Column(
       children: [
@@ -69,9 +72,42 @@ class _SignupStep4State extends State<SignupStep4> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
                         Container(
-                          alignment: Alignment.center,
-                          child: Text(termsText),
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            terms["title"],
+                            style: TextStyle(
+                              fontFamily: 'Quicksand',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 20,
+                            ),
+                          ),
                           padding: EdgeInsets.only(left: 20, right: 20),
+                          margin: EdgeInsets.only(bottom: 10),
+                        ),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            terms["lastUpdated"],
+                            style: TextStyle(
+                              fontFamily: 'Quicksand',
+                              fontWeight: FontWeight.w700,
+                              fontSize: 18,
+                            ),
+                          ),
+                          padding: EdgeInsets.only(left: 20, right: 20),
+                          margin: EdgeInsets.only(bottom: 20),
+                        ),
+                        Container(
+                          child: Text(
+                            terms["body"],
+                            style: TextStyle(
+                              fontFamily: 'Quicksand',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                            ),
+                          ),
+                          padding:
+                              EdgeInsets.only(left: 20, right: 20, bottom: 40),
                         ),
                       ],
                     ),
@@ -112,9 +148,6 @@ class _SignupStep4State extends State<SignupStep4> {
                   fontSize: 12),
             ),
           ),
-        SizedBox(
-          height: 20,
-        ),
       ],
     );
   }
