@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:storegrounds/delivery_dashboard/screens/page1.dart';
-import 'package:storegrounds/delivery_dashboard/screens/page2.dart';
-import 'package:storegrounds/delivery_dashboard/screens/page3.dart';
-import '../../global/widgets/custom_drawer.dart';
+import 'package:storegrounds/delivery_dashboard/screens/billingpayment.dart';
+import 'package:storegrounds/delivery_dashboard/screens/deliverycalender.dart';
+import 'package:storegrounds/delivery_dashboard/widgets/mainscreen.dart';
+import 'package:storegrounds/delivery_dashboard/widgets/productcenter.dart';
+import 'package:storegrounds/delivery_dashboard/widgets/mycourier.dart';
+import 'package:drawer/widgets/custom_drawer.dart';
+import 'package:storegrounds/delivery_dashboard/screens/settings.dart';
 
 class DeliveryDashboard extends StatefulWidget {
   @override
@@ -14,18 +17,29 @@ class _DeliveryDashboardState extends State<DeliveryDashboard>
   TabController _tabController;
   PageController _pageController;
 
-  final List<Widget> _pages =[
-    PageOne(),
-    PageTwo(),
-    PageThree()
+  final List<Map<String, Object>> _pages =[
+    {'title':'Product Center','screen':ProductCenterScreen()},
+    {'title':'Delivery Dashboard','screen':MainScreen()},
+    {'title':'My Courier','screen':MyCourierScreen()},
 
+    {'title':'Delivery Calendar','screen':DeliveryCalendarScreen()},
+    {'title':'Billing/Payment','screen':BillingPaymentScreen()},
+    {'title':'Settings','screen':SettingsScreen()}
   ];
 
-  int _selectedPageIndex =0;
+  int _currentPageIndex =1;
 
-  void _selectedPage(int index){
+// this function is called in the bottom navigation bar to change page index
+  void _navbarpageselector(int index){
     setState(() {
-      _selectedPageIndex = index;
+      _currentPageIndex = index;
+    });
+  }
+
+// this function is called in the custom drawer to change page index
+  void drawerPageSelector(int index){
+    setState(() {
+      _currentPageIndex = index;
     });
   }
 
@@ -44,30 +58,30 @@ class _DeliveryDashboardState extends State<DeliveryDashboard>
           ),
         ),
       ),
-      drawer: CustomDrawer(),
-      body: _pages[_selectedPageIndex],
+      drawer: CustomDrawer(_pages,_currentPageIndex,drawerPageSelector),
+      body: _pages[_currentPageIndex]['screen'],
       bottomNavigationBar: BottomNavigationBar(
-        onTap: _selectedPage ,
+        onTap: _navbarpageselector,
         backgroundColor: Theme.of(context).primaryColor,
         unselectedItemColor: Colors.white,
-        selectedItemColor: Theme.of(context).accentColor,
-        currentIndex: _selectedPageIndex,
+        selectedItemColor: Colors.black,
+        currentIndex: _currentPageIndex,
         type: BottomNavigationBarType.shifting,
         items: [
           BottomNavigationBarItem(
             backgroundColor: Theme.of(context).primaryColor,
             icon: Icon(Icons.storefront), 
-            title: Text('Jobs')
+            title: Text('Product Center', style: TextStyle(fontFamily: 'Quicksand'),)
           ),
           BottomNavigationBarItem(
             backgroundColor: Theme.of(context).primaryColor,
-            icon: Icon(Icons.grid_view), 
-            title: Text('Main')
+            icon: Icon(Icons.dashboard), 
+            title: Text('Dashboard', style: TextStyle(fontFamily: 'Quicksand'),)
           ),
           BottomNavigationBarItem(
             backgroundColor: Theme.of(context).primaryColor,
             icon: Icon(Icons.location_on), 
-            title: Text('Location')
+            title: Text('My Courier', style: TextStyle(fontFamily: 'Quicksand'),)
           ),
         ],
       ),
