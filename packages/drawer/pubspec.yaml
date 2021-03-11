@@ -1,0 +1,40 @@
+name: drawer
+description: A custom drawer that manages navigation to all parts of the application
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.4.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  provider: ^4.0.4
+  cloud_firestore: ^0.13.5
+  firebase_auth: ^0.16.1
+  intl: ^0.15.8
+  http: ^0.12.0+2
+  shared_preferences: ^0.5.3+1
+  # cloud_firestore: ^0.13.5
+  # firebase_auth: ^0.16.1
+
+  storegrounds:
+    path: ./../../../storegrounds
+
+  authentication:
+    path: ./../authentication
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  # assets:
+  #   - assets/images/storegroundsLogo.png

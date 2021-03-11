@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class PageOne extends StatelessWidget {
+class MyCourierScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Center(child: Text('Page ONE'),),
+      child: Center(child: Text('My Courier Screen'),),
     );
   }
 }
