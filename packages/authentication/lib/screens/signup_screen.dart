@@ -28,17 +28,18 @@ class Signup extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Container(
-                    width: deviceSize.width,
-                    decoration: BoxDecoration(
-                        color: Color.fromRGBO(255, 195, 1, 1),
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                    child: Text(
-                      'Storegrounds',
-                      style: Theme.of(context).textTheme.title,
-                      textAlign: TextAlign.center,
+                  if (signupStep != 4)
+                    Container(
+                      width: deviceSize.width,
+                      decoration: BoxDecoration(
+                          color: Color.fromRGBO(255, 195, 1, 1),
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                      child: Text(
+                        'Storegrounds',
+                        style: Theme.of(context).textTheme.title,
+                        textAlign: TextAlign.center,
+                      ),
                     ),
-                  ),
                   if (signupStep == 1)
                     Flexible(
                       child: Container(
@@ -58,7 +59,7 @@ class Signup extends StatelessWidget {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
-                            if (signupStep >= 3)
+                            if (signupStep >= 3 && signupStep != 4)
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
@@ -102,7 +103,7 @@ class Signup extends StatelessWidget {
                                   (signupStep > 1 && signupStep < 4)
                                       ? 'Next'
                                       : (signupStep == 4)
-                                          ? 'Submit'
+                                          ? 'Accept'
                                           : 'Sign Up',
                                   style: TextStyle(
                                     fontFamily: 'Quicksand',

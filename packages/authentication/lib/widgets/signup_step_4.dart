@@ -23,10 +23,10 @@ class _SignupStep4State extends State<SignupStep4> {
     return Column(
       children: [
         Container(
-          height: deviceSize.height * 0.07,
+          height: deviceSize.height * 0.1,
           width: deviceSize.width * 1.1,
           // color: Colors.black,
-          margin: EdgeInsets.only(bottom: 10),
+          margin: EdgeInsets.only(bottom: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,14 +38,33 @@ class _SignupStep4State extends State<SignupStep4> {
               SizedBox(
                 width: 30,
               ),
-              Text(
-                'Terms and Conditions',
-                style: TextStyle(
-                  fontFamily: 'Quicksand',
-                  fontWeight: FontWeight.w500,
-                  fontSize: 20,
+              Container(
+                height: 90,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      'Terms and Conditions',
+                      style: TextStyle(
+                        fontFamily: 'Quicksand',
+                        fontWeight: FontWeight.w500,
+                        fontSize: 20,
+                      ),
+                      textAlign: TextAlign.right,
+                    ),
+                    FlatButton(
+                      child: Text(
+                        '< Back',
+                        style: TextStyle(
+                          fontFamily: 'Quicksand',
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      textColor: Colors.grey,
+                      onPressed: signupService.handleBack,
+                    )
+                  ],
                 ),
-                textAlign: TextAlign.right,
               ),
             ],
           ),
