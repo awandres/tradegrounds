@@ -74,285 +74,290 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
+    final isTablet = deviceSize.width>750?true:false;
+    final isPhone = deviceSize.width<490?true:false;
+
     return Scaffold(
       body: SingleChildScrollView(
-        child: Container(
-          height: deviceSize.height,
-          width: deviceSize.width,
-          padding: EdgeInsets.only(
-              bottom: 10, left: 40, right: 40, top: (deviceSize.height * 0.10)),
-          child: LayoutBuilder(builder: (ctx, constraints) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Material(
-                  elevation: 10.0,
-                  shadowColor: Colors.black,
-                  borderRadius:
-                      const BorderRadius.all(const Radius.circular(20.0)),
-                  child: Container(
-                    // decoration: BoxDecoration(
-                    //   borderRadius: BorderRadius.all(Radius.circular(20)),
-                    //   boxShadow: [
-                    //     BoxShadow(
-                    //       color: Colors.grey.withOpacity(0.5),
-                    //       spreadRadius: 5,
-                    //       blurRadius: 7,
-                    //       offset: Offset(0, 20), // changes position of shadow
-                    //     ),
-                    //   ]
-                    // ),
-                    height: constraints.maxHeight * 0.35,
-                    width: double.infinity,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                      child: Image.asset(
-                        'assets/images/storegroundsLogo.png',
-                        fit: BoxFit.cover,
+        child: Center(
+          child: Container(
+            height: deviceSize.height,
+            width: isTablet? deviceSize.width*0.6 : deviceSize.width,
+            padding: EdgeInsets.only(
+                bottom: 10, left: 40, right: 40, top: (deviceSize.height * 0.10)),
+            child: LayoutBuilder(builder: (ctx, constraints) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Material(
+                    elevation: 10.0,
+                    shadowColor: Colors.black,
+                    borderRadius:
+                        const BorderRadius.all(const Radius.circular(20.0)),
+                    child: Container(
+                      // decoration: BoxDecoration(
+                      //   borderRadius: BorderRadius.all(Radius.circular(20)),
+                      //   boxShadow: [
+                      //     BoxShadow(
+                      //       color: Colors.grey.withOpacity(0.5),
+                      //       spreadRadius: 5,
+                      //       blurRadius: 7,
+                      //       offset: Offset(0, 20), // changes position of shadow
+                      //     ),
+                      //   ]
+                      // ),
+                      height: constraints.maxHeight * 0.35,
+                      width: double.infinity,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        child: Image.asset(
+                          'assets/images/storegroundsLogo.png',
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Container(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text(
-                      'Storegrounds',
-                      style: Theme.of(context).textTheme.title,
-                    )),
-                Container(
-                  height: constraints.maxHeight * 0.40,
-                  child: Form(
-                    key: _loginKey,
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: <Widget>[
-                          Material(
-                            elevation: 10.0,
-                            shadowColor: Colors.black,
-                            borderRadius: const BorderRadius.all(
-                                const Radius.circular(8.0)),
-                            child: TextFormField(
-                              decoration: const InputDecoration(
-                                labelStyle: TextStyle(
-                                  fontFamily: 'Quicksand',
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                isDense: true,
-                                labelText: 'E-Mail',
-                                border: OutlineInputBorder(
-                                  borderRadius: const BorderRadius.all(
-                                    const Radius.circular(8.0),
-                                  ),
-                                )
-                              ),
-                              keyboardType: TextInputType.emailAddress,
-                              validator: (value) {
-                                if (value.isEmpty || !value.contains('@')) {
-                                  return 'Invalid email!';
-                                }
-                              },
-                              onSaved: (value) {
-                                _authData['email'] = value;
-                              },
-                            ),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Material(
-                            elevation: 10.0,
-                            shadowColor: Colors.black,
-                            borderRadius: const BorderRadius.all(
-                                const Radius.circular(8.0)),
-                            child: TextFormField(
-                              decoration: const InputDecoration(
+                  Container(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'Storegrounds',
+                        style: Theme.of(context).textTheme.title,
+                      )),
+                  Container(
+                    height: constraints.maxHeight * 0.40,
+                    child: Form(
+                      key: _loginKey,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: <Widget>[
+                            Material(
+                              elevation: 10.0,
+                              shadowColor: Colors.black,
+                              borderRadius: const BorderRadius.all(
+                                  const Radius.circular(8.0)),
+                              child: TextFormField(
+                                decoration: const InputDecoration(
                                   labelStyle: TextStyle(
                                     fontFamily: 'Quicksand',
                                     fontWeight: FontWeight.bold,
                                   ),
                                   isDense: true,
-                                  labelText: 'Password',
+                                  labelText: 'E-Mail',
                                   border: OutlineInputBorder(
                                     borderRadius: const BorderRadius.all(
                                       const Radius.circular(8.0),
                                     ),
-                                  )),
-                              obscureText: true,
-                              controller: _passwordController,
-                              validator: (value) {
-                                if (value.isEmpty || value.length < 5) {
-                                  return 'Password is too short!';
-                                }
-                              },
-                              onSaved: (value) {
-                                _authData['password'] = value;
-                              },
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          FlatButton(
-                            textColor: Theme.of(context).primaryColor,
-                            onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => Signup()));
-                            },
-                            child: Text.rich(
-                              TextSpan(
-                                style: TextStyle(
-                                  fontFamily: 'Quicksand',
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black87,
+                                  )
                                 ),
-                                text: 'New User? ',
-                                children: <TextSpan>[
-                                  TextSpan(
-                                    text: 'Click Here',
-                                    style: TextStyle(
-                                      decoration: TextDecoration.underline,
-                                      color: Theme.of(context).primaryColor,
+                                keyboardType: TextInputType.emailAddress,
+                                validator: (value) {
+                                  if (value.isEmpty || !value.contains('@')) {
+                                    return 'Invalid email!';
+                                  }
+                                },
+                                onSaved: (value) {
+                                  _authData['email'] = value;
+                                },
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Material(
+                              elevation: 10.0,
+                              shadowColor: Colors.black,
+                              borderRadius: const BorderRadius.all(
+                                  const Radius.circular(8.0)),
+                              child: TextFormField(
+                                decoration: const InputDecoration(
+                                    labelStyle: TextStyle(
+                                      fontFamily: 'Quicksand',
+                                      fontWeight: FontWeight.bold,
                                     ),
-                                  ),
-                                ],
+                                    isDense: true,
+                                    labelText: 'Password',
+                                    border: OutlineInputBorder(
+                                      borderRadius: const BorderRadius.all(
+                                        const Radius.circular(8.0),
+                                      ),
+                                    )),
+                                obscureText: true,
+                                controller: _passwordController,
+                                validator: (value) {
+                                  if (value.isEmpty || value.length < 5) {
+                                    return 'Password is too short!';
+                                  }
+                                },
+                                onSaved: (value) {
+                                  _authData['password'] = value;
+                                },
                               ),
                             ),
-                          ),
-                          // Row(
-                          //   mainAxisAlignment: MainAxisAlignment.center,
-                          //   children: <Widget>[
-                          //     const Text(
-                          //       'New User ? ',
-                          //       style: TextStyle(
-                          //         fontFamily: 'Quicksand',
-                          //         fontWeight: FontWeight.bold,
-                          //       ),
-                          //     ),
-                          //     FlatButton(
-                          //       child: const Text(
-                          //         'Sign Up',
-                          //         style: TextStyle(
-                          //           fontFamily: 'Quicksand',
-                          //           fontWeight: FontWeight.bold,
-                          //         ),
-                          //       ),
-                          //       onPressed: () {
-                          //         Navigator.of(context).push(MaterialPageRoute(
-                          //             builder: (context) => Signup()));
-                          //       },
-                          //       padding: const EdgeInsets.symmetric(
-                          //           horizontal: 30.0, vertical: 4),
-                          //       materialTapTargetSize:
-                          //           MaterialTapTargetSize.shrinkWrap,
-                          //       textColor: Theme.of(context).primaryColor,
-                          //     ),
-                          //   ],
-                          // ),
-                          // SizedBox(
-                          //   height: 10,
-                          // ),
-                          if (_isLoading)
-                            CircularProgressIndicator()
-                          else
-                            RaisedButton(
+                            SizedBox(
+                              height: 10,
+                            ),
+                            FlatButton(
+                              textColor: Theme.of(context).primaryColor,
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => Signup()));
+                              },
+                              child: Text.rich(
+                                TextSpan(
+                                  style: TextStyle(
+                                    fontFamily: 'Quicksand',
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black87,
+                                  ),
+                                  text: 'New User? ',
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text: 'Click Here',
+                                      style: TextStyle(
+                                        decoration: TextDecoration.underline,
+                                        color: Theme.of(context).primaryColor,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.center,
+                            //   children: <Widget>[
+                            //     const Text(
+                            //       'New User ? ',
+                            //       style: TextStyle(
+                            //         fontFamily: 'Quicksand',
+                            //         fontWeight: FontWeight.bold,
+                            //       ),
+                            //     ),
+                            //     FlatButton(
+                            //       child: const Text(
+                            //         'Sign Up',
+                            //         style: TextStyle(
+                            //           fontFamily: 'Quicksand',
+                            //           fontWeight: FontWeight.bold,
+                            //         ),
+                            //       ),
+                            //       onPressed: () {
+                            //         Navigator.of(context).push(MaterialPageRoute(
+                            //             builder: (context) => Signup()));
+                            //       },
+                            //       padding: const EdgeInsets.symmetric(
+                            //           horizontal: 30.0, vertical: 4),
+                            //       materialTapTargetSize:
+                            //           MaterialTapTargetSize.shrinkWrap,
+                            //       textColor: Theme.of(context).primaryColor,
+                            //     ),
+                            //   ],
+                            // ),
+                            // SizedBox(
+                            //   height: 10,
+                            // ),
+                            if (_isLoading)
+                              CircularProgressIndicator()
+                            else
+                              RaisedButton(
+                                child: const Text(
+                                  'LOGIN',
+                                  style: TextStyle(
+                                    fontFamily: 'Quicksand',
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                onPressed: _submit,
+                                elevation: 10,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 30.0, vertical: 8.0),
+                                color: Theme.of(context).primaryColor,
+                                textColor: Theme.of(context)
+                                    .primaryTextTheme
+                                    .button
+                                    .color,
+                              ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            FlatButton(
                               child: const Text(
-                                'LOGIN',
+                                'Forgot your Password ?',
                                 style: TextStyle(
                                   fontFamily: 'Quicksand',
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              onPressed: _submit,
-                              elevation: 10,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30),
-                              ),
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => PasswordResetScreen()));
+                              },
                               padding: const EdgeInsets.symmetric(
-                                  horizontal: 30.0, vertical: 8.0),
-                              color: Theme.of(context).primaryColor,
-                              textColor: Theme.of(context)
-                                  .primaryTextTheme
-                                  .button
-                                  .color,
-                            ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          FlatButton(
-                            child: const Text(
-                              'Forgot your Password ?',
-                              style: TextStyle(
-                                fontFamily: 'Quicksand',
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => PasswordResetScreen()));
-                            },
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 30.0, vertical: 4),
-                            materialTapTargetSize:
-                                MaterialTapTargetSize.shrinkWrap,
-                            textColor: Colors.black,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                Container(
-                  height: constraints.maxHeight * 0.07,
-                  width: deviceSize.width,
-                  // color: Colors.black,
-                  // padding: EdgeInsets.only(left: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Image.asset(
-                        'assets/images/tradegroundsIg.png',
-                        fit: BoxFit.cover,
-                      ),
-                      SizedBox(
-                        width: 30,
-                      ),
-                      FittedBox(
-                        child: Column(
-                          children: <Widget>[
-                            Text(
-                              'Tradegrounds Inc. 2077',
-                              style: TextStyle(
-                                fontFamily: 'Quicksand',
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              'www.tradegrounds.info',
-                              style: TextStyle(
-                                fontFamily: 'Quicksand',
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              'v.0.0.1',
-                              style: TextStyle(
-                                fontFamily: 'Quicksand',
-                                fontWeight: FontWeight.bold,
-                              ),
+                                  horizontal: 30.0, vertical: 4),
+                              materialTapTargetSize:
+                                  MaterialTapTargetSize.shrinkWrap,
+                              textColor: Colors.black,
                             ),
                           ],
                         ),
-                      )
-                    ],
+                      ),
+                    ),
                   ),
-                ),
-              ],
-            );
-          }),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    height: constraints.maxHeight * 0.07,
+                    width: deviceSize.width,
+                    // color: Colors.black,
+                    // padding: EdgeInsets.only(left: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Image.asset(
+                          'assets/images/tradegroundsIg.png',
+                          fit: BoxFit.cover,
+                        ),
+                        SizedBox(
+                          width: 30,
+                        ),
+                        FittedBox(
+                          child: Column(
+                            children: <Widget>[
+                              Text(
+                                'Tradegrounds Inc. 2077',
+                                style: TextStyle(
+                                  fontFamily: 'Quicksand',
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                'www.tradegrounds.info',
+                                style: TextStyle(
+                                  fontFamily: 'Quicksand',
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                'v.0.0.1',
+                                style: TextStyle(
+                                  fontFamily: 'Quicksand',
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              );
+            }),
+          ),
         ),
       ),
     );
