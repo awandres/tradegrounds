@@ -81,12 +81,18 @@ class SignupProvider with ChangeNotifier {
 
 //Form Logic
 
+  Future<void> checkIfEmailExists() async {
+    final snapShot =
+        await Firestore.instance.collection('users').document("docID").get();
+  }
+
   void handleSignupStep() {
     var isValid = _signupKey.currentState.validate();
 
     if (isValid) {
       _signupKey.currentState.save();
 
+      if (_signupStep == 1) {}
       if (_signupStep == 4) {
         submitData();
       } else {

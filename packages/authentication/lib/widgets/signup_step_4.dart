@@ -28,18 +28,19 @@ class _SignupStep4State extends State<SignupStep4> {
           // color: Colors.black,
           margin: EdgeInsets.only(bottom: 20),
           child: Row(
+            mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Image.asset(
                 'assets/images/tradegroundsIg.png',
-                fit: BoxFit.cover,
+                fit: BoxFit.,
               ),
               SizedBox(
-                width: 30,
+                width: 10,
               ),
               Container(
-                height: 90,
+                height: 110,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -47,21 +48,37 @@ class _SignupStep4State extends State<SignupStep4> {
                       'Terms and Conditions',
                       style: TextStyle(
                         fontFamily: 'Quicksand',
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w600,
                         fontSize: 20,
                       ),
                       textAlign: TextAlign.right,
                     ),
-                    FlatButton(
-                      child: Text(
-                        '< Back',
-                        style: TextStyle(
+                    Text(
+                      'Effective since March 11th, 2021',
+                      style: TextStyle(
                           fontFamily: 'Quicksand',
                           fontWeight: FontWeight.bold,
+                          color: Colors.black54,
+                          fontSize: 10),
+                      textAlign: TextAlign.right,
+                    ),
+                    ButtonTheme(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 8.0, horizontal: 0.0),
+                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      minWidth: 0,
+                      height: 0,
+                      child: FlatButton(
+                        child: Text(
+                          '< Back',
+                          style: TextStyle(
+                              fontFamily: 'Quicksand',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey),
+                          textAlign: TextAlign.right,
                         ),
+                        onPressed: signupService.handleBack,
                       ),
-                      textColor: Colors.grey,
-                      onPressed: signupService.handleBack,
                     )
                   ],
                 ),
@@ -70,7 +87,7 @@ class _SignupStep4State extends State<SignupStep4> {
           ),
         ),
         SingleChildScrollView(
-          controller: _scrollController,
+          // controller: _scrollController,
           child: Material(
             elevation: 5.0,
             shadowColor: Colors.black,
@@ -86,49 +103,47 @@ class _SignupStep4State extends State<SignupStep4> {
                 child: ListView(
                   controller: _scrollController,
                   children: [
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: <Widget>[
-                        Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            terms["title"],
-                            style: TextStyle(
-                              fontFamily: 'Quicksand',
-                              fontWeight: FontWeight.w500,
-                              fontSize: 20,
+                    Container(
+                      padding: EdgeInsets.only(left: 20, right: 20, top: 0),
+                      margin: EdgeInsets.only(bottom: 10),
+                      child: Column(
+                        children: <Widget>[
+                          Container(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              terms["title"],
+                              style: TextStyle(
+                                fontFamily: 'Quicksand',
+                                fontWeight: FontWeight.w700,
+                                fontSize: 20,
+                              ),
+                            ),
+                            margin: EdgeInsets.only(bottom: 10, top: 0),
+                          ),
+                          Container(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              terms["lastUpdated"],
+                              style: TextStyle(
+                                fontFamily: 'Quicksand',
+                                fontWeight: FontWeight.w600,
+                                fontSize: 18,
+                              ),
+                            ),
+                            margin: EdgeInsets.only(bottom: 20),
+                          ),
+                          Container(
+                            child: Text(
+                              terms["body"],
+                              style: TextStyle(
+                                fontFamily: 'Quicksand',
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16.5,
+                              ),
                             ),
                           ),
-                          padding: EdgeInsets.only(left: 20, right: 20),
-                          margin: EdgeInsets.only(bottom: 10),
-                        ),
-                        Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            terms["lastUpdated"],
-                            style: TextStyle(
-                              fontFamily: 'Quicksand',
-                              fontWeight: FontWeight.w700,
-                              fontSize: 18,
-                            ),
-                          ),
-                          padding: EdgeInsets.only(left: 20, right: 20),
-                          margin: EdgeInsets.only(bottom: 20),
-                        ),
-                        Container(
-                          child: Text(
-                            terms["body"],
-                            style: TextStyle(
-                              fontFamily: 'Quicksand',
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16,
-                            ),
-                          ),
-                          padding:
-                              EdgeInsets.only(left: 20, right: 20, bottom: 40),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                     SizedBox(
                       height: 10,
@@ -145,6 +160,7 @@ class _SignupStep4State extends State<SignupStep4> {
         CheckboxListTile(
             value: signupService.termsAgreed,
             onChanged: signupService.changeTermsAgreed,
+            isThreeLine: false,
             title: new Text(
               'I have read and agree to the terms and conditions',
               style: TextStyle(
@@ -153,20 +169,17 @@ class _SignupStep4State extends State<SignupStep4> {
                 fontSize: 15,
               ),
             ),
+            subtitle: !signupService.termsValid
+                ? Padding(
+                    padding: EdgeInsets.fromLTRB(12.0, 10, 0, 0),
+                    child: Text(
+                      'Required field',
+                      style: TextStyle(color: Color(0xFFe53935), fontSize: 12),
+                    ),
+                  )
+                : null,
             controlAffinity: ListTileControlAffinity.leading,
             activeColor: Colors.blue),
-        if (!signupService.termsValid)
-          Padding(
-            padding: EdgeInsets.fromLTRB(12.0, 10, 0, 0),
-            child: Text(
-              'Required field',
-              style: TextStyle(
-                  fontFamily: 'Quicksand',
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFFe53935),
-                  fontSize: 12),
-            ),
-          ),
       ],
     );
   }

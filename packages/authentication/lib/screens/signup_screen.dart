@@ -93,7 +93,7 @@ class Signup extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(30),
                                 ),
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: 30.0, vertical: 8.0),
+                                    horizontal: 50.0, vertical: 8.0),
                                 color: Theme.of(context).primaryColor,
                                 textColor: Theme.of(context)
                                     .primaryTextTheme
@@ -108,6 +108,7 @@ class Signup extends StatelessWidget {
                                   style: TextStyle(
                                     fontFamily: 'Quicksand',
                                     fontWeight: FontWeight.bold,
+                                    fontSize: 17,
                                   ),
                                 ),
                                 onPressed: (signupStep < 4)
