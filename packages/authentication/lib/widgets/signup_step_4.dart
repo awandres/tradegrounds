@@ -29,12 +29,13 @@ class _SignupStep4State extends State<SignupStep4> {
           margin: EdgeInsets.only(bottom: 20),
           child: Row(
             mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Image.asset(
                 'assets/images/tradegroundsIg.png',
-                fit: BoxFit.,
+                fit: BoxFit.scaleDown,
+                width: 100,
               ),
               SizedBox(
                 width: 10,
@@ -104,7 +105,7 @@ class _SignupStep4State extends State<SignupStep4> {
                   controller: _scrollController,
                   children: [
                     Container(
-                      padding: EdgeInsets.only(left: 20, right: 20, top: 0),
+                      padding: EdgeInsets.only(left: 30, right: 30, top: 0),
                       margin: EdgeInsets.only(bottom: 10),
                       child: Column(
                         children: <Widget>[
