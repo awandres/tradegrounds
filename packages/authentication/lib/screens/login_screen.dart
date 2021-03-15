@@ -8,6 +8,7 @@ import '../screens/signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
+
   _LoginScreenState createState() => _LoginScreenState();
 }
 
@@ -267,27 +268,31 @@ class _LoginScreenState extends State<LoginScreen> {
                             if (_isLoading)
                               CircularProgressIndicator()
                             else
-                              RaisedButton(
-                                child: const Text(
-                                  'LOGIN',
-                                  style: TextStyle(
-                                    fontSize: 25.0,
-                                    fontFamily: 'Quicksand',
-                                    fontWeight: FontWeight.bold,
+                              Padding(
+                                padding:EdgeInsets.fromLTRB(0, 20.0, 0, 0.0),
+                                child: RaisedButton(
+                                  child: const Text(
+                                    'LOGIN',
+                                    style: TextStyle(
+                                      fontSize: 25.0,
+                                      letterSpacing: 7.5,
+                                      fontFamily: 'Quicksand',
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
+                                  onPressed: _submit,
+                                  elevation: 10,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 100.0, vertical: 25.0),
+                                  color: Theme.of(context).primaryColor,
+                                  textColor: Theme.of(context)
+                                      .primaryTextTheme
+                                      .button
+                                      .color,
                                 ),
-                                onPressed: _submit,
-                                elevation: 10,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 100.0, vertical: 25.0),
-                                color: Theme.of(context).primaryColor,
-                                textColor: Theme.of(context)
-                                    .primaryTextTheme
-                                    .button
-                                    .color,
                               ),
                             SizedBox(
                               height: 20,
@@ -296,7 +301,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: const Text(
                                 'Forgot your Password ?',
                                 style: TextStyle(
-                                  fontSize: 20.0,
+                                  fontSize: 16.0,
                                   fontFamily: 'Quicksand',
                                 ),
                               ),
@@ -336,6 +341,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         FittedBox(
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(
                                 'Tradegrounds Inc. 2021',

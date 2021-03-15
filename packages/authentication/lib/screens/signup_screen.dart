@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:authentication/providers/signup_provider.dart';
-import 'package:authentication/widgets/signup_step_1.dart';
-import 'package:authentication/widgets/signup_step_2.dart';
-import 'package:authentication/widgets/signup_step_3.dart';
-import 'package:authentication/widgets/signup_step_4.dart';
+import 'package:authentication/widgets/FunctionalWidgets//signup_step_1.dart';
+import 'package:authentication/widgets/FunctionalWidgets//signup_step_2.dart';
+import 'package:authentication/widgets/FunctionalWidgets//signup_step_3.dart';
+import 'package:authentication/widgets/FunctionalWidgets//signup_step_4.dart';
 
 class Signup extends StatelessWidget {
   @override

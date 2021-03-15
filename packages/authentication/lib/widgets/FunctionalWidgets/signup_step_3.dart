@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
 
-import 'package:authentication/widgets/auth_form_field.dart';
+import 'package:authentication/widgets/ CoreWidgets/auth_form_field.dart';
 
 import 'package:authentication/providers/signup_provider.dart';
 
