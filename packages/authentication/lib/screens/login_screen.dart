@@ -22,13 +22,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _showErrorDialog(String message) {
     showDialog(
-      context: context,
-      builder: (ctx) => CustomDialogBox(
-        title : 'Uh Oh!', 
-        errorMsg: message,
-        btnText: 'back',
-      )
-    );
+        context: context,
+        builder: (ctx) => CustomDialogBox(
+              title: 'Uh Oh!',
+              errorMsg: message,
+              btnText: 'back',
+            ));
   }
 
   Future<void> _submit() async {
@@ -74,17 +73,20 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
-    final isTablet = deviceSize.width>750?true:false;
-    final isPhone = deviceSize.width<490?true:false;
+    final isTablet = deviceSize.width > 750 ? true : false;
+    final isPhone = deviceSize.width < 490 ? true : false;
 
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
           child: Container(
             height: deviceSize.height,
-            width: isTablet? deviceSize.width*0.6 : deviceSize.width,
+            width: isTablet ? deviceSize.width * 0.6 : deviceSize.width,
             padding: EdgeInsets.only(
-                bottom: 10, left: 40, right: 40, top: (deviceSize.height * 0.10)),
+                bottom: 10,
+                left: 40,
+                right: 40,
+                top: (deviceSize.height * 0.10)),
             child: LayoutBuilder(builder: (ctx, constraints) {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -94,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     elevation: 10.0,
                     shadowColor: Colors.black,
                     borderRadius:
-                        const BorderRadius.all(const Radius.circular(20.0)),
+                        const BorderRadius.all(const Radius.circular(60)),
                     child: Container(
                       // decoration: BoxDecoration(
                       //   borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -110,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: constraints.maxHeight * 0.35,
                       width: double.infinity,
                       child: ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        borderRadius: BorderRadius.all(Radius.circular(0)),
                         child: Image.asset(
                           'assets/images/storegroundsLogo.png',
                           fit: BoxFit.cover,
@@ -119,10 +121,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   Container(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        'Storegrounds',
-                        style: Theme.of(context).textTheme.title,
+                      padding: EdgeInsets.all(20.0),
+                      child: FittedBox(
+                        fit: BoxFit.cover,
+                        child: Text(
+                          'Storegrounds',
+                          style: Theme.of(context).textTheme.title,
+                        ),
                       )),
                   Container(
                     height: constraints.maxHeight * 0.40,
@@ -138,18 +143,17 @@ class _LoginScreenState extends State<LoginScreen> {
                                   const Radius.circular(8.0)),
                               child: TextFormField(
                                 decoration: const InputDecoration(
-                                  labelStyle: TextStyle(
-                                    fontFamily: 'Quicksand',
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  isDense: true,
-                                  labelText: 'E-Mail',
-                                  border: OutlineInputBorder(
-                                    borderRadius: const BorderRadius.all(
-                                      const Radius.circular(8.0),
+                                    labelStyle: TextStyle(
+                                      fontFamily: 'Quicksand',
+                                      fontWeight: FontWeight.bold,
                                     ),
-                                  )
-                                ),
+                                    isDense: true,
+                                    labelText: 'E-Mail',
+                                    border: OutlineInputBorder(
+                                      borderRadius: const BorderRadius.all(
+                                        const Radius.circular(8.0),
+                                      ),
+                                    )),
                                 keyboardType: TextInputType.emailAddress,
                                 validator: (value) {
                                   if (value.isEmpty || !value.contains('@')) {
@@ -162,7 +166,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                             SizedBox(
-                              height: 20,
+                              height: 30,
                             ),
                             Material(
                               elevation: 10.0,
@@ -197,29 +201,33 @@ class _LoginScreenState extends State<LoginScreen> {
                             SizedBox(
                               height: 10,
                             ),
-                            FlatButton(
-                              textColor: Theme.of(context).primaryColor,
-                              onPressed: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => Signup()));
-                              },
-                              child: Text.rich(
-                                TextSpan(
-                                  style: TextStyle(
-                                    fontFamily: 'Quicksand',
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black87,
-                                  ),
-                                  text: 'New User? ',
-                                  children: <TextSpan>[
-                                    TextSpan(
-                                      text: 'Click Here',
-                                      style: TextStyle(
-                                        decoration: TextDecoration.underline,
-                                        color: Theme.of(context).primaryColor,
-                                      ),
+                            Padding(
+                              padding: EdgeInsets.all(10.0),
+                              child: FlatButton(
+                                textColor: Theme.of(context).primaryColor,
+                                onPressed: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => Signup()));
+                                },
+                                child: Text.rich(
+                                  TextSpan(
+                                    style: TextStyle(
+                                      fontFamily: 'Quicksand',
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black87,
+                                      fontSize: 20.0,
                                     ),
-                                  ],
+                                    text: 'New User? ',
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                        text: 'Click Here',
+                                        style: TextStyle(
+                                          decoration: TextDecoration.underline,
+                                          color: Theme.of(context).primaryColor,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -263,6 +271,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 child: const Text(
                                   'LOGIN',
                                   style: TextStyle(
+                                    fontSize: 25.0,
                                     fontFamily: 'Quicksand',
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -273,7 +282,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   borderRadius: BorderRadius.circular(30),
                                 ),
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: 30.0, vertical: 8.0),
+                                    horizontal: 100.0, vertical: 25.0),
                                 color: Theme.of(context).primaryColor,
                                 textColor: Theme.of(context)
                                     .primaryTextTheme
@@ -281,19 +290,20 @@ class _LoginScreenState extends State<LoginScreen> {
                                     .color,
                               ),
                             SizedBox(
-                              height: 10,
+                              height: 20,
                             ),
                             FlatButton(
                               child: const Text(
                                 'Forgot your Password ?',
                                 style: TextStyle(
+                                  fontSize: 20.0,
                                   fontFamily: 'Quicksand',
-                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                               onPressed: () {
                                 Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => PasswordResetScreen()));
+                                    builder: (context) =>
+                                        PasswordResetScreen()));
                               },
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 30.0, vertical: 4),
@@ -307,7 +317,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: 15,
+                    height: 10,
                   ),
                   Container(
                     height: constraints.maxHeight * 0.07,
@@ -328,10 +338,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Column(
                             children: <Widget>[
                               Text(
-                                'Tradegrounds Inc. 2077',
+                                'Tradegrounds Inc. 2021',
                                 style: TextStyle(
                                   fontFamily: 'Quicksand',
                                   fontWeight: FontWeight.bold,
+                                  fontSize: 24.0,
                                 ),
                               ),
                               Text(
