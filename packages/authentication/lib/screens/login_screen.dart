@@ -22,13 +22,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _showErrorDialog(String message) {
     showDialog(
-      context: context,
-      builder: (ctx) => CustomDialogBox(
-        title : 'Uh Oh!', 
-        errorMsg: message,
-        btnText: 'back',
-      )
-    );
+        context: context,
+        builder: (ctx) => CustomDialogBox(
+              title: 'Uh Oh!',
+              errorMsg: message,
+              btnText: 'back',
+            ));
   }
 
   Future<void> _submit() async {
@@ -74,8 +73,8 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
-    final isTablet = deviceSize.width>750?true:false;
-    final isPhone = deviceSize.width<490?true:false;
+    final isTablet = deviceSize.width > 750 ? true : false;
+    final isPhone = deviceSize.width < 490 ? true : false;
 
     return Scaffold(
       body: SingleChildScrollView(
