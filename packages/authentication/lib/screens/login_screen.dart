@@ -80,7 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SingleChildScrollView(
         child: Center(
           child: Container(
-            margin: EdgeInsets.only(top:50),
+            margin: isTablet?EdgeInsets.only(top:50):null,
             child: Material(
               elevation: 10.0,
               shadowColor: Colors.black,
