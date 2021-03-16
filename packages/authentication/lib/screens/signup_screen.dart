@@ -51,6 +51,7 @@ class Signup extends StatelessWidget {
                         ),
                         if (signupStep == 1)
                           Flexible(
+                            flex: 3,
                             child: Container(
                               height: constraints.maxHeight * 0.3,
                               width: double.infinity,
@@ -61,7 +62,7 @@ class Signup extends StatelessWidget {
                             ),
                           ),
                         Flexible(
-                          flex: deviceSize.width > 600 ? 2 : 1,
+                          flex: 5,
                           child: Form(
                             key: signupService.signupKey,
                             child: SingleChildScrollView(

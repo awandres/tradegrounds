@@ -93,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     bottom: 10, left: 40, right: 40, top: (deviceSize.height * 0.10)),
                 child: LayoutBuilder(builder: (ctx, constraints) {
                   return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Material(
@@ -201,7 +201,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                 ),
                                 SizedBox(
-                                  height: 10,
+                                  height: 19,
                                 ),
                                 FlatButton(
                                   textColor: Theme.of(context).primaryColor,
@@ -212,6 +212,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   child: Text.rich(
                                     TextSpan(
                                       style: TextStyle(
+                                        fontSize: 16,
                                         fontFamily: 'Quicksand',
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black87,
@@ -287,12 +288,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                         .color,
                                   ),
                                 SizedBox(
-                                  height: 10,
+                                  height: 19,
                                 ),
                                 FlatButton(
                                   child: const Text(
                                     'Forgot your Password ?',
                                     style: TextStyle(
+                                      fontSize: 16,
                                       fontFamily: 'Quicksand',
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -313,7 +315,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       SizedBox(
-                        height: 15,
+                        height: 19,
                       ),
                       Container(
                         height: constraints.maxHeight * 0.07,
