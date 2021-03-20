@@ -1,10 +1,41 @@
 import 'package:flutter/material.dart';
+import './deliveries.dart';
 
 class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Center(child: Text('Main Screen'),),
+      // padding: EdgeInsets.only(top:30),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Flexible(
+            flex: 4,
+            child: Container(
+              color: Colors.black,
+              child: Row( 
+                children: <Widget>[
+                  Text('deliveries',style: TextStyle(color: Colors.white),),
+                  Text('morning route', style: TextStyle(color: Colors.white),)
+                ],
+              ),
+            ),
+          ),
+          Flexible(
+            flex: 2,
+            child: Container(
+              color: Colors.black,
+              child: Row( 
+                children: <Widget>[
+                  Text('deliveries',style: TextStyle(color: Colors.white),),
+                  Text('morning route', style: TextStyle(color: Colors.white),)
+                ],
+              ),
+            ),
+          )
+        ]
+      )
     );
   }
 }
