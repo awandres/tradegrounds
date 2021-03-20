@@ -58,6 +58,9 @@ class _SignupStep1State extends State<SignupStep1> {
           validatorFunction: passwordMatchValidator,
           validatorErrorMessage: 'Passwords do not match',
         ),
+        SizedBox(
+          height: 10,
+        ),
         FlatButton(
           textColor: Theme.of(context).primaryColor,
           onPressed: () {
@@ -66,6 +69,7 @@ class _SignupStep1State extends State<SignupStep1> {
           child: Text.rich(
             TextSpan(
               style: TextStyle(
+                fontSize: 16,
                 fontFamily: 'Quicksand',
                 fontWeight: FontWeight.bold,
                 color: Colors.black87,

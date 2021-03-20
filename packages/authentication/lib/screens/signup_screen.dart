@@ -21,109 +21,119 @@ class Signup extends StatelessWidget {
       body: SingleChildScrollView(
         child: Center(
           child: Container(
-            height: deviceSize.height,
-            width: isTablet? deviceSize.width*0.6: deviceSize.width,
-            padding: EdgeInsets.only(
-                bottom: 0, left: 40, right: 40, top: (deviceSize.height * 0.10)),
-            child: LayoutBuilder(
-              builder: (ctx, constraints) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: deviceSize.width,
-                      decoration: BoxDecoration(
-                          color: Color.fromRGBO(255, 195, 1, 1),
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
-                      child: Text(
-                        'Storegrounds',
-                        style: Theme.of(context).textTheme.title,
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    if (signupStep == 1)
-                      Flexible(
-                        child: Container(
-                          height: constraints.maxHeight * 0.3,
-                          width: double.infinity,
-                          child: Image.asset(
-                            'assets/images/storegrounds_swoop.png',
-                            fit: BoxFit.contain,
+            margin: isTablet?EdgeInsets.only(top:50):null,
+            child: Material(
+              elevation: 10.0,
+              shadowColor: Colors.black,
+              borderRadius: const BorderRadius.all(
+              const Radius.circular(8.0)),
+              child: Container(
+                height: isTablet? deviceSize.height*0.9:deviceSize.height,
+                width: isTablet? deviceSize.width*0.6: deviceSize.width,
+                padding: EdgeInsets.only(
+                    bottom: 0, left: 40, right: 40, top: (deviceSize.height * 0.10)),
+                child: LayoutBuilder(
+                  builder: (ctx, constraints) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: deviceSize.width,
+                          decoration: BoxDecoration(
+                              color: Color.fromRGBO(255, 195, 1, 1),
+                              borderRadius: BorderRadius.all(Radius.circular(20))),
+                          child: Text(
+                            'Storegrounds',
+                            style: Theme.of(context).textTheme.title,
+                            textAlign: TextAlign.center,
                           ),
                         ),
-                      ),
-                    Flexible(
-                      flex: deviceSize.width > 600 ? 2 : 1,
-                      child: Form(
-                        key: signupService.signupKey,
-                        child: SingleChildScrollView(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                              if (signupStep >= 3)
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    FlatButton(
+                        if (signupStep == 1)
+                          Flexible(
+                            flex: 3,
+                            child: Container(
+                              height: constraints.maxHeight * 0.3,
+                              width: double.infinity,
+                              child: Image.asset(
+                                'assets/images/storegrounds_swoop.png',
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                          ),
+                        Flexible(
+                          flex: 5,
+                          child: Form(
+                            key: signupService.signupKey,
+                            child: SingleChildScrollView(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  if (signupStep >= 3)
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        FlatButton(
+                                          child: Text(
+                                            '< Back',
+                                            style: TextStyle(
+                                              fontFamily: 'Quicksand',
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          textColor: Colors.grey,
+                                          onPressed: signupService.handleBack,
+                                        ),
+                                      ],
+                                    ),
+                                  if (signupStep == 1) SignupStep1(),
+                                  if (signupStep == 2) SignupStep2(),
+                                  if (signupStep == 3) SignupStep3(),
+                                  if (signupStep == 4) SignupStep4(),
+                                  if (signupStep == 4)
+                                    SizedBox(height: 20)
+                                  else
+                                    SizedBox(height: 0),
+                                  if (signupService.isLoading)
+                                    CircularProgressIndicator(),
+                                  if (!signupService.isLoading)
+                                    RaisedButton(
+                                      elevation: 10,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 30.0, vertical: 8.0),
+                                      color: Theme.of(context).primaryColor,
+                                      textColor: Theme.of(context)
+                                          .primaryTextTheme
+                                          .button
+                                          .color,
                                       child: Text(
-                                        '< Back',
+                                        (signupStep > 1 && signupStep < 4)
+                                            ? '         Next         '
+                                            : (signupStep == 4)
+                                                ? '        Submit        ' 
+                                                : '        Sign Up       ',
                                         style: TextStyle(
                                           fontFamily: 'Quicksand',
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
-                                      textColor: Colors.grey,
-                                      onPressed: signupService.handleBack,
-                                    ),
-                                  ],
-                                ),
-                              if (signupStep == 1) SignupStep1(),
-                              if (signupStep == 2) SignupStep2(),
-                              if (signupStep == 3) SignupStep3(),
-                              if (signupStep == 4) SignupStep4(),
-                              if (signupStep == 4)
-                                SizedBox(height: 20)
-                              else
-                                SizedBox(height: 0),
-                              if (signupService.isLoading)
-                                CircularProgressIndicator(),
-                              if (!signupService.isLoading)
-                                RaisedButton(
-                                  elevation: 10,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30),
-                                  ),
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 30.0, vertical: 8.0),
-                                  color: Theme.of(context).primaryColor,
-                                  textColor: Theme.of(context)
-                                      .primaryTextTheme
-                                      .button
-                                      .color,
-                                  child: Text(
-                                    (signupStep > 1 && signupStep < 4)
-                                        ? 'Next'
-                                        : (signupStep == 4)
-                                            ? 'Submit'
-                                            : 'Sign Up',
-                                    style: TextStyle(
-                                      fontFamily: 'Quicksand',
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  onPressed: (signupStep < 4)
-                                      ? signupService.handleSignupStep
-                                      : signupService.submitData,
-                                )
-                            ],
+                                      onPressed: (signupStep < 4)
+                                          ? signupService.handleSignupStep
+                                          : signupService.submitData,
+                                    )
+                                ],
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                  ],
-                );
-              },
+                      ],
+                    );
+                  },
+                ),
+              ),
             ),
           ),
         ),
