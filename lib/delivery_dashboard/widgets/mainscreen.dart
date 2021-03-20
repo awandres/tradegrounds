@@ -10,7 +10,7 @@ class MainScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          Flexible(
+          Expanded(
             flex: 4,
             child: Container(
               color: Colors.black,
@@ -22,10 +22,10 @@ class MainScreen extends StatelessWidget {
               ),
             ),
           ),
-          Flexible(
+          Expanded(
             flex: 2,
             child: Container(
-              color: Colors.black,
+              color: Colors.red,
               child: Row( 
                 children: <Widget>[
                   Text('deliveries',style: TextStyle(color: Colors.white),),
