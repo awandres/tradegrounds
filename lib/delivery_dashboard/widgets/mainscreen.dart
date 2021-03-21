@@ -11,33 +11,33 @@ class MainScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Deliveries(),
+              // Expanded(
+              //   flex: 1,
+              //   child: Container(
+              //     padding: EdgeInsets.symmetric(vertical: 100),
+              //     color: Colors.black12,
+              //     child: Row(
+              //       mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //       children: <Widget>[
+              //         Container(
+              //           color: Colors.blue,
+              //           child: FittedBox(
+              //             child: Text(
+              //               'deliveries1',
+              //               style: TextStyle(color: Colors.black),
+              //             ),
+              //           ),
+              //         ),
+              //         Text(
+              //           'morning route',
+              //           style: TextStyle(color: Colors.black),
+              //         )
+              //       ],
+              //     ),
+              //   ),
+              // ),
               Expanded(
-                flex: 1,
-                child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 100),
-                  color: Colors.black12,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      Container(
-                        color: Colors.blue,
-                        child: FittedBox(
-                          child: Text(
-                            'deliveries1',
-                            style: TextStyle(color: Colors.black),
-                          ),
-                        ),
-                      ),
-                      Text(
-                        'morning route',
-                        style: TextStyle(color: Colors.black),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 1,
+                flex: 4,
                 child: Container(
                   color: Colors.red,
                   child: Row(
@@ -55,7 +55,7 @@ class MainScreen extends StatelessWidget {
                 ),
               ),
               Expanded(
-                flex: 1,
+                flex: 3,
                 child: Container(
                   color: Colors.redAccent,
                   child: Row(
