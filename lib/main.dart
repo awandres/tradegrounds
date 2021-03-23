@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:storegrounds/delivery_dashboard/screens/deliverydashboard.dart';
+import './delivery_dashboard/providers/window.dart';
 
 import 'delivery_dashboard/screens/deliverydashboard.dart';
 import 'package:authentication/providers/auth.dart';
@@ -37,6 +38,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider.value(
           value: SignupProvider(),
+        ),
+        ChangeNotifierProvider.value(
+          value: Window()
         )
       ],
       child: Consumer<Auth>(

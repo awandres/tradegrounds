@@ -1,11 +1,16 @@
 import 'dart:ui';
-
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:storegrounds/delivery_dashboard/models/delivery.dart';
+import '../providers/window.dart';
+import 'package:intl/intl.dart';
 
 class Deliveries extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final device = MediaQuery.of(context).size;
+    final current_window = Provider.of<Window>(context);
+    String date = new DateFormat.yMMMMEEEEd().format(new DateTime.now()).toString();
     return Expanded(
         flex: 2,
         child: FittedBox(
@@ -24,7 +29,8 @@ class Deliveries extends StatelessWidget {
                       overflow: Overflow.visible,
                       children: <Widget>[
                         Positioned(
-                            child: Text('13',
+                          child: Text(
+                            current_window.delveryCount.toString(),
                             strutStyle: StrutStyle(
                               forceStrutHeight: true,
                             ),
@@ -38,10 +44,11 @@ class Deliveries extends StatelessWidget {
                         Positioned(
                             bottom: -15,
                             child: Text(
-                              'deliveries',
+                              'Deliveries',
                             style: TextStyle(
                               fontFamily: 'Quicksand',
-                              fontSize: 10
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12
                             ),
                           ),
                         )
@@ -56,15 +63,15 @@ class Deliveries extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
                       Text(
-                        'March 20th 2021',
+                         date,
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 19,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Quicksand'
                         ),
                       ),
                       Text(
-                        'Morning route',
+                        current_window.status,
                         style: TextStyle(
                           fontFamily: 'Pacifico'
                         ),
