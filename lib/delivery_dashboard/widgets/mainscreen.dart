@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import './deliveries.dart';
+import 'deliveries.dart';
+import './status.dart';
 
 class MainScreen extends StatelessWidget {
   @override
@@ -11,49 +12,7 @@ class MainScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Deliveries(),
-              // Expanded(
-              //   flex: 1,
-              //   child: Container(
-              //     padding: EdgeInsets.symmetric(vertical: 100),
-              //     color: Colors.black12,
-              //     child: Row(
-              //       mainAxisAlignment: MainAxisAlignment.spaceAround,
-              //       children: <Widget>[
-              //         Container(
-              //           color: Colors.blue,
-              //           child: FittedBox(
-              //             child: Text(
-              //               'deliveries1',
-              //               style: TextStyle(color: Colors.black),
-              //             ),
-              //           ),
-              //         ),
-              //         Text(
-              //           'morning route',
-              //           style: TextStyle(color: Colors.black),
-              //         )
-              //       ],
-              //     ),
-              //   ),
-              // ),
-              Expanded(
-                flex: 4,
-                child: Container(
-                  color: Colors.red,
-                  child: Row(
-                    children: <Widget>[
-                      Text(
-                        'deliveries',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      Text(
-                        'morning route',
-                        style: TextStyle(color: Colors.white),
-                      )
-                    ],
-                  ),
-                ),
-              ),
+              Status(),
               Expanded(
                 flex: 3,
                 child: Container(
