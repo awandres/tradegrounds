@@ -49,7 +49,7 @@ class AuthFormField extends StatefulWidget {
 }
 
 var passwordToMatch;
-var passwordVisible = false;
+var passwordVisible = true;
 
 class _AuthFormFieldState extends State<AuthFormField> {
   @override
