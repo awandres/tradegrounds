@@ -5,6 +5,7 @@ import 'package:authentication/widgets/signup_step_1.dart';
 import 'package:authentication/widgets/signup_step_2.dart';
 import 'package:authentication/widgets/signup_step_3.dart';
 import 'package:authentication/widgets/signup_step_4.dart';
+import '../widgets/dialog_box.dart';
 
 class Signup extends StatelessWidget {
   @override
@@ -14,6 +15,23 @@ class Signup extends StatelessWidget {
 
     final signupService = Provider.of<SignupProvider>(context);
     int signupStep = signupService.signupStep;
+
+    void _showErrorDialog(String message) {
+      showDialog(
+          context: context,
+          builder: (ctx) => CustomDialogBox(
+                title: 'Uh Oh!',
+                errorMsg: message,
+                btnText: 'back',
+              ));
+    }
+
+    if (signupService.emailExists) {
+      Future.delayed(Duration.zero, () async {
+        signupService.toggleEmailExists();
+        _showErrorDialog('Email address is already in use');
+      });
+    }
 
     return Scaffold(
       body: SingleChildScrollView(
