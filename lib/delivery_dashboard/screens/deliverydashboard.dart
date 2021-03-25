@@ -12,10 +12,14 @@ class DeliveryDashboard extends StatefulWidget {
   _DeliveryDashboardState createState() => _DeliveryDashboardState();
 }
 
+<<<<<<< HEAD
 class _DeliveryDashboardState extends State<DeliveryDashboard>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
   PageController _pageController;
+=======
+class _DeliveryDashboardState extends State<DeliveryDashboard> with SingleTickerProviderStateMixin {
+>>>>>>> e6cc1c71ccfe732e6ead804b06d5d854c4317106
 
   final List<Map<String, Object>> _pages =[
     {'title':'Product Center','screen':ProductCenterScreen()},
@@ -48,6 +52,7 @@ class _DeliveryDashboardState extends State<DeliveryDashboard>
     return Scaffold(
       appBar: AppBar(
         brightness: Brightness.light,
+<<<<<<< HEAD
         backgroundColor: Colors.white,
         iconTheme: IconThemeData(
           color: Theme.of(context).primaryColor,
@@ -57,6 +62,13 @@ class _DeliveryDashboardState extends State<DeliveryDashboard>
             alignment: Alignment(-0.2, 0.0),
           ),
         ),
+=======
+        backgroundColor: Theme.of(context).primaryColor,
+        iconTheme: IconThemeData(
+          color: Colors.black,
+        ),
+        title: Text(_pages[_currentPageIndex]['title']),
+>>>>>>> e6cc1c71ccfe732e6ead804b06d5d854c4317106
       ),
       drawer: CustomDrawer(_pages,_currentPageIndex,drawerPageSelector),
       body: _pages[_currentPageIndex]['screen'],

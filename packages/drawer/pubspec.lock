@@ -359,6 +359,16 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.11.0"
+<<<<<<< HEAD
+=======
+  percent_indicator:
+    dependency: transitive
+    description:
+      name: percent_indicator
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.9+1"
+>>>>>>> e6cc1c71ccfe732e6ead804b06d5d854c4317106
   platform:
     dependency: transitive
     description:
