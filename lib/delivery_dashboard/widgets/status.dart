@@ -11,6 +11,7 @@ class Status extends StatelessWidget {
         builder: (ctx, constraints) {
           return Container(
             child:Column( 
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Padding(
                   padding: EdgeInsets.all(15.0),
@@ -25,6 +26,25 @@ class Status extends StatelessWidget {
                     progressColor: Colors.green,
                   ),
                 ),
+                Padding(
+                  padding: EdgeInsets.only(left: 25),
+                  child: Text(
+                    '6 delivered, 7 in Progress',
+                    style: TextStyle(fontSize:18),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.green,
+                      borderRadius: BorderRadius.all(Radius.circular(20))
+                    ),
+                    margin: EdgeInsets.all(25),
+                    child: Column( children: <Widget>[
+
+                    ],),
+                  )
+                )
               ]
             )
           );
