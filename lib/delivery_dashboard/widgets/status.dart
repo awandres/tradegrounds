@@ -102,7 +102,7 @@ class Status extends StatelessWidget {
             Expanded(
               flex: 1,
               child: Container(
-                padding: EdgeInsets.only(left: 15, right: 15),
+                padding: EdgeInsets.only(left: 30, right: 30),
                   child: new LinearPercentIndicator(
                   // width: constraints.maxWidth - 50,
                   animation: true,
@@ -115,13 +115,13 @@ class Status extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height:5),
+            SizedBox(height:8),
             Expanded(
               flex: 1,
               child: FittedBox(
                 fit: BoxFit.contain,
                 child: Padding(
-                  padding: EdgeInsets.only(left: 25, right: 25),
+                  padding: EdgeInsets.only(left: 45),
                   child: Text(
                     '6 delivered, 7 in Progress',
                     style: TextStyle(fontSize:18),
