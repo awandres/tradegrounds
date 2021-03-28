@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'status.dart';
 import 'deliveries.dart';
-import './status.dart';
 
 class MainScreen extends StatelessWidget {
   @override
@@ -11,8 +11,8 @@ class MainScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Deliveries(),
               Status(),
+              Deliveries(),
               Expanded(
                 flex: 3,
                 child: Container(
