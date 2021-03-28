@@ -40,7 +40,7 @@ class OrderList extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
       child: ConstrainedBox(
-        constraints: BoxConstraints(maxHeight: 300),
+        constraints: BoxConstraints(maxHeight: 330),
         child: Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(20.0)),
