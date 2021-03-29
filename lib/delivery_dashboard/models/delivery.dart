@@ -26,7 +26,7 @@ class Delivery {
     this.dropoff,
     this.window,
     this.current_location,
-    this.fulfilled = false,
+    // this.fulfilled = false,
   }) {
     this.courier = null;
     this.created_at = DateTime.now();

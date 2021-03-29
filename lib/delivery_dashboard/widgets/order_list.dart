@@ -10,35 +10,35 @@ import '../models/delivery.dart';
 class OrderList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final device = MediaQuery.of(context).size;
+
     List<Delivery> _deliveries = [
       Delivery(
         items: [Product(), Product()],
         recipient: 'John Stamos 1',
-        fulfilled: false,
       ),
       Delivery(
         items: [Product(), Product(), Product()],
         recipient: 'John Stamos 2',
-        fulfilled: false,
       ),
       Delivery(
         items: [Product(), Product(), Product(), Product(), Product()],
         recipient: 'John Stamos 3',
-        fulfilled: false,
       ),
       Delivery(
         items: [
           Product(),
         ],
         recipient: 'John Stamos 4',
-        fulfilled: false,
       ),
     ];
     final current_window = Provider.of<Window>(context);
     String date =
         new DateFormat.yMMMMEEEEd().format(new DateTime.now()).toString();
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+      padding: device.width > 400
+          ? EdgeInsets.symmetric(horizontal: 30, vertical: 20)
+          : EdgeInsets.symmetric(horizontal: 0, vertical: 20),
       child: ConstrainedBox(
         constraints: BoxConstraints(maxHeight: 330),
         child: Container(
@@ -71,43 +71,50 @@ class OrderList extends StatelessWidget {
                       ]),
                   margin: EdgeInsets.symmetric(vertical: 10),
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                  child: Container(
-                    color: Colors.white,
-                    child: Padding(
-                      padding: EdgeInsets.all(10.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Row(
-                            children: [
-                              Icon(Icons.add_box, size: 56.0),
-                              SizedBox(width: 8),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
+                  child: Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Flex(
+                      direction:
+                          device.width > 400 ? Axis.horizontal : Axis.vertical,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(Icons.add_box, size: 56.0),
+                            SizedBox(width: 8),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  child: Text(
                                     delivery.recipient,
                                     style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
                                         fontFamily: 'Quicksand'),
                                   ),
-                                  Text(
+                                ),
+                                FittedBox(
+                                  fit: BoxFit.cover,
+                                  child: Text(
                                     delivery.items.length.toString() + ' items',
                                     style: TextStyle(
-                                        fontSize: 17,
+                                        // fontSize: 17,
                                         fontWeight: FontWeight.bold,
                                         fontFamily: 'Quicksand'),
-                                  )
-                                ],
-                              ),
-                            ],
-                          ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        if (device.width > 400)
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Column(children: [
-                                SizedBox(height: 10),
+                                SizedBox(height: 7),
                                 Text(
                                   'Status:Delivered',
                                   style: TextStyle(
@@ -120,12 +127,30 @@ class OrderList extends StatelessWidget {
                               Icon(
                                 Icons.check_circle,
                                 color: Color(0xFF36814A),
-                                size: 66.0,
+                                size: 46.0,
                               )
                             ],
                           ),
-                        ],
-                      ),
+                        if (device.width < 400)
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Icon(
+                                Icons.check_circle,
+                                color: Color(0xFF36814A),
+                                size: 46.0,
+                              ),
+                              SizedBox(width: 8),
+                              Text(
+                                'Status:Delivered',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Quicksand'),
+                              ),
+                            ],
+                          ),
+                      ],
                     ),
                   ),
                 );
