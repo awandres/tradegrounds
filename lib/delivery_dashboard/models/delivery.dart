@@ -26,10 +26,12 @@ class Delivery {
     this.dropoff,
     this.window,
     this.current_location,
+    this.fulfilled=false,
+    this.courier
   }) {
-    this.courier = null;
+    // this.courier = null;
     this.created_at = DateTime.now();
-    this.fulfilled = false;
+    // this.fulfilled = false;
   }
 
   LatLng getLocation() {

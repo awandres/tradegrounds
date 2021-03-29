@@ -103,8 +103,11 @@ class Status extends StatelessWidget {
                       animation: true,
                       lineHeight: 20.0,
                       animationDuration: 2500,
-                      percent: 0.8,
-                      center: Text("80.0%"),
+                      percent: current_window.countfullfilled/current_window.deliveryCount,
+                      center: Text(
+                        '${current_window.countfullfilled/current_window.deliveryCount*100}%',
+                        style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                      ),
                       linearStrokeCap: LinearStrokeCap.roundAll,
                       progressColor: Color(0xFF009A9A),
                     ),
@@ -124,10 +127,10 @@ class Status extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           color: Colors.black87,
                         ),
-                        text: '6 Delivered, ',
+                        text: '${current_window.countfullfilled} Delivered, ',
                         children: <TextSpan>[
                           TextSpan(
-                            text: '7 in Progress',
+                            text: '${current_window.countInProgress} in Progress',
                             style: TextStyle(
                               fontFamily: 'Quicksand',
                               fontWeight: FontWeight.bold,
