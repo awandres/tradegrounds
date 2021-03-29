@@ -87,6 +87,7 @@ class SignupProvider with ChangeNotifier {
     if (isValid) {
       _signupKey.currentState.save();
 
+      if (_signupStep == 1) {}
       if (_signupStep == 4) {
         submitData();
       } else {
@@ -164,19 +165,6 @@ class SignupProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  // TODO: Set relevant business properties in one function
-
-  // void setBusinessLocation(streetAddress, unit, city, state, zip) {
-  //   _businessLocation.streetAddress = streetAddress;
-  //   _businessLocation.unit = unit;
-  //   _businessLocation.city = city;
-  //   _businessLocation.state = state;
-  //   _businessLocation.zip = zip;
-  //   print(
-  //       'business info is $_businessLocation street address: ${_businessLocation.streetAddress} , unit ${_businessLocation.unit}, city: ${_businessLocation.city} state: ${_businessLocation.state}, zip: ${_businessLocation.zip}');
-  //   notifyListeners();
-  // }
-
   void changeTermsAgreed(bool value) {
     _termsAgreed = value;
     _termsValid = value;
@@ -229,10 +217,6 @@ class SignupProvider with ChangeNotifier {
 
   Future<void> signup(String email, String password) async {
     return _authenticate(email, password, 'accounts:signUp');
-  }
-
-  Future<void> login(String email, String password) async {
-    return _authenticate(email, password, 'accounts:signInWithPassword');
   }
 
   void submitData() async {
@@ -289,6 +273,7 @@ class SignupProvider with ChangeNotifier {
       }
     }
     toggleLoading();
+
     _signupStep = 1;
     print('you are now logged in');
     notifyListeners();

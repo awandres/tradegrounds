@@ -6,8 +6,9 @@ class Product {
 }
 
 class Delivery {
-  var items = new List<Product>(); 
+  var items = new List<Product>();
   String courier;
+  String recipient;
   String cost;
   String pickup;
   String dropoff;
@@ -19,24 +20,23 @@ class Delivery {
 
   Delivery({
     this.items,
+    this.recipient,
     this.cost,
     this.pickup,
     this.dropoff,
     this.window,
     this.current_location,
-  }
-  ){
+  }) {
     this.courier = null;
-    this.created_at=DateTime.now();
-    this.fulfilled=false;
+    this.created_at = DateTime.now();
+    this.fulfilled = false;
   }
 
-  LatLng getLocation(){
+  LatLng getLocation() {
     return this.current_location;
   }
 
-  int getItemsCount(){
+  int getItemsCount() {
     return items.length;
   }
-
 }

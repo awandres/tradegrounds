@@ -12,29 +12,28 @@ class DeliveryDashboard extends StatefulWidget {
   _DeliveryDashboardState createState() => _DeliveryDashboardState();
 }
 
-class _DeliveryDashboardState extends State<DeliveryDashboard> with SingleTickerProviderStateMixin {
-
-  final List<Map<String, Object>> _pages =[
-    {'title':'Product Center','screen':ProductCenterScreen()},
-    {'title':'Delivery Dashboard','screen':MainScreen()},
-    {'title':'My Courier','screen':MyCourierScreen()},
-
-    {'title':'Delivery Calendar','screen':DeliveryCalendarScreen()},
-    {'title':'Billing/Payment','screen':BillingPaymentScreen()},
-    {'title':'Settings','screen':SettingsScreen()}
+class _DeliveryDashboardState extends State<DeliveryDashboard>
+    with SingleTickerProviderStateMixin {
+  final List<Map<String, Object>> _pages = [
+    {'title': 'Product Center', 'screen': ProductCenterScreen()},
+    {'title': 'Delivery Dashboard', 'screen': MainScreen()},
+    {'title': 'My Courier', 'screen': MyCourierScreen()},
+    {'title': 'Delivery Calendar', 'screen': DeliveryCalendarScreen()},
+    {'title': 'Billing/Payment', 'screen': BillingPaymentScreen()},
+    {'title': 'Settings', 'screen': SettingsScreen()}
   ];
 
-  int _currentPageIndex =1;
+  int _currentPageIndex = 1;
 
 // this function is called in the bottom navigation bar to change page index
-  void _navbarpageselector(int index){
+  void _navbarpageselector(int index) {
     setState(() {
       _currentPageIndex = index;
     });
   }
 
 // this function is called in the custom drawer to change page index
-  void drawerPageSelector(int index){
+  void drawerPageSelector(int index) {
     setState(() {
       _currentPageIndex = index;
     });
@@ -51,7 +50,7 @@ class _DeliveryDashboardState extends State<DeliveryDashboard> with SingleTicker
         ),
         title: Text(_pages[_currentPageIndex]['title']),
       ),
-      drawer: CustomDrawer(_pages,_currentPageIndex,drawerPageSelector),
+      drawer: CustomDrawer(_pages, _currentPageIndex, drawerPageSelector),
       body: _pages[_currentPageIndex]['screen'],
       bottomNavigationBar: BottomNavigationBar(
         onTap: _navbarpageselector,
@@ -62,20 +61,26 @@ class _DeliveryDashboardState extends State<DeliveryDashboard> with SingleTicker
         type: BottomNavigationBarType.shifting,
         items: [
           BottomNavigationBarItem(
-            backgroundColor: Theme.of(context).primaryColor,
-            icon: Icon(Icons.storefront), 
-            title: Text('Product Center', style: TextStyle(fontFamily: 'Quicksand'),)
-          ),
+              backgroundColor: Theme.of(context).primaryColor,
+              icon: Icon(Icons.storefront),
+              title: Text(
+                'Product Center',
+                style: TextStyle(fontFamily: 'Quicksand'),
+              )),
           BottomNavigationBarItem(
-            backgroundColor: Theme.of(context).primaryColor,
-            icon: Icon(Icons.dashboard), 
-            title: Text('Dashboard', style: TextStyle(fontFamily: 'Quicksand'),)
-          ),
+              backgroundColor: Theme.of(context).primaryColor,
+              icon: Icon(Icons.dashboard),
+              title: Text(
+                'Dashboard',
+                style: TextStyle(fontFamily: 'Quicksand'),
+              )),
           BottomNavigationBarItem(
-            backgroundColor: Theme.of(context).primaryColor,
-            icon: Icon(Icons.location_on), 
-            title: Text('My Courier', style: TextStyle(fontFamily: 'Quicksand'),)
-          ),
+              backgroundColor: Theme.of(context).primaryColor,
+              icon: Icon(Icons.location_on),
+              title: Text(
+                'My Courier',
+                style: TextStyle(fontFamily: 'Quicksand'),
+              )),
         ],
       ),
     );
