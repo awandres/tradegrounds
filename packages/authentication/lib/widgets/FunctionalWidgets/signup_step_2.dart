@@ -23,7 +23,7 @@ class _SignupStep2State extends State<SignupStep2> {
 
     return Column(
       children: [
-        SizedBox(height: 50),
+        SizedBox(height: 100),
         Text(
           'Business Information',
           style: Theme.of(context).textTheme.title,
