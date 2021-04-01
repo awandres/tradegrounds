@@ -77,18 +77,31 @@ class MainScreen extends StatelessWidget {
                         ),
                         SizedBox(width:50),
                         Expanded(
-                          child: FittedBox(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                IconButton(
-                                  icon: const Icon(Icons.add),
-                                  tooltip: 'Increase volume by 10',
+                          child: Column(
+                            children: [
+                              Expanded(
+                                flex:2,
+                                child: FittedBox(
+                                  fit: BoxFit.contain,
+                                  child: Stack(
+                                    overflow: Overflow.visible,
+                                    alignment: AlignmentDirectional.center,
+                                    children: [
+                                      Center(child: Material( elevation: 18, borderRadius: BorderRadius.all(Radius.circular(20)),child:  Icon(Icons.circle, color: Theme.of(context).primaryColor, size: 42,))),
+                                      Center(
+                                        child:  IconButton(
+                                          iconSize: 35,
+                                          icon: const Icon(Icons.add, color: Colors.white,),
+                                          tooltip: 'Add New Order',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                Icon(Icons.circle, ),
-                                Text('New Order')
-                              ],
-                            )
+                              ),
+                              SizedBox(height:10),
+                              Flexible(flex:1, child: FittedBox( fit: BoxFit.contain, child: Text('New Order', style: TextStyle(fontSize:28),)))
+                            ],
                           )
                         ),
                       ],
