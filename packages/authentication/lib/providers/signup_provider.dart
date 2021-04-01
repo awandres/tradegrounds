@@ -43,6 +43,8 @@ class SignupProvider with ChangeNotifier {
 // Form
 
   bool get termsAgreed => _termsAgreed;
+  bool get emailExists => _emailExists;
+
   bool get termsValid => _termsValid;
   bool get isLoading => _isLoading;
   GlobalKey get signupKey => _signupKey;
@@ -51,6 +53,7 @@ class SignupProvider with ChangeNotifier {
   bool _termsAgreed = false;
   bool _termsValid = true;
   bool _isLoading = false;
+  bool _emailExists = false;
   static GlobalKey<FormState> _signupKey = new GlobalKey<FormState>();
   // bool isValid = false;
   var isValid;
@@ -81,16 +84,28 @@ class SignupProvider with ChangeNotifier {
 
 //Form Logic
 
-  void handleSignupStep() {
+  Future checkIfEmailExists() async {
+    print('running email check');
+    var authResult = await _auth.fetchSignInMethodsForEmail(email: userEmail);
+    if (authResult.length == 1) toggleEmailExists();
+    notifyListeners();
+    toggleLoading();
+    return;
+  }
+
+  void handleSignupStep() async {
     var isValid = _signupKey.currentState.validate();
 
     if (isValid) {
       _signupKey.currentState.save();
 
-      if (_signupStep == 1) {}
+      if (_signupStep == 1) {
+        toggleLoading();
+        await checkIfEmailExists();
+      }
       if (_signupStep == 4) {
         submitData();
-      } else {
+      } else if (!_emailExists) {
         ++_signupStep;
       }
       print('auth step is $signupStep');
@@ -175,6 +190,12 @@ class SignupProvider with ChangeNotifier {
 
   void toggleLoading() {
     _isLoading = !_isLoading;
+    notifyListeners();
+  }
+
+  void toggleEmailExists() {
+    _emailExists = !_emailExists;
+    _signupStep = 1;
     notifyListeners();
   }
 

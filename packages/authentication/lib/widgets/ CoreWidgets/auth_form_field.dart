@@ -3,8 +3,10 @@ import 'package:flutter/services.dart';
 
 class AuthFormField extends StatefulWidget {
   final TextInputType keyboardType;
+  final bool passwordVisible;
   final bool obscureText;
   final bool isDense;
+  final bool passwordVisibilityToggle;
   final String labelText;
   final String initialValue;
   final String valueKey;
@@ -21,7 +23,9 @@ class AuthFormField extends StatefulWidget {
   final List<TextInputFormatter> inputFormatters;
 
   const AuthFormField({
+    this.passwordVisible = false,
     this.isDense = true,
+    this.passwordVisibilityToggle = false,
     this.initialValue,
     this.autovalidateMode = AutovalidateMode.disabled,
     this.labelText,
@@ -45,6 +49,7 @@ class AuthFormField extends StatefulWidget {
 }
 
 var passwordToMatch;
+var passwordVisible = true;
 
 class _AuthFormFieldState extends State<AuthFormField> {
   @override
@@ -57,7 +62,9 @@ class _AuthFormFieldState extends State<AuthFormField> {
         autovalidateMode: widget.autovalidateMode,
         initialValue: widget.initialValue,
         controller: widget.fieldController,
-        obscureText: widget.obscureText,
+        obscureText: widget.passwordVisibilityToggle
+            ? passwordVisible
+            : widget.obscureText,
         onFieldSubmitted: widget.onFieldSubmitted,
         inputFormatters: widget.inputFormatters,
         textInputAction: widget.textInputAction,
@@ -73,6 +80,21 @@ class _AuthFormFieldState extends State<AuthFormField> {
               const Radius.circular(8.0),
             ),
           ),
+          suffixIcon: widget.passwordVisibilityToggle
+              ? IconButton(
+                  icon: Icon(
+                    // Based on passwordVisible state choose the icon
+                    passwordVisible ? Icons.visibility : Icons.visibility_off,
+                    color: Colors.grey,
+                  ),
+                  onPressed: () {
+                    // Update the state i.e. toogle the state of passwordVisible variable
+                    setState(() {
+                      passwordVisible = !passwordVisible;
+                    });
+                  },
+                )
+              : null,
         ),
         textCapitalization: widget.textCapitalization,
         key: ValueKey(widget.valueKey),
