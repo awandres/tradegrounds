@@ -40,6 +40,7 @@ class _SignupStep1State extends State<SignupStep1> {
           },
           validatorFunction: passwordValidator,
           validatorErrorMessage: 'Please enter a password',
+          passwordVisibilityToggle: true,
           onChangedFunction: (String value) {
             signupService.changeUserPassword(value);
           },
@@ -54,6 +55,7 @@ class _SignupStep1State extends State<SignupStep1> {
           textInputAction: TextInputAction.done,
           validatorFunction: passwordMatchValidator,
           validatorErrorMessage: 'Passwords do not match',
+          passwordVisibilityToggle: true,
         ),
         FlatButton(
           textColor: Theme.of(context).primaryColor,
