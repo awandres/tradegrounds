@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:storegrounds/delivery_dashboard/models/delivery.dart';
 
-import '../providers/window.dart';
+import '../providers/dashboard_provider.dart';
 import 'package:intl/intl.dart';
 import '../models/delivery.dart';
 
@@ -32,7 +32,7 @@ class OrderList extends StatelessWidget {
         recipient: 'John Stamos 4',
       ),
     ];
-    final current_window = Provider.of<Window>(context);
+    final current_window = Provider.of<DashboardProvider>(context);
     String date =
         new DateFormat.yMMMMEEEEd().format(new DateTime.now()).toString();
     return Container(

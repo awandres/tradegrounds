@@ -18,19 +18,19 @@ class Delivery {
   bool fulfilled;
   int window;
 
-  Delivery({
-    this.items,
-    this.recipient,
-    this.cost,
-    this.pickup,
-    this.dropoff,
-    this.window,
-    this.current_location,
-    // this.fulfilled = false,
-  }) {
-    this.courier = null;
+  Delivery(
+      {this.items,
+      this.recipient,
+      this.cost,
+      this.pickup,
+      this.dropoff,
+      this.window,
+      this.current_location,
+      this.fulfilled = false,
+      this.courier}) {
+    // this.courier = null;
     this.created_at = DateTime.now();
-    this.fulfilled = false;
+    // this.fulfilled = false;
   }
 
   LatLng getLocation() {
