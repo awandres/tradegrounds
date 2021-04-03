@@ -15,6 +15,9 @@ class Delivery {
   LatLng current_location;
   DateTime created_at;
   DateTime updated_at;
+  String estimatedDeliveryTime;
+  String deliveredAtTime;
+
   bool fulfilled;
   int window;
 
@@ -27,6 +30,8 @@ class Delivery {
       this.window,
       this.current_location,
       this.fulfilled = false,
+      this.estimatedDeliveryTime,
+      this.deliveredAtTime,
       this.courier}) {
     // this.courier = null;
     this.created_at = DateTime.now();

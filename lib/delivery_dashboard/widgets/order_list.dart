@@ -16,20 +16,30 @@ class OrderList extends StatelessWidget {
       Delivery(
         items: [Product(), Product()],
         recipient: 'John Stamos 1',
+        deliveredAtTime: new DateFormat.jm().format(new DateTime.now()),
+        estimatedDeliveryTime: new DateFormat.jm().format(new DateTime.now()),
+        fulfilled: true,
       ),
       Delivery(
         items: [Product(), Product(), Product()],
         recipient: 'John Stamos 2',
+        deliveredAtTime: new DateFormat.jm().format(new DateTime.now()),
+        estimatedDeliveryTime: new DateFormat.jm().format(new DateTime.now()),
+        fulfilled: true,
       ),
       Delivery(
         items: [Product(), Product(), Product(), Product(), Product()],
         recipient: 'John Stamos 3',
+        deliveredAtTime: new DateFormat.jm().format(new DateTime.now()),
+        estimatedDeliveryTime: new DateFormat.jm().format(new DateTime.now()),
       ),
       Delivery(
         items: [
           Product(),
         ],
         recipient: 'John Stamos 4',
+        deliveredAtTime: new DateFormat.jm().format(new DateTime.now()),
+        estimatedDeliveryTime: new DateFormat.jm().format(new DateTime.now()),
       ),
     ];
     final current_window = Provider.of<DashboardProvider>(context);
@@ -70,13 +80,13 @@ class OrderList extends StatelessWidget {
                         ),
                       ]),
                   margin: EdgeInsets.symmetric(vertical: 10),
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   child: Padding(
                     padding: EdgeInsets.all(10.0),
                     child: Flex(
                       direction:
                           device.width > 400 ? Axis.horizontal : Axis.vertical,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Row(
                           children: [
@@ -110,26 +120,68 @@ class OrderList extends StatelessWidget {
                           ],
                         ),
                         if (device.width > 400)
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Column(children: [
-                                SizedBox(height: 7),
-                                Text(
-                                  'Status:Delivered',
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: 'Quicksand'),
-                                )
-                              ]),
-                              SizedBox(width: 8),
-                              Icon(
-                                Icons.check_circle,
-                                color: Color(0xFF36814A),
-                                size: 46.0,
-                              )
-                            ],
+                          ConstrainedBox(
+                            constraints: BoxConstraints(minWidth: 250),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                delivery.fulfilled
+                                    ? Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Status:Delivered',
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                                fontFamily: 'Quicksand'),
+                                          ),
+                                          Text(
+                                            'at ${delivery.deliveredAtTime.toString()}',
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                                fontFamily: 'Quicksand'),
+                                          )
+                                        ],
+                                      )
+                                    : Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Status: In Progress',
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                                fontFamily: 'Quicksand'),
+                                          ),
+                                          Text(
+                                            delivery.estimatedDeliveryTime
+                                                .toString(),
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                                fontFamily: 'Quicksand'),
+                                          )
+                                        ],
+                                      ),
+                                SizedBox(width: 8),
+                                delivery.fulfilled
+                                    ? Icon(
+                                        Icons.check_circle,
+                                        color: Color(0xFF36814A),
+                                        size: 46.0,
+                                      )
+                                    : Icon(
+                                        Icons.swap_horizontal_circle,
+                                        color: Color(0xFF009A9A),
+                                        size: 46.0,
+                                      )
+                              ],
+                            ),
                           ),
                         if (device.width < 400)
                           Row(
