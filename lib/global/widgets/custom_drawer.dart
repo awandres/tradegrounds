@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:storegrounds/delivery_dashboard/screens/deliverydashboard.dart';
+import 'package:storegrounds/delivery_dashboard/screens/deliverydashboard_screen.dart';
 import 'package:authentication/providers/auth.dart';
 import 'package:provider/provider.dart';
 

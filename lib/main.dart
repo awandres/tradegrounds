@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
-import 'package:storegrounds/delivery_dashboard/screens/deliverydashboard.dart';
+import 'package:storegrounds/delivery_dashboard/screens/deliverydashboard_screen.dart';
 import 'delivery_dashboard/providers/dashboard_provider.dart';
 
-import 'delivery_dashboard/screens/deliverydashboard.dart';
+import 'delivery_dashboard/screens/deliverydashboard_screen.dart';
 import 'package:authentication/providers/auth.dart';
 import 'package:authentication/screens/login_screen.dart';
 import 'package:authentication/screens/splash_screen.dart';
