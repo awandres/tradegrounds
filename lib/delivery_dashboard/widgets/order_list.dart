@@ -159,8 +159,7 @@ class OrderList extends StatelessWidget {
                                                 fontFamily: 'Quicksand'),
                                           ),
                                           Text(
-                                            delivery.estimatedDeliveryTime
-                                                .toString(),
+                                            'at ${delivery.deliveredAtTime.toString()}',
                                             style: TextStyle(
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.bold,
