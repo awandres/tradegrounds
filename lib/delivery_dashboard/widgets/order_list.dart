@@ -15,60 +15,6 @@ class OrderList extends StatelessWidget {
   Widget build(BuildContext context) {
     final device = MediaQuery.of(context).size;
     final dash = Provider.of<DashboardProvider>(context);
-
-    List<Delivery> _completedDeliveries = [
-      Delivery(
-        items: [Product(), Product()],
-        recipient: 'John Stamos ',
-        deliveredAtTime: new DateFormat.jm().format(new DateTime.now()),
-        estimatedDeliveryTime: new DateFormat.jm().format(new DateTime.now()),
-        fulfilled: true,
-      ),
-      Delivery(
-        items: [Product(), Product(), Product()],
-        recipient: 'John Stamos 2',
-        deliveredAtTime: new DateFormat.jm().format(new DateTime.now()),
-        estimatedDeliveryTime: new DateFormat.jm().format(new DateTime.now()),
-        fulfilled: true,
-      ),
-    ];
-
-    List<Delivery> _deliveriesInProgress = [
-      Delivery(
-        items: [Product(), Product()],
-        recipient: 'Carl Sagan 1',
-        deliveredAtTime: new DateFormat.jm().format(new DateTime.now()),
-        estimatedDeliveryTime: new DateFormat.jm().format(new DateTime.now()),
-        fulfilled: false,
-      ),
-      Delivery(
-        items: [Product(), Product(), Product()],
-        recipient: 'Carl Sagan 2',
-        deliveredAtTime: new DateFormat.jm().format(new DateTime.now()),
-        estimatedDeliveryTime: new DateFormat.jm().format(new DateTime.now()),
-        fulfilled: false,
-      ),
-      Delivery(
-        items: [Product(), Product(), Product(), Product(), Product()],
-        recipient: 'Carl Sagan 3',
-        deliveredAtTime: new DateFormat.jm().format(new DateTime.now()),
-        estimatedDeliveryTime: new DateFormat.jm().format(new DateTime.now()),
-      ),
-      Delivery(
-        items: [
-          Product(),
-        ],
-        recipient: 'Carl Sagan 4',
-        deliveredAtTime: new DateFormat.jm().format(new DateTime.now()),
-        estimatedDeliveryTime: new DateFormat.jm().format(new DateTime.now()),
-      ),
-    ];
-
-    Dashboard _dashboard = new Dashboard(
-      completedDelivieres: _completedDeliveries,
-      deliveriesInProgress: _deliveriesInProgress,
-    );
-
     final current_window = Provider.of<DashboardProvider>(context);
     String date =
         new DateFormat.yMMMMEEEEd().format(new DateTime.now()).toString();
