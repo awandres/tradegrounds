@@ -1,334 +1,213 @@
-// import 'package:flutter/material.dart';
+// import 'dart:ui';
 // import 'package:provider/provider.dart';
-// import '../providers/auth.dart';
-// import '../models/http_exception.dart';
-// import './password_reset_screen.dart';
+// import 'package:flutter/material.dart';
+// import 'package:storegrounds/delivery_dashboard/models/delivery.dart';
 
-// class LoginScreen extends StatefulWidget {
-//   @override
-//   _LoginScreenState createState() => _LoginScreenState();
-// }
+// import '../providers/dashboard_provider.dart';
+// import 'package:intl/intl.dart';
+// import '../models/delivery.dart';
 
-// class _LoginScreenState extends State<LoginScreen> {
-//   final GlobalKey<FormState> _signupKey = GlobalKey();
-//   Map<String, String> _authData = {
-//     'email': '',
-//     'password': '',
-//   };
-//   var _isLoading = false;
-//   final _passwordController = TextEditingController();
-
-//   void _showErrorDialog(String message) {
-//     showDialog(
-//       context: context,
-//       builder: (ctx) => AlertDialog(
-//         title: Text('An Error Occurred!'),
-//         content: Text(message),
-//         actions: <Widget>[
-//           FlatButton(
-//             child: Text('Okay'),
-//             onPressed: () {
-//               Navigator.of(ctx).pop();
-//             },
-//           )
-//         ],
-//       ),
-//     );
-//   }
-
-//   Future<void> _submit() async {
-//     if (!_signupKey.currentState.validate()) {
-//       // Invalid!
-//       return;
-//     }
-//     _signupKey.currentState.save();
-//     setState(() {
-//       _isLoading = true;
-//     });
-//     try {
-//       // Sign user up
-//       await Provider.of<Auth>(context, listen: false).login(
-//         _authData['email'],
-//         _authData['password'],
-//       );
-//     } on HttpException catch (error) {
-//       var errorMessage = 'Authentication failed';
-//       if (error.toString().contains('EMAIL_EXISTS')) {
-//         errorMessage = 'This email address is already in use.';
-//       } else if (error.toString().contains('INVALID_EMAIL')) {
-//         errorMessage = 'This is not a valid email address';
-//       } else if (error.toString().contains('WEAK_PASSWORD')) {
-//         errorMessage = 'This password is too weak.';
-//       } else if (error.toString().contains('EMAIL_NOT_FOUND')) {
-//         errorMessage = 'Email or password is incorrect.';
-//       } else if (error.toString().contains('INVALID_PASSWORD')) {
-//         errorMessage = 'Email or password is incorrect.';
-//       }
-//       _showErrorDialog(errorMessage);
-//     } catch (error) {
-//       const errorMessage =
-//           'Could not authenticate you. Please try again later.';
-//       _showErrorDialog(errorMessage);
-//     }
-
-//     setState(() {
-//       _isLoading = false;
-//     });
-//   }
-
+// class OrderList extends StatelessWidget {
 //   @override
 //   Widget build(BuildContext context) {
-//     final deviceSize = MediaQuery.of(context).size;
-//     return Scaffold(
-//       body: SingleChildScrollView(
+//     final device = MediaQuery.of(context).size;
+
+//     List<Delivery> _deliveries = [
+//       Delivery(
+//         items: [Product(), Product()],
+//         recipient: 'John Stamos 1',
+//         deliveredAtTime: new DateFormat.jm().format(new DateTime.now()),
+//         estimatedDeliveryTime: new DateFormat.jm().format(new DateTime.now()),
+//         fulfilled: true,
+//       ),
+//       Delivery(
+//         items: [Product(), Product(), Product()],
+//         recipient: 'John Stamos 2',
+//         deliveredAtTime: new DateFormat.jm().format(new DateTime.now()),
+//         estimatedDeliveryTime: new DateFormat.jm().format(new DateTime.now()),
+//         fulfilled: true,
+//       ),
+//       Delivery(
+//         items: [Product(), Product(), Product(), Product(), Product()],
+//         recipient: 'John Stamos 3',
+//         deliveredAtTime: new DateFormat.jm().format(new DateTime.now()),
+//         estimatedDeliveryTime: new DateFormat.jm().format(new DateTime.now()),
+//       ),
+//       Delivery(
+//         items: [
+//           Product(),
+//         ],
+//         recipient: 'John Stamos 4',
+//         deliveredAtTime: new DateFormat.jm().format(new DateTime.now()),
+//         estimatedDeliveryTime: new DateFormat.jm().format(new DateTime.now()),
+//       ),
+//     ];
+//     final current_window = Provider.of<DashboardProvider>(context);
+//     String date =
+//         new DateFormat.yMMMMEEEEd().format(new DateTime.now()).toString();
+//     return Container(
+//       padding: device.width > 400
+//           ? EdgeInsets.symmetric(horizontal: 30, vertical: 20)
+//           : EdgeInsets.symmetric(horizontal: 0, vertical: 20),
+//       child: ConstrainedBox(
+//         constraints: BoxConstraints(maxHeight: 330),
 //         child: Container(
-//           height: deviceSize.height,
-//           width: deviceSize.width,
-//           padding: EdgeInsets.only(
-//               bottom: 10, left: 40, right: 40, top: (deviceSize.height * 0.10)),
-//           child: LayoutBuilder(builder: (ctx, constraints) {
-//             return Column(
-//               mainAxisAlignment: MainAxisAlignment.center,
-//               crossAxisAlignment: CrossAxisAlignment.center,
-//               children: [
-//                 Material(
-//                   elevation: 10.0,
-//                   shadowColor: Colors.black,
-//                   borderRadius: const BorderRadius.all(const Radius.circular(20.0)),
-//                   child: Container(
-//                     // decoration: BoxDecoration(
-//                     //   borderRadius: BorderRadius.all(Radius.circular(20)),
-//                     //   boxShadow: [
-//                     //     BoxShadow(
-//                     //       color: Colors.grey.withOpacity(0.5),
-//                     //       spreadRadius: 5,
-//                     //       blurRadius: 7,
-//                     //       offset: Offset(0, 20), // changes position of shadow
-//                     //     ),
-//                     //   ]
-//                     // ),
-//                     height: constraints.maxHeight * 0.35,
-//                     width: double.infinity,
-//                     child: ClipRRect(
-//                       borderRadius: BorderRadius.all(Radius.circular(20)),
-//                       child: Image.asset(
-//                         'assets/images/storegroundsLogo.png',
-//                         fit: BoxFit.cover,
-//                       ),
-//                     ),
-//                   ),
+//           decoration: BoxDecoration(
+//               borderRadius: BorderRadius.all(Radius.circular(20.0)),
+//               color: Color(0xFF009A9A),
+//               boxShadow: [
+//                 BoxShadow(
+//                   color: Colors.grey.withOpacity(0.5),
+//                   spreadRadius: 3,
+//                   blurRadius: 5,
+//                   offset: Offset(0, 0),
 //                 ),
-//                 Container(
-//                   padding: EdgeInsets.all(20),
-//                   child: Text(
-//                     'Storegrounds',
-//                     style: Theme.of(context).textTheme.title,
-//                   )
-//                 ),
-//                 Container(
-//                   height: constraints.maxHeight*0.40,
-//                   child: Form(
-//                     key: _signupKey,
-//                     child: SingleChildScrollView(
-//                       child: Column(
-//                         children: <Widget>[
-//                           Material(
-//                             elevation: 10.0,
-//                             shadowColor: Colors.black,
-//                             borderRadius: const BorderRadius.all(
-//                                 const Radius.circular(20.0)),
-//                             child: TextFormField(
-//                               decoration: const InputDecoration(
-//                                 labelStyle: TextStyle(
-//                                   fontFamily: 'Quicksand',
-//                                   fontWeight: FontWeight.bold,
-//                                 ),
-//                                 isDense: true,
-//                                 labelText: 'E-Mail',
-//                                 border: OutlineInputBorder(
-//                                   borderRadius: const BorderRadius.all(
-//                                     const Radius.circular(20.0),
+//               ]),
+//           padding: EdgeInsets.all(30),
+//           child: SingleChildScrollView(
+//             child: Column(
+//               children: _deliveries.map((delivery) {
+//                 return Container(
+//                   decoration: BoxDecoration(
+//                       borderRadius: BorderRadius.all(Radius.circular(20.0)),
+//                       color: Colors.white,
+//                       boxShadow: [
+//                         BoxShadow(
+//                           color: Colors.grey.withOpacity(0.5),
+//                           spreadRadius: 3,
+//                           blurRadius: 5,
+//                           offset: Offset(0, 0), // changes position of shadow
+//                         ),
+//                       ]),
+//                   margin: EdgeInsets.symmetric(vertical: 10),
+//                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+//                   child: Padding(
+//                     padding: EdgeInsets.all(10.0),
+//                     child: Flex(
+//                       direction:
+//                           device.width > 400 ? Axis.horizontal : Axis.vertical,
+//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                       children: [
+//                         Row(
+//                           children: [
+//                             Icon(Icons.add_box, size: 56.0),
+//                             SizedBox(width: 8),
+//                             Column(
+//                               crossAxisAlignment: CrossAxisAlignment.start,
+//                               children: [
+//                                 FittedBox(
+//                                   fit: BoxFit.scaleDown,
+//                                   child: Text(
+//                                     delivery.recipient,
+//                                     style: TextStyle(
+//                                         fontSize: 20,
+//                                         fontWeight: FontWeight.bold,
+//                                         fontFamily: 'Quicksand'),
 //                                   ),
-//                                 )
-//                               ),
-//                               keyboardType: TextInputType.emailAddress,
-//                               validator: (value) {
-//                                 if (value.isEmpty || !value.contains('@')) {
-//                                   return 'Invalid email!';
-//                                 }
-//                               },
-//                               onSaved: (value) {
-//                                 _authData['email'] = value;
-//                               },
+//                                 ),
+//                                 FittedBox(
+//                                   fit: BoxFit.cover,
+//                                   child: Text(
+//                                     delivery.items.length.toString() + ' items',
+//                                     style: TextStyle(
+//                                         // fontSize: 17,
+//                                         fontWeight: FontWeight.bold,
+//                                         fontFamily: 'Quicksand'),
+//                                   ),
+//                                 ),
+//                               ],
+//                             ),
+//                           ],
+//                         ),
+//                         if (device.width > 400)
+//                           ConstrainedBox(
+//                             constraints: BoxConstraints(minWidth: 250),
+//                             child: Row(
+//                               crossAxisAlignment: CrossAxisAlignment.start,
+//                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                               children: [
+//                                 delivery.fulfilled
+//                                     ? Column(
+//                                         crossAxisAlignment:
+//                                             CrossAxisAlignment.start,
+//                                         children: [
+//                                           Text(
+//                                             'Status:Delivered',
+//                                             style: TextStyle(
+//                                                 fontSize: 20,
+//                                                 fontWeight: FontWeight.bold,
+//                                                 fontFamily: 'Quicksand'),
+//                                           ),
+//                                           Text(
+//                                             'at ${delivery.deliveredAtTime.toString()}',
+//                                             style: TextStyle(
+//                                                 fontSize: 20,
+//                                                 fontWeight: FontWeight.bold,
+//                                                 fontFamily: 'Quicksand'),
+//                                           )
+//                                         ],
+//                                       )
+//                                     : Column(
+//                                         crossAxisAlignment:
+//                                             CrossAxisAlignment.start,
+//                                         children: [
+//                                           Text(
+//                                             'Status: In Progress',
+//                                             style: TextStyle(
+//                                                 fontSize: 20,
+//                                                 fontWeight: FontWeight.bold,
+//                                                 fontFamily: 'Quicksand'),
+//                                           ),
+//                                           Text(
+//                                             'at ${delivery.deliveredAtTime.toString()}',
+//                                             style: TextStyle(
+//                                                 fontSize: 20,
+//                                                 fontWeight: FontWeight.bold,
+//                                                 fontFamily: 'Quicksand'),
+//                                           )
+//                                         ],
+//                                       ),
+//                                 SizedBox(width: 8),
+//                                 delivery.fulfilled
+//                                     ? Icon(
+//                                         Icons.check_circle,
+//                                         color: Color(0xFF36814A),
+//                                         size: 46.0,
+//                                       )
+//                                     : Icon(
+//                                         Icons.swap_horizontal_circle,
+//                                         color: Color(0xFF009A9A),
+//                                         size: 46.0,
+//                                       )
+//                               ],
 //                             ),
 //                           ),
-//                           SizedBox(
-//                             height: 20,
-//                           ),
-//                           Material(
-//                             elevation: 10.0,
-//                             shadowColor: Colors.black,
-//                             borderRadius: const BorderRadius.all(
-//                                 const Radius.circular(20.0)),
-//                             child: TextFormField(
-//                               decoration: const InputDecoration(
-//                                 labelStyle: TextStyle(
-//                                   fontFamily: 'Quicksand',
-//                                   fontWeight: FontWeight.bold,
-//                                 ),
-//                                 isDense: true,
-//                                 labelText: 'Password',
-//                                 border: OutlineInputBorder(
-//                                   borderRadius: const BorderRadius.all(
-//                                     const Radius.circular(20.0),
-//                                   ),
-//                                 )
-//                               ),
-//                               obscureText: true,
-//                               controller: _passwordController,
-//                               validator: (value) {
-//                                 if (value.isEmpty || value.length < 5) {
-//                                   return 'Password is too short!';
-//                                 }
-//                               },
-//                               onSaved: (value) {
-//                                 _authData['password'] = value;
-//                               },
-//                             ),
-//                           ),
-//                           // if (_isLoading)
-//                           //   CircularProgressIndicator()
-//                           // else
-//                           SizedBox(
-//                             height: 10,
-//                           ),
+//                         if (device.width < 400)
 //                           Row(
-//                             mainAxisAlignment: MainAxisAlignment.center,
-//                             children: <Widget>[
-//                               const Text(
-//                                 'New User ? ',
-//                                 style: TextStyle(
-//                                   fontFamily: 'Quicksand',
-//                                   fontWeight: FontWeight.bold,
-//                                 ),
+//                             crossAxisAlignment: CrossAxisAlignment.start,
+//                             children: [
+//                               Icon(
+//                                 Icons.check_circle,
+//                                 color: Color(0xFF36814A),
+//                                 size: 46.0,
 //                               ),
-//                               FlatButton(
-//                                 child: const Text(
-//                                   'Sign Up',
-//                                   style: TextStyle(
-//                                     fontFamily: 'Quicksand',
+//                               SizedBox(width: 8),
+//                               Text(
+//                                 'Status:Delivered',
+//                                 style: TextStyle(
+//                                     fontSize: 20,
 //                                     fontWeight: FontWeight.bold,
-//                                   ),
-//                                 ),
-//                                 onPressed: () {
-//                                   // Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegistrationScreen()));
-//                                 },
-//                                 padding: const EdgeInsets.symmetric(
-//                                     horizontal: 30.0, vertical: 4),
-//                                 materialTapTargetSize:
-//                                     MaterialTapTargetSize.shrinkWrap,
-//                                 textColor: Theme.of(context).primaryColor,
+//                                     fontFamily: 'Quicksand'),
 //                               ),
 //                             ],
 //                           ),
-//                           SizedBox(
-//                             height: 10,
-//                           ),
-//                           RaisedButton(
-//                             child: const Text(
-//                               'LOGIN',
-//                               style: TextStyle(
-//                                 fontFamily: 'Quicksand',
-//                                 fontWeight: FontWeight.bold,
-//                               ),
-//                             ),
-//                             onPressed: _submit,
-//                             elevation: 10,
-//                             shape: RoundedRectangleBorder(
-//                               borderRadius: BorderRadius.circular(30),
-//                             ),
-//                             padding: const EdgeInsets.symmetric(
-//                                 horizontal: 30.0, vertical: 8.0),
-//                             color: Theme.of(context).primaryColor,
-//                             textColor:
-//                                 Theme.of(context).primaryTextTheme.button.color,
-//                           ),
-//                           SizedBox(
-//                             height: 10,
-//                           ),
-//                           FlatButton(
-//                                 child: const Text(
-//                                   'Forgot your Password ?',
-//                                   style: TextStyle(
-//                                     fontFamily: 'Quicksand',
-//                                     fontWeight: FontWeight.bold,
-//                                   ),
-//                                 ),
-//                                 onPressed: () {
-//                                   Navigator.of(context).push(MaterialPageRoute(builder: (context) => PasswordResetScreen()));
-//                                 },
-//                                 padding: const EdgeInsets.symmetric(
-//                                     horizontal: 30.0, vertical: 4),
-//                                 materialTapTargetSize:
-//                                     MaterialTapTargetSize.shrinkWrap,
-//                                 textColor: Colors.black,
-//                               ),
-//                         ],
-//                       ),
-//                     ),
-//                   ),
-//                 ),
-//                 SizedBox(
-//                   height: 15,
-//                 ),
-//                 Container(
-//                     height: constraints.maxHeight*0.07,
-//                     width: deviceSize.width,
-//                     // color: Colors.black,
-//                     // padding: EdgeInsets.only(left: 20),
-//                     child: Row(
-//                       mainAxisAlignment: MainAxisAlignment.center,
-//                       children: <Widget>[
-//                         Image.asset(
-//                           'assets/images/tradegroundsIg.png',
-//                           fit: BoxFit.cover,
-//                         ),
-//                         SizedBox(
-//                           width: 30,
-//                         ),
-//                         FittedBox(
-//                           child: Column(
-//                             children: <Widget>[
-//                               Text(
-//                                 'Tradegrounds Inc. 2077',
-//                                 style: TextStyle(
-//                                   fontFamily: 'Quicksand',
-//                                   fontWeight: FontWeight.bold,
-//                                 ),
-//                               ),
-//                               Text(
-//                                 'www.tradegrounds.info',
-//                                 style: TextStyle(
-//                                   fontFamily: 'Quicksand',
-//                                   fontWeight: FontWeight.bold,
-//                                 ),
-//                               ),
-//                               Text(
-//                                 'v.0.0.1',
-//                                 style: TextStyle(
-//                                   fontFamily: 'Quicksand',
-//                                   fontWeight: FontWeight.bold,
-//                                 ),
-//                               ),
-//                             ],
-//                           ),
-//                         )
 //                       ],
 //                     ),
 //                   ),
-//               ],
-//             );
-//           }),
+//                 );
+//               }).toList(),
+//             ),
+//           ),
 //         ),
 //       ),
 //     );
