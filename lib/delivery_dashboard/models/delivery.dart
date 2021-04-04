@@ -17,7 +17,7 @@ class Delivery {
   DateTime updated_at;
   String estimatedDeliveryTime;
   String deliveredAtTime;
-
+  int itemCount;
   bool fulfilled;
   int window;
 
@@ -32,6 +32,7 @@ class Delivery {
       this.fulfilled = false,
       this.estimatedDeliveryTime,
       this.deliveredAtTime,
+      this.itemCount,
       this.courier}) {
     // this.courier = null;
     this.created_at = DateTime.now();

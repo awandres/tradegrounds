@@ -6,12 +6,15 @@ import 'package:storegrounds/delivery_dashboard/models/delivery.dart';
 import '../providers/dashboard_provider.dart';
 import 'package:intl/intl.dart';
 import '../models/delivery.dart';
+import '../models/dashboard.dart';
+
 import './order_list_item.dart';
 
 class OrderList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final device = MediaQuery.of(context).size;
+    final dash = Provider.of<DashboardProvider>(context);
 
     List<Delivery> _completedDeliveries = [
       Delivery(
@@ -60,6 +63,12 @@ class OrderList extends StatelessWidget {
         estimatedDeliveryTime: new DateFormat.jm().format(new DateTime.now()),
       ),
     ];
+
+    Dashboard _dashboard = new Dashboard(
+      completedDelivieres: _completedDeliveries,
+      deliveriesInProgress: _deliveriesInProgress,
+    );
+
     final current_window = Provider.of<DashboardProvider>(context);
     String date =
         new DateFormat.yMMMMEEEEd().format(new DateTime.now()).toString();
@@ -81,41 +90,67 @@ class OrderList extends StatelessWidget {
                   offset: Offset(0, 0),
                 ),
               ]),
-          padding: EdgeInsets.all(30),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Just Finished',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w900,
-                      fontFamily: 'Quicksand',
-                      letterSpacing: 1),
-                ),
-                Column(
-                  children: _completedDeliveries.map((_delivery) {
-                    return OrderListItem(delivery: _delivery);
-                  }).toList(),
-                ),
-                Text(
-                  'Up Next',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w900,
-                      fontFamily: 'Quicksand',
-                      letterSpacing: 1),
-                ),
-                Column(
-                  children: _deliveriesInProgress.map((_delivery) {
-                    return OrderListItem(delivery: _delivery);
-                  }).toList(),
-                ),
-              ],
-            ),
+          padding: EdgeInsets.fromLTRB(30, 30, 30, 0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Expanded(
+                child: ListView(children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Just Finished',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w900,
+                            fontFamily: 'Quicksand',
+                            letterSpacing: 1),
+                      ),
+                      Column(
+                        children: dash.completedDeliveries.map((_delivery) {
+                          return OrderListItem(
+                            delivery: _delivery,
+                          );
+                        }).toList(),
+                      ),
+                      Text(
+                        'Up Next',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w900,
+                            fontFamily: 'Quicksand',
+                            letterSpacing: 1),
+                      ),
+                      Column(
+                        children: dash.deliveriesInProgress.map((_delivery) {
+                          return OrderListItem(delivery: _delivery);
+                        }).toList(),
+                      ),
+                    ],
+                  ),
+                ]),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: TextButton(
+                    onPressed: () {
+                      print('showing full list');
+                    },
+                    child: Text(
+                      'SEE IN FULL VIEW',
+                      style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          fontSize: 23,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          letterSpacing: 5,
+                          fontFamily: 'Quicksand'),
+                    )),
+              )
+            ],
           ),
         ),
       ),

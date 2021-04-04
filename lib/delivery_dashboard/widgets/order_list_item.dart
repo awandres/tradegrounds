@@ -58,7 +58,7 @@ class _OrderListItemState extends State<OrderListItem> {
                     FittedBox(
                       fit: BoxFit.cover,
                       child: Text(
-                        widget.delivery.items.length.toString() + ' items',
+                        widget.delivery.itemCount.toString() + ' items',
                         style: TextStyle(
                             // fontSize: 17,
                             fontWeight: FontWeight.bold,
@@ -107,7 +107,7 @@ class _OrderListItemState extends State<OrderListItem> {
                                     fontFamily: 'Quicksand'),
                               ),
                               Text(
-                                'at ${widget.delivery.deliveredAtTime.toString()}',
+                                'at ${widget.delivery.estimatedDeliveryTime.toString()}',
                                 style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
