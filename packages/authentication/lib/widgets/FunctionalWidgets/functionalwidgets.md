@@ -1,0 +1,1 @@
+Functional Widgets correlate to all functional tasks and user stories that contain a custom functionality, built to help teams reuse code.

@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:authentication/screens/login_screen.dart';
 
 import 'package:authentication/providers/signup_provider.dart';
-import 'package:authentication/widgets/auth_form_field.dart';
+import 'package:authentication/widgets/ CoreWidgets/auth_form_field.dart';
 
 class SignupStep1 extends StatefulWidget {
   @override
@@ -16,16 +16,19 @@ class _SignupStep1State extends State<SignupStep1> {
     final signupService = Provider.of<SignupProvider>(context);
     return Column(
       children: [
-        AuthFormField(
-          valueKey: 'email',
-          labelText: 'Email',
-          keyboardType: TextInputType.emailAddress,
-          textInputAction: TextInputAction.next,
-          onSavedFunction: (String value) {
-            signupService.changeUserEmail(value);
-          },
-          validatorFunction: emailValidation,
-          validatorErrorMessage: 'Please enter a valid email',
+        Padding(
+          padding:EdgeInsets.all(10.0),
+          child: AuthFormField(
+            valueKey: 'email',
+            labelText: 'Email',
+            keyboardType: TextInputType.emailAddress,
+            textInputAction: TextInputAction.next,
+            onSavedFunction: (String value) {
+              signupService.changeUserEmail(value);
+            },
+            validatorFunction: emailValidation,
+            validatorErrorMessage: 'Please enter a valid email',
+          ),
         ),
         SizedBox(
           height: 10,
@@ -57,6 +60,9 @@ class _SignupStep1State extends State<SignupStep1> {
           validatorErrorMessage: 'Passwords do not match',
           passwordVisibilityToggle: true,
         ),
+        SizedBox(
+          height: 10,
+        ),
         FlatButton(
           textColor: Theme.of(context).primaryColor,
           onPressed: () {
@@ -65,6 +71,7 @@ class _SignupStep1State extends State<SignupStep1> {
           child: Text.rich(
             TextSpan(
               style: TextStyle(
+                fontSize: 16,
                 fontFamily: 'Quicksand',
                 fontWeight: FontWeight.bold,
                 color: Colors.black87,
