@@ -1,19 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:authentication/providers/signup_provider.dart';
-import 'package:authentication/widgets/signup_step_1.dart';
-import 'package:authentication/widgets/signup_step_2.dart';
-import 'package:authentication/widgets/signup_step_3.dart';
-import 'package:authentication/widgets/signup_step_4.dart';
+import 'package:authentication/screens/login_screen.dart';
+
+import 'package:authentication/widgets/FunctionalWidgets/signup_step_1.dart';
+import 'package:authentication/widgets/FunctionalWidgets/signup_step_2.dart';
+import 'package:authentication/widgets/FunctionalWidgets/signup_step_3.dart';
+import 'package:authentication/widgets/FunctionalWidgets/signup_step_4.dart';
 import '../widgets/dialog_box.dart';
 
-class Signup extends StatelessWidget {
+class Signup extends StatefulWidget {
+  @override
+  _SignupState createState() => _SignupState();
+}
+
+class _SignupState extends State<Signup> {
   @override
   Widget build(BuildContext context) {
     // final _signupKey = GlobalKey<FormState>();
     final deviceSize = MediaQuery.of(context).size;
-    final isTablet = deviceSize.width>750?true:false;
-    final isPhone = deviceSize.width<490?true:false;
+    final isTablet = deviceSize.width > 750 ? true : false;
+    final isPhone = deviceSize.width < 490 ? true : false;
 
     final signupService = Provider.of<SignupProvider>(context);
     int signupStep = signupService.signupStep;
@@ -28,6 +35,14 @@ class Signup extends StatelessWidget {
               ));
     }
 
+    if (signupService.accountCreated) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.of(context).pop();
+        signupService.toggleAccountCreated();
+        signupService.resetSignupStep();
+      });
+    }
+
     if (signupService.emailExists) {
       Future.delayed(Duration.zero, () async {
         signupService.toggleEmailExists();
@@ -39,17 +54,19 @@ class Signup extends StatelessWidget {
       body: SingleChildScrollView(
         child: Center(
           child: Container(
-            margin: isTablet?EdgeInsets.only(top:50):null,
+            margin: isTablet ? EdgeInsets.only(top: 50) : null,
             child: Material(
               elevation: 10.0,
               shadowColor: Colors.black,
-              borderRadius: const BorderRadius.all(
-              const Radius.circular(8.0)),
+              borderRadius: const BorderRadius.all(const Radius.circular(8.0)),
               child: Container(
-                height: isTablet? deviceSize.height*0.9:deviceSize.height,
-                width: isTablet? deviceSize.width*0.6: deviceSize.width,
+                height: isTablet ? deviceSize.height * 0.9 : deviceSize.height,
+                width: isTablet ? deviceSize.width * 0.6 : deviceSize.width,
                 padding: EdgeInsets.only(
-                    bottom: 0, left: 40, right: 40, top: (deviceSize.height * 0.10)),
+                    bottom: 0,
+                    left: 40,
+                    right: 40,
+                    top: (deviceSize.height * 0.10)),
                 child: LayoutBuilder(
                   builder: (ctx, constraints) {
                     return Column(
@@ -60,7 +77,8 @@ class Signup extends StatelessWidget {
                           width: deviceSize.width,
                           decoration: BoxDecoration(
                               color: Color.fromRGBO(255, 195, 1, 1),
-                              borderRadius: BorderRadius.all(Radius.circular(20))),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20))),
                           child: Text(
                             'Storegrounds',
                             style: Theme.of(context).textTheme.title,
@@ -131,7 +149,7 @@ class Signup extends StatelessWidget {
                                         (signupStep > 1 && signupStep < 4)
                                             ? '         Next         '
                                             : (signupStep == 4)
-                                                ? '        Submit        ' 
+                                                ? '        Submit        '
                                                 : '        Sign Up       ',
                                         style: TextStyle(
                                           fontFamily: 'Quicksand',
