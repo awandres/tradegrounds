@@ -35,6 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> _submit() async {
+    
     if (!_loginKey.currentState.validate()) {
       // Invalid!
       return;
@@ -285,7 +286,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                   ),
                                   onPressed: () {
-                                    _submit;
+                                    _submit();
                                     HapticFeedback.mediumImpact();
                                   },
                                   elevation: 5,
