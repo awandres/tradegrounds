@@ -44,6 +44,7 @@ class SignupProvider with ChangeNotifier {
 
   bool get termsAgreed => _termsAgreed;
   bool get emailExists => _emailExists;
+  bool get accountCreated => _accountCreated;
 
   bool get termsValid => _termsValid;
   bool get isLoading => _isLoading;
@@ -54,6 +55,8 @@ class SignupProvider with ChangeNotifier {
   bool _termsValid = true;
   bool _isLoading = false;
   bool _emailExists = false;
+  bool _accountCreated = false;
+
   static GlobalKey<FormState> _signupKey = new GlobalKey<FormState>();
   // bool isValid = false;
   var isValid;
@@ -114,6 +117,11 @@ class SignupProvider with ChangeNotifier {
     }
   }
 
+  void resetSignupStep() {
+    _signupStep = 1;
+    notifyListeners();
+  }
+
   void handleBack() {
     _signupStep = _signupStep - 1;
     print('auth step is $signupStep');
@@ -151,6 +159,11 @@ class SignupProvider with ChangeNotifier {
   void changeBusinessPhoneNumber(String value) {
     print('changing phone');
     _userData.phoneNumber = value;
+    notifyListeners();
+  }
+
+  void toggleAccountCreated() {
+    _accountCreated = !_accountCreated;
     notifyListeners();
   }
 
@@ -293,9 +306,11 @@ class SignupProvider with ChangeNotifier {
         errorMessage = 'Could not find a user with that email.';
       }
     }
+
+    toggleAccountCreated();
     toggleLoading();
 
-    _signupStep = 1;
+    // _signupStep = 1;
     print('you are now logged in');
     notifyListeners();
   }
