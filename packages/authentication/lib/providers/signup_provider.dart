@@ -253,7 +253,7 @@ class SignupProvider with ChangeNotifier {
     return _authenticate(email, password, 'accounts:signUp');
   }
 
-  void submitData() async {
+  void submitData( ) async {
     AuthResult authResult;
 
     if (!_termsAgreed) {
