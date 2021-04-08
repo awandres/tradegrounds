@@ -6,6 +6,7 @@ import './password_reset_screen.dart';
 import '../widgets/dialog_box.dart';
 import '../screens/signup_screen.dart';
 import 'package:flutter/services.dart';
+import 'package:authentication/widgets/ CoreWidgets/auth_form_field.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -35,7 +36,6 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> _submit() async {
-    
     if (!_loginKey.currentState.validate()) {
       // Invalid!
       return;
@@ -147,30 +147,21 @@ class _LoginScreenState extends State<LoginScreen> {
                               shadowColor: Colors.black,
                               borderRadius: const BorderRadius.all(
                                   const Radius.circular(8.0)),
-                              child: TextFormField(
-                                decoration: const InputDecoration(
-                                    labelStyle: TextStyle(
-                                      fontFamily: 'Quicksand',
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    isDense: true,
-                                    labelText: 'E-Mail',
-                                    border: OutlineInputBorder(
-                                      borderRadius: const BorderRadius.all(
-                                        const Radius.circular(8.0),
-                                      ),
-                                    )),
+                              child: AuthFormField(
+                                valueKey: 'email',
+                                labelText: 'Email',
                                 keyboardType: TextInputType.emailAddress,
-                                validator: (value) {
-                                  if (value.isEmpty || !value.contains('@')) {
-                                    return 'Invalid email!';
-                                  }
-                                },
-                                onSaved: (value) {
+                                textInputAction: TextInputAction.next,
+                                onSavedFunction: (String value) {
                                   _authData['email'] = value;
+                                  print('auth data is ${_authData['email']}');
                                 },
+                                validatorFunction: emailValidation,
+                                validatorErrorMessage:
+                                    'Please enter a valid email',
                               ),
                             ),
+
                             SizedBox(
                               height: 30,
                             ),
