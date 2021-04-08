@@ -39,8 +39,8 @@ class CustomDrawer extends StatelessWidget {
               title: Text(
                 title,
                 style: TextStyle(
-                  fontSize: 15.0,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.w700,
                   fontFamily: 'Quicksand',
                 ),
               ),
@@ -53,12 +53,18 @@ class CustomDrawer extends StatelessWidget {
       else{
         return ListTile(
           leading: icon,
-          trailing: locked?Icon(Icons.lock):null,
-          title: Text(
-            title,
-            style: TextStyle(
-              fontSize: 15.0,
-              fontFamily: 'Quicksand',
+          trailing: locked?Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(Icons.lock),
+          ):null,
+          title: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Text(
+              title,
+              style: TextStyle(
+                fontSize: 20.0,
+                fontFamily: 'Quicksand',
+              ),
             ),
           ),
           onTap: onTap,
@@ -71,26 +77,29 @@ class CustomDrawer extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width * 0.75,
       child: Drawer(
-        elevation: 3.0,
+        elevation: 1.0,
         child: Column(
           children: <Widget>[
             Container(
-              padding: EdgeInsets.only(top: 90),
+              padding: EdgeInsets.only(top: 100),
               child: Column(
                 children: <Widget>[
                   Container(
                     child: Row(
                       children: <Widget>[
                         Container(
-                            padding: EdgeInsets.all(22),
+                            padding: EdgeInsets.all(30),
                             child: CircleAvatar(radius: 32,)
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text(
-                              'Testing Inc',
-                              style: Theme.of(context).textTheme.title,
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0,0,0,8.0),
+                              child: Text(
+                                'Testing Inc',
+                                style: Theme.of(context).textTheme.title,
+                              ),
                             ),
                             Text(
                               'Customers Served',
