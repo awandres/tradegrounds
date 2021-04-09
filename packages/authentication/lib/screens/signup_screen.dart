@@ -84,15 +84,12 @@ class _SignupState extends State<Signup> {
                       if (signupStep == 1)
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 15),
-                          child: Flexible(
-                            flex: 3,
-                            child: Container(
-                              height: constraints.maxHeight * 0.28,
-                              width: double.infinity,
-                              child: Image.asset(
-                                'assets/images/storegrounds_swoop.png',
-                                fit: BoxFit.contain,
-                              ),
+                          child: Container(
+                            height: constraints.maxHeight * 0.28,
+                            width: double.infinity,
+                            child: Image.asset(
+                              'assets/images/storegrounds_swoop.png',
+                              fit: BoxFit.contain,
                             ),
                           ),
                         ),
