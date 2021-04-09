@@ -54,55 +54,61 @@ var passwordVisible = true;
 class _AuthFormFieldState extends State<AuthFormField> {
   @override
   Widget build(BuildContext context) {
-    return Material(
-      elevation: 5.0,
-      shadowColor: Colors.black,
-      borderRadius: const BorderRadius.all(const Radius.circular(8.0)),
-      child: TextFormField(
-        autovalidateMode: widget.autovalidateMode,
-        initialValue: widget.initialValue,
-        controller: widget.fieldController,
-        obscureText: widget.passwordVisibilityToggle
-            ? passwordVisible
-            : widget.obscureText,
-        onFieldSubmitted: widget.onFieldSubmitted,
-        inputFormatters: widget.inputFormatters,
-        textInputAction: widget.textInputAction,
-        decoration: InputDecoration(
-          labelStyle: TextStyle(
-            fontFamily: 'Quicksand',
-            fontWeight: FontWeight.bold,
-          ),
-          isDense: widget.isDense,
-          labelText: widget.labelText,
-          border: OutlineInputBorder(
-            borderRadius: const BorderRadius.all(
-              const Radius.circular(8.0),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+      child: Material(
+        elevation: 5.0,
+        shadowColor: Colors.black,
+        borderRadius: const BorderRadius.all(const Radius.circular(8.0)),
+        child: TextFormField(
+          autovalidateMode: widget.autovalidateMode,
+          initialValue: widget.initialValue,
+          controller: widget.fieldController,
+          obscureText: widget.passwordVisibilityToggle
+              ? passwordVisible
+              : widget.obscureText,
+          onFieldSubmitted: widget.onFieldSubmitted,
+          inputFormatters: widget.inputFormatters,
+          textInputAction: widget.textInputAction,
+          style: TextStyle(fontSize: 20.0, height: 1.5),
+          decoration: InputDecoration(
+            labelStyle: TextStyle(
+              fontFamily: 'Quicksand',
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
             ),
+            isDense: widget.isDense,
+            labelText: widget.labelText,
+            border: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(
+                const Radius.circular(8.0),
+              ),
+            ),
+            suffixIcon: widget.passwordVisibilityToggle
+                ? IconButton(
+                    icon: Icon(
+                      // Based on passwordVisible state choose the icon
+                      passwordVisible ? Icons.visibility : Icons.visibility_off,
+                      color: Colors.grey,
+                    ),
+                    onPressed: () {
+                      // Update the state i.e. toogle the state of passwordVisible variable
+                      setState(() {
+                        passwordVisible = !passwordVisible;
+                      });
+                    },
+                  )
+                : null,
           ),
-          suffixIcon: widget.passwordVisibilityToggle
-              ? IconButton(
-                  icon: Icon(
-                    // Based on passwordVisible state choose the icon
-                    passwordVisible ? Icons.visibility : Icons.visibility_off,
-                    color: Colors.grey,
-                  ),
-                  onPressed: () {
-                    // Update the state i.e. toogle the state of passwordVisible variable
-                    setState(() {
-                      passwordVisible = !passwordVisible;
-                    });
-                  },
-                )
-              : null,
+          textCapitalization: widget.textCapitalization,
+          key: ValueKey(widget.valueKey),
+          validator: (value) {
+            return widget.validatorFunction(
+                value, widget.validatorErrorMessage);
+          },
+          keyboardType: widget.keyboardType,
+          onSaved: widget.onSavedFunction,
         ),
-        textCapitalization: widget.textCapitalization,
-        key: ValueKey(widget.valueKey),
-        validator: (value) {
-          return widget.validatorFunction(value, widget.validatorErrorMessage);
-        },
-        keyboardType: widget.keyboardType,
-        onSaved: widget.onSavedFunction,
       ),
     );
   }
