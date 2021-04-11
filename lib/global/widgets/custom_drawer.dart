@@ -28,6 +28,7 @@ class CustomDrawer extends StatelessWidget {
       if(title == pages[currentPage]['title']){
         return Container(
           color: Theme.of(context).primaryColor,
+          padding: EdgeInsets.all(20),
           child: ListTileTheme(
             selectedColor: Colors.white,
             contentPadding: EdgeInsets.zero,
