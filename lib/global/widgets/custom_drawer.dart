@@ -86,11 +86,13 @@ class CustomDrawer extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Container(
+                    margin: EdgeInsets.all(25),
                     child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Container(
                             padding: EdgeInsets.all(30),
-                            child: CircleAvatar(radius: 32,)
+                            child: CircleAvatar(radius: 42,)
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -99,18 +101,44 @@ class CustomDrawer extends StatelessWidget {
                               padding: const EdgeInsets.fromLTRB(0,0,0,8.0),
                               child: Text(
                                 'Testing Inc',
+                                textScaleFactor: 1.5,
                                 style: Theme.of(context).textTheme.title,
                               ),
                             ),
-                            Text(
-                              'Customers Served',
-                              style: TextStyle(fontSize: 15, fontFamily:'Quicksand',),
+                            Text.rich(
+                              TextSpan(
+                                style: TextStyle(
+                                  fontFamily: 'Quicksand',
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF009A9A),
+                                  fontSize: 18.0,
+                                ),
+                                text: '200 ',
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: 'Customers Served',
+                                    style:  TextStyle(fontSize: 15, color: Colors.black, fontFamily:'Quicksand',),
+                                  ),
+                                ],
+                              ),
                             ),
-                            Text(
-                              'Deliveries Made',
-                              style: TextStyle(fontSize: 15, fontFamily:'Quicksand',),
+                            Text.rich(
+                              TextSpan(
+                                style: TextStyle(
+                                  fontFamily: 'Quicksand',
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF009A9A),
+                                  fontSize: 18.0,
+                                ),
+                                text: '200 ',
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: 'Deliveries made',
+                                    style:  TextStyle(fontSize: 15, color: Colors.black, fontFamily:'Quicksand',),
+                                  ),
+                                ],
+                              ),
                             ),
-
                           ],
                         )
                       ],
