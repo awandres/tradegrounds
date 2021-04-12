@@ -104,11 +104,11 @@ class CustomDrawer extends StatelessWidget {
                             ),
                             Text(
                               'Customers Served',
-                              style: TextStyle(fontFamily:'Quicksand',),
+                              style: TextStyle(fontSize: 15, fontFamily:'Quicksand',),
                             ),
                             Text(
                               'Deliveries Made',
-                              style: TextStyle(fontFamily:'Quicksand',),
+                              style: TextStyle(fontSize: 15, fontFamily:'Quicksand',),
                             ),
 
                           ],
