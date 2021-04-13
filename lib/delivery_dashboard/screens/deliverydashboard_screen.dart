@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:storegrounds/delivery_dashboard/screens/billingpayment_screen.dart';
 import 'package:storegrounds/delivery_dashboard/screens/deliverycalendar_screen.dart';
-import 'package:storegrounds/delivery_dashboard/widgets/mainscreen.dart';
-import 'package:storegrounds/delivery_dashboard/widgets/productcenter.dart';
+import 'file:///D:/Tradegrounds/storegrounds/storegrounds/storegrounds/lib/delivery_dashboard/screens/mainscreen.dart';
+import 'file:///D:/Tradegrounds/storegrounds/storegrounds/storegrounds/lib/product_center/screens/product_center.dart';
 import 'package:storegrounds/delivery_dashboard/widgets/mycourier.dart';
 import 'package:storegrounds/global/widgets/custom_drawer.dart';
-import 'package:storegrounds/delivery_dashboard/screens/settings_screen.dart';
+import 'file:///D:/Tradegrounds/storegrounds/storegrounds/storegrounds/lib/settings/screens/settings_screen.dart';
 
 class DeliveryDashboard extends StatefulWidget {
   @override

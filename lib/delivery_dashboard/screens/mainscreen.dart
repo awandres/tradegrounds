@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'status.dart';
-import './status.dart';
-import 'order_list.dart';
+import '../widgets/status.dart';
+import '../widgets/status.dart';
+import '../widgets/order_list.dart';
 import '../widgets/neworder.dart';
 
 class MainScreen extends StatelessWidget {
