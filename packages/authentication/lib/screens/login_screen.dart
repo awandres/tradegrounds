@@ -6,6 +6,7 @@ import './password_reset_screen.dart';
 import '../widgets/dialog_box.dart';
 import '../screens/signup_screen.dart';
 import 'package:flutter/services.dart';
+import 'package:authentication/widgets/ CoreWidgets/auth_form_field.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -16,6 +17,9 @@ class LoginScreen extends StatefulWidget {
 // const _tradegroundsurl = 'https://tradegrounds.info';
 
 class _LoginScreenState extends State<LoginScreen> {
+  // ---------------------------------------------------------------------
+  // -------Statefull widget that Handles Login Screen functionality 
+  // ---------------------------------------------------------------------
   final GlobalKey<FormState> _loginKey = GlobalKey();
   Map<String, String> _authData = {
     'email': '',
@@ -24,18 +28,25 @@ class _LoginScreenState extends State<LoginScreen> {
   var _isLoading = false;
   final _passwordController = TextEditingController();
 
+  // ----------------------------------------------------------------------
+  // ------- This is where error dialog pops on un successfull login
+  // ----------------------------------------------------------------------
   void _showErrorDialog(String message) {
     showDialog(
-        context: context,
-        builder: (ctx) => CustomDialogBox(
-              title: 'Uh Oh!',
-              errorMsg: message,
-              btnText: 'back',
-            ));
+      context: context,
+      // custom dialog box box
+      builder: (ctx) => CustomDialogBox(
+          title: 'Uh Oh!',
+          errorMsg: message,
+          btnText: 'back',
+        )
+      );
   }
 
+  // ----------------------------------------------------------------------
+  // --- Submit Function is defined below which returns a future 
+  // ----------------------------------------------------------------------
   Future<void> _submit() async {
-    
     if (!_loginKey.currentState.validate()) {
       // Invalid!
       return;
@@ -82,6 +93,9 @@ class _LoginScreenState extends State<LoginScreen> {
     final isPhone = deviceSize.width < 490 ? true : false;
 
     return Scaffold(
+  // ---------------------------------------------------------------
+  // --- Body begins here. Wrapped in a single child scroll view
+  // ---------------------------------------------------------------
       body: SingleChildScrollView(
         child: Center(
           child: Container(
@@ -92,28 +106,23 @@ class _LoginScreenState extends State<LoginScreen> {
                 left: 40,
                 right: 40,
                 top: (deviceSize.height * 0.10)),
+      // ------------------------------------------------------------------------------
+      // --------- Layout builder passes down constraints to child widgets here
+      // ------------------------------------------------------------------------------
             child: LayoutBuilder(builder: (ctx, constraints) {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  // -----------
+                  // --- Logo
+                  // -----------
                   Material(
                     elevation: 5.0,
                     shadowColor: Colors.blueGrey,
                     borderRadius:
                         const BorderRadius.all(const Radius.circular(60.0)),
                     child: Container(
-                      // decoration: BoxDecoration(
-                      //   borderRadius: BorderRadius.all(Radius.circular(20)),
-                      //   boxShadow: [
-                      //     BoxShadow(
-                      //       color: Colors.grey.withOpacity(0.5),
-                      //       spreadRadius: 5,
-                      //       blurRadius: 7,
-                      //       offset: Offset(0, 20), // changes position of shadow
-                      //     ),
-                      //   ]
-                      // ),
                       height: constraints.maxHeight * 0.35,
                       width: constraints.maxWidth * 0.60,
                       child: ClipRRect(
@@ -125,6 +134,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
+                  // -------------
+                  //  --- Title
+                  // -------------
                   Container(
                       padding: EdgeInsets.all(20.0),
                       child: FittedBox(
@@ -134,6 +146,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           style: Theme.of(context).textTheme.title,
                         ),
                       )),
+          // ---------------------------------------------------
+          // ---- Container that wraps custom Auth Form fields
+          // --------------------------------------------------
                   Container(
                     height: constraints.maxHeight * 0.40,
                     width: constraints.maxWidth * 0.7,
@@ -142,71 +157,44 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: SingleChildScrollView(
                         child: Column(
                           children: <Widget>[
-                            Material(
-                              elevation: 5.0,
-                              shadowColor: Colors.black,
-                              borderRadius: const BorderRadius.all(
-                                  const Radius.circular(8.0)),
-                              child: TextFormField(
-                                decoration: const InputDecoration(
-                                    labelStyle: TextStyle(
-                                      fontFamily: 'Quicksand',
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    isDense: true,
-                                    labelText: 'E-Mail',
-                                    border: OutlineInputBorder(
-                                      borderRadius: const BorderRadius.all(
-                                        const Radius.circular(8.0),
-                                      ),
-                                    )),
+                          // ----------------
+                          // -- Email Input
+                          // ----------------
+                            AuthFormField(
+                                valueKey: 'email',
+                                labelText: 'Email',
                                 keyboardType: TextInputType.emailAddress,
-                                validator: (value) {
-                                  if (value.isEmpty || !value.contains('@')) {
-                                    return 'Invalid email!';
-                                  }
-                                },
-                                onSaved: (value) {
+                                textInputAction: TextInputAction.next,
+                                onSavedFunction: (String value) {
                                   _authData['email'] = value;
                                 },
-                              ),
+                                validatorFunction: emailValidation,
+                                validatorErrorMessage:
+                                    'Please enter a valid email',
                             ),
                             SizedBox(
                               height: 30,
                             ),
-                            Material(
-                              elevation: 5.0,
-                              shadowColor: Colors.black,
-                              borderRadius: const BorderRadius.all(
-                                  const Radius.circular(8.0)),
-                              child: TextFormField(
-                                decoration: const InputDecoration(
-                                    labelStyle: TextStyle(
-                                      fontFamily: 'Quicksand',
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    isDense: true,
-                                    labelText: 'Password',
-                                    border: OutlineInputBorder(
-                                      borderRadius: const BorderRadius.all(
-                                        const Radius.circular(8.0),
-                                      ),
-                                    )),
-                                obscureText: true,
-                                controller: _passwordController,
-                                validator: (value) {
-                                  if (value.isEmpty || value.length < 5) {
-                                    return 'Password is too short!';
-                                  }
-                                },
-                                onSaved: (value) {
-                                  _authData['password'] = value;
-                                },
-                              ),
+                          // ----------------
+                          // -- Password
+                          // ----------------
+                            AuthFormField(
+                              valueKey: 'password',
+                              labelText: 'Password',
+                              obscureText: true,
+                              validatorFunction: passwordValidator,
+                              validatorErrorMessage: 'Please enter a password',
+                              passwordVisibilityToggle: true,
+                              onSavedFunction: (String value) {
+                                _authData['password'] = value;
+                              },
                             ),
                             SizedBox(
                               height: 10,
                             ),
+                          // -----------------------------------------------------------
+                          // ---  Route to Register screen
+                          // -----------------------------------------------------------
                             Padding(
                               padding: EdgeInsets.all(10.0),
                               child: FlatButton(
@@ -237,42 +225,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               ),
                             ),
-                            // Row(
-                            //   mainAxisAlignment: MainAxisAlignment.center,
-                            //   children: <Widget>[
-                            //     const Text(
-                            //       'New User ? ',
-                            //       style: TextStyle(
-                            //         fontFamily: 'Quicksand',
-                            //         fontWeight: FontWeight.bold,
-                            //       ),
-                            //     ),
-                            //     FlatButton(
-                            //       child: const Text(
-                            //         'Sign Up',
-                            //         style: TextStyle(
-                            //           fontFamily: 'Quicksand',
-                            //           fontWeight: FontWeight.bold,
-                            //         ),
-                            //       ),
-                            //       onPressed: () {
-                            //         Navigator.of(context).push(MaterialPageRoute(
-                            //             builder: (context) => Signup()));
-                            //       },
-                            //       padding: const EdgeInsets.symmetric(
-                            //           horizontal: 30.0, vertical: 4),
-                            //       materialTapTargetSize:
-                            //           MaterialTapTargetSize.shrinkWrap,
-                            //       textColor: Theme.of(context).primaryColor,
-                            //     ),
-                            //   ],
-                            // ),
-                            // SizedBox(
-                            //   height: 10,
-                            // ),
+                            // -----------------------------------------
+                            // Conditionally rendering loading spinner
+                            // -----------------------------------------
                             if (_isLoading)
                               CircularProgressIndicator()
                             else
+                            // ------------------------
+                            // ----- Login Button
+                            // ------------------------
                               Padding(
                                 padding: EdgeInsets.fromLTRB(0, 20.0, 0, 0.0),
                                 child: RaisedButton(
@@ -305,6 +266,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             SizedBox(
                               height: 20,
                             ),
+                            // ----------------------------------------------
+                            // ----- Route to Forgot Password (Button)
+                            // ----------------------------------------------
                             FlatButton(
                               child: const Text(
                                 'Forgot your Password ?',
@@ -332,6 +296,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(
                     height: 10,
                   ),
+                  // ---------------------------------------
+                  // -------------- Footer
+                  // ---------------------------------------
                   Padding(
                     padding: EdgeInsets.all(10.0),
                     child: Container(
