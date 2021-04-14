@@ -67,11 +67,12 @@ class _SignupStep2State extends State<SignupStep2> {
                 signupService.changeBusinessCategory(value),
               },
               decoration: InputDecoration(
-                isDense: true,
-                contentPadding: const EdgeInsets.all(10.5),
+                // isDense: true,
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
                 border: OutlineInputBorder(
                   borderRadius: const BorderRadius.all(
-                    const Radius.circular(10.0),
+                    const Radius.circular(8.0),
                   ),
                 ),
               ),
