@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:storegrounds/delivery_dashboard/screens/billingpayment_screen.dart';
 import 'package:storegrounds/delivery_dashboard/screens/deliverycalendar_screen.dart';
-import 'file:///D:/Tradegrounds/storegrounds/storegrounds/storegrounds/lib/delivery_dashboard/screens/mainscreen.dart';
-import 'file:///D:/Tradegrounds/storegrounds/storegrounds/storegrounds/lib/product_center/screens/product_center.dart';
+import '../../delivery_dashboard/screens/mainscreen.dart';
+import '../../product_center/screens/product_center.dart';
 import 'package:storegrounds/delivery_dashboard/widgets/mycourier.dart';
 import 'package:storegrounds/global/widgets/custom_drawer.dart';
-import 'file:///D:/Tradegrounds/storegrounds/storegrounds/storegrounds/lib/settings/screens/settings_screen.dart';
+import '../../settings/screens/settings_screen.dart';
 
 class DeliveryDashboard extends StatefulWidget {
   @override
@@ -43,29 +43,40 @@ class _DeliveryDashboardState extends State<DeliveryDashboard>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: true,
+        automaticallyImplyLeading: false,
         toolbarHeight: 120.0,
         brightness: Brightness.light,
         backgroundColor: Theme.of(context).primaryColor,
         iconTheme: IconThemeData(
           color: Colors.black,
         ),
+        leading: Builder(
+          builder: (context) => IconButton(
+            splashRadius: 30,
+            padding: EdgeInsets.only(left: 25),
+            icon: Icon(
+              Icons.menu, 
+              size: 40,
+            ),
+            onPressed: () => Scaffold.of(context).openDrawer(),
+          ),
+        ),
         title: Center(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              _pages[_currentPageIndex]['title'],
-              style: TextStyle(
-                fontFamily: 'Pacifico',
-                fontWeight: FontWeight.w700,
-                fontSize: 40.0,
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                _pages[_currentPageIndex]['title'],
+                style: TextStyle(
+                  fontFamily: 'Pacifico',
+                  fontWeight: FontWeight.w700,
+                  fontSize: 40.0,
+                ),
               ),
-            ),
           ),
         ),
       ),
       drawer: CustomDrawer(_pages, _currentPageIndex, drawerPageSelector),
-      body: _pages[_currentPageIndex]['screen'],
+      body: Padding(padding: EdgeInsets.all(23) ,child:_pages[_currentPageIndex]['screen']),
       bottomNavigationBar: BottomNavigationBar(
         onTap: _navbarpageselector,
         backgroundColor: Theme.of(context).primaryColor,

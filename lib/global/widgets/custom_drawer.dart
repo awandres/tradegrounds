@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:storegrounds/delivery_dashboard/screens/deliverycalendar_screen.dart';
 import 'package:storegrounds/delivery_dashboard/screens/billingpayment_screen.dart';
-import 'file:///D:/Tradegrounds/storegrounds/storegrounds/storegrounds/lib/settings/screens/settings_screen.dart';
+import '../../settings/screens/settings_screen.dart';
 import 'package:authentication/providers/auth.dart';
 
 class CustomDrawer extends StatelessWidget {
