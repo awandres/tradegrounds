@@ -61,16 +61,18 @@ class _DeliveryDashboardState extends State<DeliveryDashboard>
             onPressed: () => Scaffold.of(context).openDrawer(),
           ),
         ),
-        title: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              _pages[_currentPageIndex]['title'],
-              style: TextStyle(
-                fontFamily: 'Pacifico',
-                fontWeight: FontWeight.w700,
-                fontSize: 40.0,
+        title: Center(
+          child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                _pages[_currentPageIndex]['title'],
+                style: TextStyle(
+                  fontFamily: 'Pacifico',
+                  fontWeight: FontWeight.w700,
+                  fontSize: 40.0,
+                ),
               ),
-            ),
+          ),
         ),
       ),
       drawer: CustomDrawer(_pages, _currentPageIndex, drawerPageSelector),
