@@ -57,7 +57,7 @@ class _SignupState extends State<Signup> {
             margin: isTablet ? EdgeInsets.only(top: 0) : null,
             child: Container(
               height: isTablet ? deviceSize.height * 0.9 : deviceSize.height,
-              width: isTablet ? deviceSize.width * 0.6 : deviceSize.width,
+              width: isTablet ? deviceSize.width * 0.69 : deviceSize.width,
               padding: EdgeInsets.only(
                   bottom: 0,
                   left: 40,
@@ -86,7 +86,7 @@ class _SignupState extends State<Signup> {
                           padding: const EdgeInsets.symmetric(vertical: 15),
                           child: Container(
                             height: constraints.maxHeight * 0.28,
-                            width: double.infinity,
+                            width: constraints.maxHeight * 0.5,
                             child: Image.asset(
                               'assets/images/storegrounds_swoop.png',
                               fit: BoxFit.contain,
@@ -139,7 +139,7 @@ class _SignupState extends State<Signup> {
                                         borderRadius: BorderRadius.circular(30),
                                       ),
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 0.0, vertical: 25.0),
+                                          horizontal: 80.0, vertical: 28.0),
                                       color: Theme.of(context).primaryColor,
                                       textColor: Theme.of(context)
                                           .primaryTextTheme
@@ -147,10 +147,11 @@ class _SignupState extends State<Signup> {
                                           .color,
                                       child: Text(
                                         (signupStep > 1 && signupStep < 4)
-                                            ? '         Next         '
+                                            ? 'Next'
                                             : (signupStep == 4)
-                                                ? '        Submit        '
-                                                : '        SIGN UP      ',
+                                                ? 'Submit'
+                                                : 'SIGN UP',
+                                        textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontSize: 25.0,
                                           letterSpacing: 7.5,
