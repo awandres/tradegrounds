@@ -57,12 +57,12 @@ class _SignupState extends State<Signup> {
             margin: isTablet ? EdgeInsets.only(top: 0) : null,
             child: Container(
               height: isTablet ? deviceSize.height * 0.9 : deviceSize.height,
-              width: isTablet ? deviceSize.width * 0.6 : deviceSize.width,
+              width: isTablet ? deviceSize.width * 0.7 : deviceSize.width,
               padding: EdgeInsets.only(
-                  bottom: 0,
+                  bottom: 10,
                   left: 40,
                   right: 40,
-                  top: (deviceSize.height * 0.13)),
+                  top: (deviceSize.height * 0.10)),
               child: LayoutBuilder(
                 builder: (ctx, constraints) {
                   return Column(
@@ -75,10 +75,13 @@ class _SignupState extends State<Signup> {
                             color: Color.fromRGBO(255, 195, 1, 1),
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20))),
-                        child: Text(
-                          'Storegrounds',
-                          style: Theme.of(context).textTheme.title,
-                          textAlign: TextAlign.center,
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Text(
+                            'Storegrounds',
+                            style: Theme.of(context).textTheme.title,
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       ),
                       if (signupStep == 1)
@@ -145,17 +148,20 @@ class _SignupState extends State<Signup> {
                                           .primaryTextTheme
                                           .button
                                           .color,
-                                      child: Text(
-                                        (signupStep > 1 && signupStep < 4)
-                                            ? '         Next         '
-                                            : (signupStep == 4)
-                                                ? '        Submit        '
-                                                : '        SIGN UP      ',
-                                        style: TextStyle(
-                                          fontSize: 25.0,
-                                          letterSpacing: 7.5,
-                                          fontFamily: 'Quicksand',
-                                          fontWeight: FontWeight.bold,
+                                      child: Padding(
+                                        padding: const EdgeInsets.fromLTRB(60.0,8.0,60.0,8.0),
+                                        child: Text(
+                                          (signupStep > 1 && signupStep < 4)
+                                              ? '         Next         '
+                                              : (signupStep == 4)
+                                                  ? 'Submit'
+                                                  : 'SIGN UP',
+                                          style: TextStyle(
+                                            fontSize: 25.0,
+                                            letterSpacing: 7.5,
+                                            fontFamily: 'Quicksand',
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
                                       ),
                                       onPressed: (signupStep < 4)
