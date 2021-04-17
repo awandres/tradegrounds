@@ -20,7 +20,8 @@ class _SignupState extends State<Signup> {
     // final _signupKey = GlobalKey<FormState>();
     final deviceSize = MediaQuery.of(context).size;
     final isTablet = deviceSize.width > 750 ? true : false;
-    final isPhone = deviceSize.width < 490 ? true : false;
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
 
     final signupService = Provider.of<SignupProvider>(context);
     int signupStep = signupService.signupStep;
@@ -56,10 +57,10 @@ class _SignupState extends State<Signup> {
           child: Container(
             margin: isTablet ? EdgeInsets.only(top: 0) : null,
             child: Container(
-              height: isTablet ? deviceSize.height * 0.9 : deviceSize.height,
+              height: isTablet ? deviceSize.height * .95 : deviceSize.height,
               width: isTablet ? deviceSize.width * 0.69 : deviceSize.width,
               padding: EdgeInsets.only(
-                  bottom: 10,
+                  // bottom: 10,
                   left: 40,
                   right: 40,
                   top: (deviceSize.height * 0.10)),
@@ -166,7 +167,63 @@ class _SignupState extends State<Signup> {
                                           ? signupService.handleSignupStep
                                           : signupService.submitData,
                                     ),
-                                  )
+                                  ),
+                                SizedBox(height: isLandscape ? 40 : 125),
+                                Padding(
+                                  padding: EdgeInsets.all(10.0),
+                                  child: Container(
+                                    height: constraints.maxHeight * 0.07,
+                                    width: deviceSize.width,
+// color: Colors.black,
+// padding: EdgeInsets.only(left: 20),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(3.0),
+                                          child: Image.asset(
+                                            'assets/images/tradegroundsIg.png',
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 30,
+                                        ),
+                                        FittedBox(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'Tradegrounds Inc. 2021',
+                                                style: TextStyle(
+                                                  fontFamily: 'Quicksand',
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 24.0,
+                                                ),
+                                              ),
+                                              Text(
+                                                'www.tradegrounds.info',
+                                                style: TextStyle(
+                                                  fontFamily: 'Quicksand',
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              Text(
+                                                'v.0.0.1',
+                                                style: TextStyle(
+                                                  fontFamily: 'Quicksand',
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                           ),
