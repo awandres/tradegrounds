@@ -60,7 +60,7 @@ class MainScreen extends StatelessWidget {
               //   child: NewOrder(),
               // ),
               AnimatedContainer(
-                constraints: BoxConstraints(maxHeight: isLandscape ? 150 : 250),
+                constraints: BoxConstraints(maxHeight: isLandscape ? 150 : 270),
                 duration: _duration,
                 curve: Curves.easeOut,
                 height: height3,

@@ -5,7 +5,7 @@ class NewOrder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(25, 10, 25, 0),
+      padding: const EdgeInsets.fromLTRB(25, 15, 25, 0),
       child: ConstrainedBox(
         constraints: BoxConstraints(
           maxHeight: 200,
