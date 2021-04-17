@@ -169,61 +169,62 @@ class _SignupState extends State<Signup> {
                                     ),
                                   ),
                                 SizedBox(height: isLandscape ? 40 : 125),
-                                Padding(
-                                  padding: EdgeInsets.all(10.0),
-                                  child: Container(
-                                    height: constraints.maxHeight * 0.07,
-                                    width: deviceSize.width,
+                                if (signupStep == 1)
+                                  Padding(
+                                    padding: EdgeInsets.all(10.0),
+                                    child: Container(
+                                      height: constraints.maxHeight * 0.07,
+                                      width: deviceSize.width,
 // color: Colors.black,
 // padding: EdgeInsets.only(left: 20),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(3.0),
-                                          child: Image.asset(
-                                            'assets/images/tradegroundsIg.png',
-                                            fit: BoxFit.cover,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(3.0),
+                                            child: Image.asset(
+                                              'assets/images/tradegroundsIg.png',
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
-                                        ),
-                                        SizedBox(
-                                          width: 30,
-                                        ),
-                                        FittedBox(
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Tradegrounds Inc. 2021',
-                                                style: TextStyle(
-                                                  fontFamily: 'Quicksand',
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 24.0,
-                                                ),
-                                              ),
-                                              Text(
-                                                'www.tradegrounds.info',
-                                                style: TextStyle(
-                                                  fontFamily: 'Quicksand',
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              Text(
-                                                'v.0.0.1',
-                                                style: TextStyle(
-                                                  fontFamily: 'Quicksand',
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ],
+                                          SizedBox(
+                                            width: 30,
                                           ),
-                                        )
-                                      ],
+                                          FittedBox(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'Tradegrounds Inc. 2021',
+                                                  style: TextStyle(
+                                                    fontFamily: 'Quicksand',
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 24.0,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  'www.tradegrounds.info',
+                                                  style: TextStyle(
+                                                    fontFamily: 'Quicksand',
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  'v.0.0.1',
+                                                  style: TextStyle(
+                                                    fontFamily: 'Quicksand',
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
                               ],
                             ),
                           ),
