@@ -10,6 +10,7 @@ import 'package:http/http.dart' as http;
 
 class DashboardProvider with ChangeNotifier {
   String status = "Morning Route";
+  bool _orderListExpanded = false;
   List<Delivery> _deliveries = [
     Delivery(
         // courier is a test variable
@@ -101,6 +102,7 @@ class DashboardProvider with ChangeNotifier {
 
   List get completedDeliveries => dashboard.completedDelivieres;
   List get deliveriesInProgress => dashboard.deliveriesInProgress;
+  bool get orderListExpanded => _orderListExpanded;
 
   int get deliveryCount {
     return _deliveries.length;
@@ -139,5 +141,10 @@ class DashboardProvider with ChangeNotifier {
     }
 
     return fullfilled.length;
+  }
+
+  void toggleOrderListExpanded() {
+    _orderListExpanded = !_orderListExpanded;
+    notifyListeners();
   }
 }

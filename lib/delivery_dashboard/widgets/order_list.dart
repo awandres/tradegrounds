@@ -83,10 +83,10 @@ class OrderList extends StatelessWidget {
                 padding: const EdgeInsets.all(10),
                 child: TextButton(
                     onPressed: () {
-                      print('showing full list');
+                      dash.toggleOrderListExpanded();
                     },
                     child: Text(
-                      'SEE IN FULL VIEW',
+                      dash.orderListExpanded ? 'CLOSE' : 'SEE IN FULL VIEW',
                       style: TextStyle(
                           decoration: TextDecoration.underline,
                           fontSize: 23,
