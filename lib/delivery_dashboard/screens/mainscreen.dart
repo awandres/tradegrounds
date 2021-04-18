@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../widgets/status.dart';
 import '../widgets/status.dart';
 import '../widgets/order_list.dart';
@@ -25,50 +26,65 @@ class MainScreen extends StatelessWidget {
     var isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
 
-    return Center(
-      child: ConstrainedBox(
-        constraints: BoxConstraints(maxWidth: 780, maxHeight: height * .8),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            if (!dash.orderListExpanded)
-              // Expanded(
-              //   flex: 3,
-              //   child: Status(),
-              // ),
-              AnimatedContainer(
-                duration: _duration,
-                curve: Curves.easeOut,
-                height: height1,
-                child: Status(),
+    return StreamBuilder<Object>(
+        stream: Firestore.instance.collection('dashboard').snapshots(),
+        builder: (context, AsyncSnapshot snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: CircularProgressIndicator(
+                backgroundColor: Colors.lightBlueAccent,
               ),
-            // Expanded(
-            //   flex: dash.orderListExpanded ? 10 : 4,
-            //   child: OrderList(),
-            // ),
-            AnimatedContainer(
-              constraints: BoxConstraints(maxHeight: height - 350),
-              duration: _duration,
-              curve: Curves.easeInOutQuart,
-              height: height2,
-              child: OrderList(),
-            ),
-            if (!dash.orderListExpanded)
-              // Expanded(
-              //   flex: 2,
-              //   child: NewOrder(),
-              // ),
-              AnimatedContainer(
-                constraints: BoxConstraints(maxHeight: isLandscape ? 150 : 270),
-                duration: _duration,
-                curve: Curves.easeOut,
-                height: height3,
-                child: NewOrder(),
-              )
-          ],
-        ),
-      ),
-    );
+            );
+          } else
+            return Center(
+              child: ConstrainedBox(
+                constraints:
+                    BoxConstraints(maxWidth: 780, maxHeight: height * .8),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    if (!dash.orderListExpanded)
+                      // Expanded(
+                      //   flex: 3,
+                      //   child: Status(),
+                      // ),
+                      AnimatedContainer(
+                        duration: _duration,
+                        curve: Curves.easeOut,
+                        height: height1,
+                        child: Status(),
+                      ),
+                    // Expanded(
+                    //   flex: dash.orderListExpanded ? 10 : 4,
+                    //   child: OrderList(),
+                    // ),
+                    AnimatedContainer(
+                      constraints: BoxConstraints(maxHeight: height - 350),
+                      duration: _duration,
+                      curve: Curves.easeInOutQuart,
+                      height: height2,
+                      child: OrderList(
+                        dashSnapshotData: snapshot,
+                      ),
+                    ),
+                    if (!dash.orderListExpanded)
+                      // Expanded(
+                      //   flex: 2,
+                      //   child: NewOrder(),
+                      // ),
+                      AnimatedContainer(
+                        constraints:
+                            BoxConstraints(maxHeight: isLandscape ? 150 : 270),
+                        duration: _duration,
+                        curve: Curves.easeOut,
+                        height: height3,
+                        child: NewOrder(),
+                      )
+                  ],
+                ),
+              ),
+            );
+        });
   }
 }

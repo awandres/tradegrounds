@@ -2,6 +2,8 @@ import 'package:latlng/latlng.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:storegrounds/delivery_dashboard/widgets/status.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../models/delivery.dart';
 import '../models/dashboard.dart';
@@ -11,6 +13,8 @@ import 'package:http/http.dart' as http;
 class DashboardProvider with ChangeNotifier {
   String status = "Morning Route";
   bool _orderListExpanded = false;
+  final _auth = FirebaseAuth.instance;
+
   List<Delivery> _deliveries = [
     Delivery(
         // courier is a test variable
@@ -103,6 +107,13 @@ class DashboardProvider with ChangeNotifier {
   List get completedDeliveries => dashboard.completedDelivieres;
   List get deliveriesInProgress => dashboard.deliveriesInProgress;
   bool get orderListExpanded => _orderListExpanded;
+  // get userId => await _auth.currentUser();
+
+  Future getUserId() async {
+    AuthResult authResult;
+    return authResult.user.uid;
+    ;
+  }
 
   int get deliveryCount {
     return _deliveries.length;
