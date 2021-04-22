@@ -20,12 +20,15 @@ class ProductCenterScreen extends StatelessWidget {
             ),
             Expanded(
               flex: 2,
-              child: Row(
-                children: [
-                ProductStats(),
-                SizedBox(width:50),
-                NewProductBtn()
-              ]),
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  children: [
+                  ProductStats(),
+                  SizedBox(width:50),
+                  NewProductBtn()
+                ]),
+              ),
             )
           ],
         ),
