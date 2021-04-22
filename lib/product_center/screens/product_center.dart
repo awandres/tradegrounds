@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import '../widgets/product_list.dart';
 import '../widgets/product_stats.dart';
-import '../widgets/new_product.dart';
+import '../widgets/new_product_btn.dart';
+import '../screens/new_product_screen.dart';
 
 class ProductCenterScreen extends StatelessWidget {
   @override
@@ -19,9 +20,11 @@ class ProductCenterScreen extends StatelessWidget {
             ),
             Expanded(
               flex: 2,
-              child: Row(children: [
+              child: Row(
+                children: [
                 ProductStats(),
-                NewProduct(),
+                SizedBox(width:50),
+                NewProductBtn()
               ]),
             )
           ],
@@ -30,3 +33,4 @@ class ProductCenterScreen extends StatelessWidget {
     );
   }
 }
+
