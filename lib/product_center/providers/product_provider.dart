@@ -11,9 +11,33 @@ import 'package:http/http.dart' as http;
 class ProductProvider with ChangeNotifier {
   String status = "Morning Route";
   List<Product> _products = [
-    Product(name: 'Product A', cost: '25.00'),
-    Product(name: 'Product A', cost: '25.00'),
-    Product(name: 'Product A', cost: '25.00'),
+    Product(
+      name: 'Wolfneck Blazer',
+      cost: '150.00',
+      sku: '15ADU7C126',
+      active: true,
+      amountInsured: 150,
+      amountDelivered: 13,
+      deliveryCost: 4.25,
+    ),
+    Product(
+      name: 'Harlequin Blazer',
+      cost: '130.00',
+      sku: 'DC2AU7C922',
+      active: true,
+      amountInsured: 130,
+      amountDelivered: 11,
+      deliveryCost: 3.25,
+    ),
+    Product(
+      name: 'Wolfneck Blazer',
+      cost: '150.00',
+      sku: '00PDO918223',
+      active: true,
+      amountInsured: 90,
+      amountDelivered: 13,
+      deliveryCost: 1.25,
+    ),
   ];
 
   ProductCenter productCenter = ProductCenter(

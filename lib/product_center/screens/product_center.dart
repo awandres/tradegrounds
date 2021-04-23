@@ -9,7 +9,7 @@ class ProductCenterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: ConstrainedBox(
-        constraints: BoxConstraints(maxWidth: 780),
+        constraints: BoxConstraints(maxWidth: 1000),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -22,10 +22,9 @@ class ProductCenterScreen extends StatelessWidget {
               flex: 2,
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  children: [
+                child: Row(children: [
                   ProductStats(),
-                  SizedBox(width:50),
+                  SizedBox(width: 50),
                   NewProductBtn()
                 ]),
               ),
@@ -36,4 +35,3 @@ class ProductCenterScreen extends StatelessWidget {
     );
   }
 }
-

@@ -31,20 +31,20 @@ class ProductList extends StatelessWidget {
                   offset: Offset(0, 0),
                 ),
               ]),
-          padding: EdgeInsets.fromLTRB(30, 30, 30, 0),
+          padding: EdgeInsets.fromLTRB(30, 10, 30, 0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Expanded(
                 child: ListView(children: [
                   Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        'Products',
+                        'Product Log',
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: 20,
+                            fontSize: 35,
                             fontWeight: FontWeight.w900,
                             fontFamily: 'Quicksand',
                             letterSpacing: 1),
