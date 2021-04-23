@@ -119,7 +119,7 @@ class _OrderListItemState extends State<ProductListItem> {
                 ),
                 SizedBox(width: 40),
                 ConstrainedBox(
-                  constraints: BoxConstraints(maxHeight: 200, maxWidth: 180),
+                  constraints: BoxConstraints(maxHeight: 200, maxWidth: 170),
                   child: Container(
                     height: double.infinity,
                     width: double.infinity,
@@ -128,14 +128,14 @@ class _OrderListItemState extends State<ProductListItem> {
                         borderRadius: BorderRadius.circular(15),
                       ),
                       borderOnForeground: true,
-                      elevation: 10,
+                      elevation: 8,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
                             Icons.check_circle,
                             color: Color(0xFF36814A),
-                            size: 60.0,
+                            size: 75.0,
                           ),
                           SizedBox(height: 10),
                           Text(
@@ -149,7 +149,7 @@ class _OrderListItemState extends State<ProductListItem> {
                           Icon(
                             Icons.edit,
                             color: Colors.black,
-                            size: 40.0,
+                            size: 30.0,
                           ),
                         ],
                       ),
