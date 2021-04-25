@@ -19,11 +19,11 @@ class _OrderListItemState extends State<ProductListItem> {
     final device = MediaQuery.of(context).size;
 
     return Opacity(
-      opacity: widget.product.active ? 1 : .85,
+      opacity: widget.product.active ? 1 : .9,
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(20.0)),
-            color: Colors.white,
+            color: widget.product.active ? Colors.white : Color(0xFFE0E0E0),
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.5),
