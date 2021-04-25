@@ -101,10 +101,12 @@ class ProductList extends StatelessWidget {
                 padding: const EdgeInsets.all(10),
                 child: TextButton(
                     onPressed: () {
-                      print('showing full list');
+                      productService.toggleProductListExpanded();
                     },
                     child: Text(
-                      'SEE IN FULL VIEW',
+                      productService.productListExpanded
+                          ? 'CLOSE'
+                          : 'SEE IN FULL VIEW',
                       style: TextStyle(
                           decoration: TextDecoration.underline,
                           fontSize: 23,

@@ -10,6 +10,8 @@ import 'package:http/http.dart' as http;
 
 class ProductProvider with ChangeNotifier {
   String status = "Morning Route";
+  bool _productListExpanded = false;
+
   List<Product> _activeProductList = [
     Product(
       name: 'Wolfneck Blazer',
@@ -76,4 +78,10 @@ class ProductProvider with ChangeNotifier {
   // List get productList => _products;
   List get inactiveProductList => _inactiveProductList;
   List get activeProductList => _activeProductList;
+  bool get productListExpanded => _productListExpanded;
+
+  void toggleProductListExpanded() {
+    _productListExpanded = !_productListExpanded;
+    notifyListeners();
+  }
 }
