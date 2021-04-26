@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/products_provider.dart';
+import 'package:intl/intl.dart';
 
 class ProductStats extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final stats= Provider.of<ProductProvider>(context);
     return Expanded(
         child: Container(
           margin: EdgeInsets.only(bottom:30, left:20),
@@ -28,11 +32,11 @@ class ProductStats extends StatelessWidget {
                   SizedBox(height: 13,),
                   Text.rich(
                     TextSpan(
-                      text:'2 ', 
+                      text:stats.activeProducts.toString(), 
                       style: TextStyle(fontSize:19,color:Color(0xFF009A9A),),
                       children: <TextSpan>[
                         TextSpan(
-                          text:'Active Products', 
+                          text:' Active Products', 
                           style: TextStyle(
                             fontSize:18,color:Colors.black,
                           ),
@@ -43,11 +47,11 @@ class ProductStats extends StatelessWidget {
                   
                   Text.rich(
                     TextSpan(
-                      text:'4 ', 
+                      text: stats.inactiveProducts.toString(), 
                       style: TextStyle(fontSize:19,color:Color(0xFF009A9A),),
                       children: <TextSpan>[
                         TextSpan(
-                          text:'Inactive Products', 
+                          text:' Inactive Products', 
                           style: TextStyle(
                             fontSize:18,color:Colors.black,
                           ),
@@ -58,11 +62,11 @@ class ProductStats extends StatelessWidget {
 
                   Text.rich(
                     TextSpan(
-                      text:'23 ', 
+                      text:stats.deliveriesThisWeek.toString(), 
                       style: TextStyle(fontSize:19,color:Color(0xFF009A9A),),
                       children: <TextSpan>[
                         TextSpan(
-                          text:'Deliveries this week', 
+                          text:' Deliveries this week', 
                           style: TextStyle(
                             fontSize:18,color:Colors.black,
                           ),
@@ -72,25 +76,11 @@ class ProductStats extends StatelessWidget {
                   ),
                   Text.rich(
                     TextSpan(
-                      text:'23 ', 
+                      text:stats.totalDeliveries.toString(), 
                       style: TextStyle(fontSize:19,color:Color(0xFF009A9A),),
                       children: <TextSpan>[
                         TextSpan(
-                          text:'Deliveries this week', 
-                          style: TextStyle(
-                            fontSize:18,color:Colors.black,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  Text.rich(
-                    TextSpan(
-                      text:'277 ', 
-                      style: TextStyle(fontSize:19,color:Color(0xFF009A9A),),
-                      children: <TextSpan>[
-                        TextSpan(
-                          text:'Deliveries Total', 
+                          text:' Deliveries Total', 
                           style: TextStyle(
                             fontSize:18,color:Colors.black,
                           ),

@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../providers/product_provider.dart';
+import '../providers/products_provider.dart';
 import './product_list_item.dart';
 
 class ProductList extends StatelessWidget {

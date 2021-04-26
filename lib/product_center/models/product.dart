@@ -1,4 +1,5 @@
 import 'package:latlng/latlng.dart';
+import 'package:flutter/foundation.dart';
 
 class Product {
   String name;
@@ -9,13 +10,13 @@ class Product {
   int amountInsured;
   int amountDelivered;
 
-  Product({
-    this.name,
-    this.cost,
-    this.sku,
-    this.active,
-    this.amountInsured,
-    this.amountDelivered,
-    this.deliveryCost,
-  }) {}
+  Product ({
+    @required this.name,
+    @required this.cost,
+    @required this.sku,
+    @required this.active,
+    @required this.amountInsured,
+    @required this.amountDelivered,
+    @required this.deliveryCost,
+  });
 }
