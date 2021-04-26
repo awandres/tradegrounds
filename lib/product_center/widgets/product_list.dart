@@ -35,22 +35,59 @@ class ProductList extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: TextButton(
+                    onPressed: () {
+                      print('showing full list');
+                    },
+                    child: Text(
+                      'Product Log',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 35,
+                          fontWeight: FontWeight.w900,
+                          fontFamily: 'Quicksand',
+                          letterSpacing: 1),
+                    )),
+              ),
               Expanded(
                 child: ListView(children: [
                   Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Product Log',
+                        'Active',
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: 35,
+                            fontSize: 24,
                             fontWeight: FontWeight.w900,
                             fontFamily: 'Quicksand',
                             letterSpacing: 1),
                       ),
                       Column(
-                        children: productService.productList.map((_product) {
+                        children:
+                            productService.activeProductList.map((_product) {
+                          return ProductListItem(
+                            product: _product,
+                          );
+                        }).toList(),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 30, 0, 10),
+                        child: Text(
+                          'Inactive',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 24,
+                              fontWeight: FontWeight.w900,
+                              fontFamily: 'Quicksand',
+                              letterSpacing: 1),
+                        ),
+                      ),
+                      Column(
+                        children:
+                            productService.inactiveProductList.map((_product) {
                           return ProductListItem(
                             product: _product,
                           );
@@ -64,10 +101,12 @@ class ProductList extends StatelessWidget {
                 padding: const EdgeInsets.all(10),
                 child: TextButton(
                     onPressed: () {
-                      print('showing full list');
+                      productService.toggleProductListExpanded();
                     },
                     child: Text(
-                      'SEE IN FULL VIEW',
+                      productService.productListExpanded
+                          ? 'CLOSE'
+                          : 'SEE IN FULL VIEW',
                       style: TextStyle(
                           decoration: TextDecoration.underline,
                           fontSize: 23,
