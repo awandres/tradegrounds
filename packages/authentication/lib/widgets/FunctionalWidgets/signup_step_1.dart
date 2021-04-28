@@ -16,19 +16,16 @@ class _SignupStep1State extends State<SignupStep1> {
     final signupService = Provider.of<SignupProvider>(context);
     return Column(
       children: [
-        Padding(
-          padding:EdgeInsets.all(10.0),
-          child: AuthFormField(
-            valueKey: 'email',
-            labelText: 'Email',
-            keyboardType: TextInputType.emailAddress,
-            textInputAction: TextInputAction.next,
-            onSavedFunction: (String value) {
-              signupService.changeUserEmail(value);
-            },
-            validatorFunction: emailValidation,
-            validatorErrorMessage: 'Please enter a valid email',
-          ),
+        AuthFormField(
+          valueKey: 'email',
+          labelText: 'Email',
+          keyboardType: TextInputType.emailAddress,
+          textInputAction: TextInputAction.next,
+          onSavedFunction: (String value) {
+            signupService.changeUserEmail(value);
+          },
+          validatorFunction: emailValidation,
+          validatorErrorMessage: 'Please enter a valid email',
         ),
         SizedBox(
           height: 10,
@@ -71,7 +68,7 @@ class _SignupStep1State extends State<SignupStep1> {
           child: Text.rich(
             TextSpan(
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 20.0,
                 fontFamily: 'Quicksand',
                 fontWeight: FontWeight.bold,
                 color: Colors.black87,

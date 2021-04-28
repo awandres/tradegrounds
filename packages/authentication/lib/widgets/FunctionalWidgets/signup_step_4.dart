@@ -22,9 +22,10 @@ class _SignupStep4State extends State<SignupStep4> {
 
     return Column(
       children: [
+        SizedBox(height: 10),
         Container(
           height: deviceSize.height * 0.1,
-          width: deviceSize.width * 1.1,
+          width: deviceSize.width * 1.2,
           // color: Colors.black,
           margin: EdgeInsets.only(bottom: 20),
           child: Row(
@@ -50,7 +51,7 @@ class _SignupStep4State extends State<SignupStep4> {
                       style: TextStyle(
                         fontFamily: 'Quicksand',
                         fontWeight: FontWeight.w600,
-                        fontSize: 20,
+                        fontSize: 22,
                       ),
                       textAlign: TextAlign.right,
                     ),
@@ -60,7 +61,7 @@ class _SignupStep4State extends State<SignupStep4> {
                           fontFamily: 'Quicksand',
                           fontWeight: FontWeight.bold,
                           color: Colors.black54,
-                          fontSize: 10),
+                          fontSize: 14),
                       textAlign: TextAlign.right,
                     ),
                     ButtonTheme(
@@ -75,6 +76,7 @@ class _SignupStep4State extends State<SignupStep4> {
                           style: TextStyle(
                               fontFamily: 'Quicksand',
                               fontWeight: FontWeight.bold,
+                              fontSize: 17,
                               color: Colors.grey),
                           textAlign: TextAlign.right,
                         ),
@@ -95,7 +97,7 @@ class _SignupStep4State extends State<SignupStep4> {
             borderRadius: const BorderRadius.all(const Radius.circular(8.0)),
             child: ConstrainedBox(
               constraints: BoxConstraints(
-                maxHeight: (deviceSize.height * 0.5),
+                maxHeight: (deviceSize.height * 0.4),
               ),
               child: Scrollbar(
                 isAlwaysShown: true,

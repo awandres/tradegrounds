@@ -44,44 +44,49 @@ class _SignupStep2State extends State<SignupStep2> {
           validatorErrorMessage: 'Please enter a store name',
         ),
         SizedBox(height: 10),
-        Material(
-          elevation: 5.0,
-          shadowColor: Colors.black,
-          borderRadius: const BorderRadius.all(const Radius.circular(10.0)),
-          child: DropdownButtonFormField(
-            style: TextStyle(
-              fontSize: 16,
-              color: Colors.black.withOpacity(0.8),
-              fontFamily: 'Quicksand',
-              fontWeight: FontWeight.w700,
-            ),
-            hint: signupService.businessCategory == null
-                ? Text('Business Category')
-                : Text(
-                    signupService.businessCategory,
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+          child: Material(
+            elevation: 5.0,
+            shadowColor: Colors.black,
+            borderRadius: const BorderRadius.all(const Radius.circular(8.0)),
+            child: DropdownButtonFormField(
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.black.withOpacity(0.8),
+                fontFamily: 'Quicksand',
+                fontWeight: FontWeight.w700,
+                height: 1.5,
+              ),
+              hint: signupService.businessCategory == null
+                  ? Text('Business Category')
+                  : Text(
+                      signupService.businessCategory,
+                    ),
+              onChanged: (value) => {
+                signupService.changeBusinessCategory(value),
+              },
+              decoration: InputDecoration(
+                // isDense: true,
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+                border: OutlineInputBorder(
+                  borderRadius: const BorderRadius.all(
+                    const Radius.circular(8.0),
                   ),
-            onChanged: (value) => {
-              signupService.changeBusinessCategory(value),
-            },
-            decoration: InputDecoration(
-              isDense: true,
-              contentPadding: const EdgeInsets.all(10.5),
-              border: OutlineInputBorder(
-                borderRadius: const BorderRadius.all(
-                  const Radius.circular(10.0),
                 ),
               ),
+              isExpanded: true,
+              iconSize: 30.0,
+              items: categories.map(
+                (value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                },
+              ).toList(),
             ),
-            isExpanded: true,
-            iconSize: 30.0,
-            items: categories.map(
-              (value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              },
-            ).toList(),
           ),
         ),
         SizedBox(height: 10),

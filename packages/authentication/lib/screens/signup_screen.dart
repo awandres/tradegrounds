@@ -20,7 +20,8 @@ class _SignupState extends State<Signup> {
     // final _signupKey = GlobalKey<FormState>();
     final deviceSize = MediaQuery.of(context).size;
     final isTablet = deviceSize.width > 750 ? true : false;
-    final isPhone = deviceSize.width < 490 ? true : false;
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
 
     final signupService = Provider.of<SignupProvider>(context);
     int signupStep = signupService.signupStep;
@@ -54,92 +55,95 @@ class _SignupState extends State<Signup> {
       body: SingleChildScrollView(
         child: Center(
           child: Container(
-            margin: isTablet ? EdgeInsets.only(top: 50) : null,
-            child: Material(
-              elevation: 10.0,
-              shadowColor: Colors.black,
-              borderRadius: const BorderRadius.all(const Radius.circular(8.0)),
-              child: Container(
-                height: isTablet ? deviceSize.height * 0.9 : deviceSize.height,
-                width: isTablet ? deviceSize.width * 0.6 : deviceSize.width,
-                padding: EdgeInsets.only(
-                    bottom: 0,
-                    left: 40,
-                    right: 40,
-                    top: (deviceSize.height * 0.10)),
-                child: LayoutBuilder(
-                  builder: (ctx, constraints) {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: deviceSize.width,
-                          decoration: BoxDecoration(
-                              color: Color.fromRGBO(255, 195, 1, 1),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20))),
+            margin: isTablet ? EdgeInsets.only(top: 0) : null,
+            child: Container(
+              height: isTablet ? deviceSize.height * .95 : deviceSize.height,
+              width: isTablet ? deviceSize.width * 0.69 : deviceSize.width,
+              padding: EdgeInsets.only(
+                  // bottom: 10,
+                  left: 40,
+                  right: 40,
+                  top: (deviceSize.height * 0.10)),
+              child: LayoutBuilder(
+                builder: (ctx, constraints) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: deviceSize.width,
+                        decoration: BoxDecoration(
+                            color: Color.fromRGBO(255, 195, 1, 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20))),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
                           child: Text(
                             'Storegrounds',
                             style: Theme.of(context).textTheme.title,
                             textAlign: TextAlign.center,
                           ),
                         ),
-                        if (signupStep == 1)
-                          Flexible(
-                            flex: 3,
-                            child: Container(
-                              height: constraints.maxHeight * 0.3,
-                              width: double.infinity,
-                              child: Image.asset(
-                                'assets/images/storegrounds_swoop.png',
-                                fit: BoxFit.contain,
-                              ),
+                      ),
+                      if (signupStep == 1)
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 15),
+                          child: Container(
+                            height: constraints.maxHeight * 0.28,
+                            width: constraints.maxHeight * 0.5,
+                            child: Image.asset(
+                              'assets/images/storegrounds_swoop.png',
+                              fit: BoxFit.contain,
                             ),
                           ),
-                        Flexible(
-                          flex: 5,
-                          child: Form(
-                            key: signupService.signupKey,
-                            child: SingleChildScrollView(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  if (signupStep >= 3)
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        FlatButton(
-                                          child: Text(
-                                            '< Back',
-                                            style: TextStyle(
-                                              fontFamily: 'Quicksand',
-                                              fontWeight: FontWeight.bold,
-                                            ),
+                        ),
+                      Flexible(
+                        flex: 5,
+                        child: Form(
+                          key: signupService.signupKey,
+                          child: SingleChildScrollView(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                if (signupStep >= 3 && signupStep < 4)
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      FlatButton(
+                                        child: Text(
+                                          '< Back',
+                                          style: TextStyle(
+                                            fontFamily: 'Quicksand',
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 17,
                                           ),
-                                          textColor: Colors.grey,
-                                          onPressed: signupService.handleBack,
                                         ),
-                                      ],
-                                    ),
-                                  if (signupStep == 1) SignupStep1(),
-                                  if (signupStep == 2) SignupStep2(),
-                                  if (signupStep == 3) SignupStep3(),
-                                  if (signupStep == 4) SignupStep4(),
-                                  if (signupStep == 4)
-                                    SizedBox(height: 20)
-                                  else
-                                    SizedBox(height: 0),
-                                  if (signupService.isLoading)
-                                    CircularProgressIndicator(),
-                                  if (!signupService.isLoading)
-                                    RaisedButton(
-                                      elevation: 10,
+                                        textColor: Colors.grey,
+                                        onPressed: signupService.handleBack,
+                                      ),
+                                    ],
+                                  ),
+                                if (signupStep == 1) SignupStep1(),
+                                if (signupStep == 2) SignupStep2(),
+                                if (signupStep == 3) SignupStep3(),
+                                if (signupStep == 4) SignupStep4(),
+                                if (signupStep == 4)
+                                  SizedBox(height: 20)
+                                else
+                                  SizedBox(height: 0),
+                                if (signupService.isLoading)
+                                  CircularProgressIndicator(),
+                                if (!signupService.isLoading)
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                                    child: RaisedButton(
+                                      elevation: 5,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(30),
                                       ),
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 30.0, vertical: 8.0),
+                                          horizontal: 80.0, vertical: 28.0),
                                       color: Theme.of(context).primaryColor,
                                       textColor: Theme.of(context)
                                           .primaryTextTheme
@@ -147,11 +151,14 @@ class _SignupState extends State<Signup> {
                                           .color,
                                       child: Text(
                                         (signupStep > 1 && signupStep < 4)
-                                            ? '         Next         '
+                                            ? 'Next'
                                             : (signupStep == 4)
-                                                ? '        Submit        '
-                                                : '        Sign Up       ',
+                                                ? 'Submit'
+                                                : 'SIGN UP',
+                                        textAlign: TextAlign.center,
                                         style: TextStyle(
+                                          fontSize: 25.0,
+                                          letterSpacing: 7.5,
                                           fontFamily: 'Quicksand',
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -159,16 +166,73 @@ class _SignupState extends State<Signup> {
                                       onPressed: (signupStep < 4)
                                           ? signupService.handleSignupStep
                                           : signupService.submitData,
-                                    )
-                                ],
-                              ),
+                                    ),
+                                  ),
+                                SizedBox(height: isLandscape ? 40 : 125),
+                                if (signupStep == 1)
+                                  Padding(
+                                    padding: EdgeInsets.all(10.0),
+                                    child: Container(
+                                      height: constraints.maxHeight * 0.07,
+                                      width: deviceSize.width,
+// color: Colors.black,
+// padding: EdgeInsets.only(left: 20),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(3.0),
+                                            child: Image.asset(
+                                              'assets/images/tradegroundsIg.png',
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 30,
+                                          ),
+                                          FittedBox(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'Tradegrounds Inc. 2021',
+                                                  style: TextStyle(
+                                                    fontFamily: 'Quicksand',
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 24.0,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  'www.tradegrounds.info',
+                                                  style: TextStyle(
+                                                    fontFamily: 'Quicksand',
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  'v.0.0.1',
+                                                  style: TextStyle(
+                                                    fontFamily: 'Quicksand',
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                              ],
                             ),
                           ),
                         ),
-                      ],
-                    );
-                  },
-                ),
+                      ),
+                    ],
+                  );
+                },
               ),
             ),
           ),
