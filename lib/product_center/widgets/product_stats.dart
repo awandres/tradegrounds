@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../providers/products_provider.dart';
+import '../providers/test_product_provider.dart';
 import 'package:intl/intl.dart';
 
 class ProductStats extends StatelessWidget {

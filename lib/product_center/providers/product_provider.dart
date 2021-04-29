@@ -1,28 +1,13 @@
 import 'package:latlng/latlng.dart';
-import 'package:flutter/foundation.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:storegrounds/delivery_dashboard/widgets/status.dart';
 
+import '../models/product.dart';
+import '../models/product_center.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
-<<<<<<< HEAD
-class Product with ChangeNotifier{
-  String name;
-  String cost;
-  String sku;
-  bool active;
-  double deliveryCost;
-  int amountInsured;
-  int amountDelivered;
-
-  Product ({
-    @required this.name,
-    @required this.cost,
-    @required this.sku,
-    @required this.active,
-    @required this.amountInsured,
-    @required this.amountDelivered,
-    @required this.deliveryCost,
-  });
-=======
 class ProductProvider with ChangeNotifier {
   String status = "Morning Route";
   bool _productListExpanded = false;
@@ -86,18 +71,22 @@ class ProductProvider with ChangeNotifier {
   );
 
   int get activeProducts => productCenter.activeProducts;
+
   int get inactiveProducts => productCenter.inactiveProducts;
 
   int get deliveriesThisWeek => productCenter.deliveriesThisWeek;
+
   int get totalDeliveries => productCenter.totalDeliveries;
+
   // List get productList => _products;
   List get inactiveProductList => _inactiveProductList;
+
   List get activeProductList => _activeProductList;
+
   bool get productListExpanded => _productListExpanded;
 
   void toggleProductListExpanded() {
     _productListExpanded = !_productListExpanded;
     notifyListeners();
   }
->>>>>>> 2fc0daaf496d8fba1d267cebb91eacae34e2945e
 }
