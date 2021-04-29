@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:storegrounds/delivery_dashboard/screens/deliverydashboard_screen.dart';
-import 'package:storegrounds/product_center/providers/test_product_provider.dart';
 import 'delivery_dashboard/providers/dashboard_provider.dart';
-import 'product_center/providers/test_product_provider.dart';
+import 'product_center/providers/product_provider.dart';
 
 import 'delivery_dashboard/screens/deliverydashboard_screen.dart';
 import 'package:authentication/providers/auth.dart';
@@ -43,7 +42,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(
           value: DashboardProvider(),
         ),
-        ChangeNotifierProvider.value(value: ProductProvider())
+        ChangeNotifierProvider.value(
+          value: ProductProvider(),
+        )
       ],
       child: Consumer<Auth>(
         builder: (ctx, auth, _) =>
