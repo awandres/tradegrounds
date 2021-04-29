@@ -2,15 +2,17 @@ import 'package:latlng/latlng.dart';
 import 'package:flutter/foundation.dart';
 
 class Product {
-  String name;
-  String cost;
-  String sku;
-  bool active;
-  double deliveryCost;
-  int amountInsured;
-  int amountDelivered;
+  final String productUrl;
+  final String name;
+  final String cost;
+  final String sku;
+  final bool active;
+  final double deliveryCost;
+  final int amountInsured;
+  final int amountDelivered;
 
   Product ({
+    @required this.productUrl,
     @required this.name,
     @required this.cost,
     @required this.sku,
