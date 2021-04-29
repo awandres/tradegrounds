@@ -6,6 +6,7 @@ import '../widgets/new_product_btn.dart';
 import '../screens/new_product_screen.dart';
 import '../providers/product_provider.dart';
 import '../widgets/product_carousel.dart';
+
 class ProductCenterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

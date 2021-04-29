@@ -59,7 +59,7 @@ class ProductProvider with ChangeNotifier {
       deliveryCost: 1.25,
     );
 
-    get products => [_product1,_product2,_product3, _product4, _product5];
+get products => [_product1,_product2,_product3, _product4, _product5];
 
 
     //product dashboard
@@ -79,9 +79,6 @@ class ProductProvider with ChangeNotifier {
   int get totalDeliveries => productCenter.totalDeliveries;
 
   // List get productList => _products;
-  List get inactiveProductList => _inactiveProductList;
-
-  List get activeProductList => _activeProductList;
 
   bool get productListExpanded => _productListExpanded;
 
