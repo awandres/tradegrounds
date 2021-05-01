@@ -1,4 +1,6 @@
 import 'package:authentication/docs/dummy_delivery_list.dart';
+import 'package:authentication/docs/dummy_product_list.dart';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -303,6 +305,15 @@ class SignupProvider with ChangeNotifier {
           .setData({
         'orderCount': 7,
       });
+      await Firestore.instance
+          .collection('productCenter')
+          .document(authResult.user.uid)
+          .setData({
+        'activeProducts': 7,
+        'inactiveProducts': 3,
+        'deliveriesThisWeek': 22,
+        'totalDeliveries': 180,
+      });
       var db = await Firestore.instance;
 
       // await Firestore.instance
@@ -343,6 +354,35 @@ class SignupProvider with ChangeNotifier {
           'recipient': delivery['recipient'],
           'deliveredAtTime': delivery['deliveredAtTime'],
           'fulfilled': delivery['fulfilled'],
+        });
+      });
+
+      dummyActiveProductList.forEach((product) {
+        Firestore.instance
+            .collection('productCenter')
+            .document(authResult.user.uid)
+            .collection('activeProductList')
+            .add({
+          'name': product['name'],
+          'cost': product['cost'],
+          'sku': product['sku'],
+          'amountInsured': product['amountInsured'],
+          'amountDelivered': product['amountDelivered'],
+          'deliveryCost': product['deliveryCost'],
+        });
+      });
+      dummyInactiveProductList.forEach((product) {
+        Firestore.instance
+            .collection('productCenter')
+            .document(authResult.user.uid)
+            .collection('inactiveProductList')
+            .add({
+          'name': product['name'],
+          'cost': product['cost'],
+          'sku': product['sku'],
+          'amountInsured': product['amountInsured'],
+          'amountDelivered': product['amountDelivered'],
+          'deliveryCost': product['deliveryCost'],
         });
       });
       // await Firestore.instance
