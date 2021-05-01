@@ -2,11 +2,20 @@ import 'dart:ui';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../providers/product_provider.dart';
 import './product_list_item.dart';
 
-class ProductList extends StatelessWidget {
+class ProductList extends StatefulWidget {
+  final AsyncSnapshot productSnapshotData;
+  const ProductList({this.productSnapshotData});
+  @override
+  _ProductListState createState() => _ProductListState();
+}
+
+class _ProductListState extends State<ProductList> {
   @override
   Widget build(BuildContext context) {
     final device = MediaQuery.of(context).size;
@@ -65,14 +74,31 @@ class ProductList extends StatelessWidget {
                             fontFamily: 'Quicksand',
                             letterSpacing: 1),
                       ),
-                      Column(
-                        children:
-                            productService.activeProductList.map((_product) {
-                          return ProductListItem(
-                            product: _product,
-                          );
-                        }).toList(),
-                      ),
+                      StreamBuilder<Object>(
+                          stream: Firestore.instance
+                              .collection('productCenter')
+                              .document('kZ4sfVH81MRX0m91UcRkJlI949q1')
+                              .collection('activeProductList')
+                              .snapshots(),
+                          builder:
+                              (context, AsyncSnapshot productCenterSnapshot) {
+                            if (productCenterSnapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return Center(
+                                child: CircularProgressIndicator(
+                                  backgroundColor: Colors.lightBlueAccent,
+                                ),
+                              );
+                            } else
+                              return Column(
+                                children: productCenterSnapshot.data.documents
+                                    .map<Widget>((_product) {
+                                  return ProductListItem(
+                                    product: _product,
+                                  );
+                                }).toList(),
+                              );
+                          }),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 30, 0, 10),
                         child: Text(
@@ -85,14 +111,31 @@ class ProductList extends StatelessWidget {
                               letterSpacing: 1),
                         ),
                       ),
-                      Column(
-                        children:
-                            productService.inactiveProductList.map((_product) {
-                          return ProductListItem(
-                            product: _product,
-                          );
-                        }).toList(),
-                      ),
+                      StreamBuilder<Object>(
+                          stream: Firestore.instance
+                              .collection('productCenter')
+                              .document('kZ4sfVH81MRX0m91UcRkJlI949q1')
+                              .collection('inactiveProductList')
+                              .snapshots(),
+                          builder:
+                              (context, AsyncSnapshot productCenterSnapshot) {
+                            if (productCenterSnapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return Center(
+                                child: CircularProgressIndicator(
+                                  backgroundColor: Colors.lightBlueAccent,
+                                ),
+                              );
+                            } else
+                              return Column(
+                                children: productCenterSnapshot.data.documents
+                                    .map<Widget>((_product) {
+                                  return ProductListItem(
+                                    product: _product,
+                                  );
+                                }).toList(),
+                              );
+                          }),
                     ],
                   ),
                 ]),
