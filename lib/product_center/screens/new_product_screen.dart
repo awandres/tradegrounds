@@ -138,7 +138,7 @@ class _NewProductScreenState extends State<NewProductScreen> {
             // -- Form 
             // ------------------------------
             child: SingleChildScrollView(
-                          child: Form(
+              child: Form(
                 key: _formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -152,7 +152,7 @@ class _NewProductScreenState extends State<NewProductScreen> {
                         ),
                         SizedBox(width:30),
                         Expanded(
-                                                  child: Text(
+                          child: Text(
                             'Product Info',
                             style: TextStyle(
                               fontSize: 42,
@@ -173,8 +173,8 @@ class _NewProductScreenState extends State<NewProductScreen> {
                         decoration: InputDecoration(
                           filled: true,
                           labelText: 'Name of Product',
-                          fillColor: Color(0xc9c8c7),
-                          focusColor: Color(0xc9c8c7),
+                          fillColor: Colors.grey[200],
+            
                         ),
                         textInputAction: TextInputAction.next,
                         onFieldSubmitted: (_) {
@@ -214,8 +214,7 @@ class _NewProductScreenState extends State<NewProductScreen> {
                               decoration: InputDecoration(
                                 filled: true,
                                 labelText: 'Cost of Product',
-                                fillColor: Color(0xc9c8c7),
-                                focusColor: Colors.grey
+                                fillColor: Colors.grey[200],
                               ),
                               textInputAction: TextInputAction.next,
                               onFieldSubmitted: (_) {
@@ -264,8 +263,7 @@ class _NewProductScreenState extends State<NewProductScreen> {
                               decoration: InputDecoration(
                                 filled: true,
                                 labelText: 'Dimensions',
-                                fillColor: Colors.grey,
-                                focusColor: Colors.grey
+                                fillColor: Colors.grey[200],
                               ),
                               isExpanded: true,
                               iconSize: 30.0,
@@ -303,8 +301,7 @@ class _NewProductScreenState extends State<NewProductScreen> {
                               decoration: InputDecoration(
                                 filled: true,
                                 labelText: 'Weight',
-                                fillColor: Colors.grey,
-                                focusColor: Colors.grey
+                                fillColor: Colors.grey[200],
                               ),
                               isExpanded: true,
                               iconSize: 30.0,
@@ -336,8 +333,7 @@ class _NewProductScreenState extends State<NewProductScreen> {
                               decoration: InputDecoration(
                                 filled: true,
                                 labelText: 'SKU (Optional)',
-                                fillColor: Colors.grey,
-                                focusColor: Colors.grey
+                                fillColor: Colors.grey[200],
                               ),
                               textInputAction: TextInputAction.next,
                               onFieldSubmitted: (_) {
@@ -431,7 +427,7 @@ class _NewProductScreenState extends State<NewProductScreen> {
                     Container(
                       margin: EdgeInsets.only(left:10),
                       child: Padding(
-                        padding: EdgeInsets.fromLTRB(0, 35.0, 0, 0.0),
+                        padding: EdgeInsets.fromLTRB(0, 12.0, 0, 0.0),
                         child: RaisedButton(
                           child: const Text(
                             'Continue',
