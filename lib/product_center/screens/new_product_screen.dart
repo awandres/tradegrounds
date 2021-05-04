@@ -50,6 +50,30 @@ class Product {
     signatureNeeded= !this.signatureNeeded;
   }
 
+  void setName(value){
+    name=value;
+    print(name);
+  }
+
+  void setCost(value){
+    cost=value;
+    print(cost);
+  }
+
+  void setDimensions(value){
+    dimensions=value;
+    print(dimensions);
+  }
+
+  void setWeight(value){
+    weight=value;
+    print(weight);
+  }
+
+  void setSku(value){
+    sku=value;
+    print(sku);
+  }
 }
 
 class NewProductScreen extends StatefulWidget {
@@ -109,6 +133,20 @@ class _NewProductScreenState extends State<NewProductScreen> {
 
   var _isLoading =false;
 
+  // ----------------------------
+  // --- On Submit Function 
+  // ----------------------------
+
+  Future<void> _saveForm() async {
+    final isValid = _formKey.currentState.validate();
+    if (!isValid) {
+      return;
+    }
+    _formKey.currentState.save();
+    setState(() {
+      _isLoading = true;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -212,15 +250,7 @@ class _NewProductScreenState extends State<NewProductScreen> {
                             return null;
                           },
                           onSaved: (value) {
-                            _product = Product(
-                              name:value,
-                              cost:_product.cost,
-                              sku:_product.sku,
-                              active:_product.active,
-                              amountInsured:_product.amountInsured,
-                              amountDelivered: _product.amountDelivered,
-                              deliveryCost: _product.deliveryCost,
-                            );
+                            _product.setName(value);
                           },
                         ),
                       ),
@@ -236,7 +266,7 @@ class _NewProductScreenState extends State<NewProductScreen> {
                             Container(
                               width: 620,
                               child: TextFormField(
-                                keyboardType: TextInputType.number,
+                                keyboardType: TextInputType.datetime,
                                 decoration: InputDecoration(
                                   filled: true,
                                   labelText: 'Cost of Product',
@@ -253,15 +283,7 @@ class _NewProductScreenState extends State<NewProductScreen> {
                                   return null;
                                 },
                                 onSaved: (value) {
-                                  _product = Product(
-                                    name:value,
-                                    cost:_product.cost,
-                                    sku:_product.sku,
-                                    active:_product.active,
-                                    amountInsured:_product.amountInsured,
-                                    amountDelivered: _product.amountDelivered,
-                                    deliveryCost: _product.deliveryCost,
-                                  );
+                                  _product.setCost(value);
                                 },
                               ),
                             ),
@@ -302,7 +324,13 @@ class _NewProductScreenState extends State<NewProductScreen> {
                                   },
                                 ).toList(),
                                 onChanged: (value) => {
-                                  // signupService.changeBusinessCategory(value),
+                                  _product.setDimensions(value)
+                                },
+                                validator: (value) {
+                                  if (value==null) {
+                                    return 'Please provide Dimensions';
+                                  }
+                                  return null;
                                 },
                               ),
                             ),
@@ -343,7 +371,13 @@ class _NewProductScreenState extends State<NewProductScreen> {
                                   },
                                 ).toList(),
                                 onChanged: (value) => {
-                                  // signupService.changeBusinessCategory(value),
+                                  _product.setWeight(value),
+                                },
+                                validator: (value) {
+                                  if (value==null) {
+                                    return 'Please provide Weight';
+                                  }
+                                  return null;
                                 },
                               ),
                             ),
@@ -371,22 +405,17 @@ class _NewProductScreenState extends State<NewProductScreen> {
                                 onFieldSubmitted: (_) {
                                   FocusScope.of(context).requestFocus(_costOfProductFocusNode);
                                 },
-                                validator: (value) {
-                                  if (value.isEmpty) {
-                                    return 'Please provide a name.';
-                                  }
-                                  return null;
-                                },
+                                // ------------------------
+                                // ---- OPTIONAL FIELD
+                                // ------------------------
+                                // validator: (value) {
+                                //   if (value.isEmpty) {
+                                //     return 'Please provide a name.';
+                                //   }
+                                //   return null;
+                                // },
                                 onSaved: (value) {
-                                  _product = Product(
-                                    name:value,
-                                    cost:_product.cost,
-                                    sku:_product.sku,
-                                    active:_product.active,
-                                    amountInsured:_product.amountInsured,
-                                    amountDelivered: _product.amountDelivered,
-                                    deliveryCost: _product.deliveryCost,
-                                  );
+                                  _product.setSku(value);
                                 },
                               ),
                             ),
@@ -403,9 +432,11 @@ class _NewProductScreenState extends State<NewProductScreen> {
                             Icon(Icons.add_circle),
                             SizedBox(width:20),
                             Checkbox(
-                              value: false, 
+                              value: _product.ageVerified, 
                               onChanged: (va){ 
-
+                                setState(() {
+                                  _product.toggleAgeVerified();
+                                });
                               }
                             ),
                             Text(
@@ -423,8 +454,12 @@ class _NewProductScreenState extends State<NewProductScreen> {
                             Icon(Icons.add_circle),
                             SizedBox(width:20),
                             Checkbox(
-                              value: false, 
-                              onChanged: (va){ }
+                              value: _product.insured, 
+                              onChanged: (va){
+                                setState(() {
+                                  _product.toggleInsurance();
+                                }); 
+                              }
                             ),
                             Text(' [Insurance] Do you need this product insured? ')
                           ],
@@ -440,8 +475,12 @@ class _NewProductScreenState extends State<NewProductScreen> {
                             Icon(Icons.add_circle),
                             SizedBox(width:20),
                             Checkbox(
-                              value: false, 
-                              onChanged: (va){ }
+                              value: _product.signatureNeeded, 
+                              onChanged: (va){ 
+                                setState(() {
+                                  _product.toggleSignature();
+                                });
+                              }
                             ),
                             Text(' [Signature] Have the recipient sign the package? ')
                           ],
@@ -456,7 +495,7 @@ class _NewProductScreenState extends State<NewProductScreen> {
                         CircularProgressIndicator()
                       else
                       // ------------------------
-                      // ----- Continue Button
+                      // ----- CONTINUE BUTTON
                       // ------------------------
                       Container(
                         margin: EdgeInsets.only(left:10),
@@ -472,9 +511,7 @@ class _NewProductScreenState extends State<NewProductScreen> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            onPressed: () {
-                              // _submit();
-                            },
+                            onPressed: () => _saveForm(),
                             elevation: 5,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30),
