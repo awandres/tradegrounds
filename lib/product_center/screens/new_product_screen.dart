@@ -12,8 +12,12 @@ class Product {
   String dimensions;
   String weight;
   String sku;
+  // set to false on instantiation
   bool ageVerified;
   int amountInsured;
+  bool insured;
+  bool signatureNeeded;
+
   bool active;
   double deliveryCost;
   int amountDelivered;
@@ -22,11 +26,30 @@ class Product {
     @required this.name,
     @required this.cost,
     @required this.sku,
-    @required this.active,
     @required this.amountInsured,
     @required this.amountDelivered,
     @required this.deliveryCost,
+
+    this.ageVerified =false,
+    this.insured=false,
+    this.signatureNeeded=false,
+    this.active=false,
+    
+
   });
+
+  void toggleAgeVerified(){
+    ageVerified= !this.ageVerified;
+  }
+
+  void toggleInsurance(){
+    insured= !this.insured;
+  }
+
+  void toggleSignature(){
+    signatureNeeded= !this.signatureNeeded;
+  }
+
 }
 
 class NewProductScreen extends StatefulWidget {
@@ -50,6 +73,7 @@ class _NewProductScreenState extends State<NewProductScreen> {
     amountInsured:0,
     amountDelivered: 0,
     deliveryCost: 0,
+    
   );
   
   // ----------------------
@@ -210,8 +234,9 @@ class _NewProductScreenState extends State<NewProductScreen> {
                             Icon(Icons.add_circle),
                             SizedBox(width:20),
                             Container(
-                              width: 600,
+                              width: 620,
                               child: TextFormField(
+                                keyboardType: TextInputType.number,
                                 decoration: InputDecoration(
                                   filled: true,
                                   labelText: 'Cost of Product',
@@ -253,7 +278,7 @@ class _NewProductScreenState extends State<NewProductScreen> {
                             Icon(Icons.add_circle),
                             SizedBox(width:20),
                             Container(
-                              width: 600,
+                              width: 620,
                               child: DropdownButtonFormField(
                                 style: TextStyle(
                                   fontSize: 16,
@@ -276,6 +301,9 @@ class _NewProductScreenState extends State<NewProductScreen> {
                                     );
                                   },
                                 ).toList(),
+                                onChanged: (value) => {
+                                  // signupService.changeBusinessCategory(value),
+                                },
                               ),
                             ),
                           ],
@@ -291,7 +319,7 @@ class _NewProductScreenState extends State<NewProductScreen> {
                             Icon(Icons.add_circle),
                             SizedBox(width:20),
                             Container(
-                              width: 600,
+                              width: 620,
                               child: DropdownButtonFormField(
                                 style: TextStyle(
                                   fontSize: 16,
@@ -306,7 +334,7 @@ class _NewProductScreenState extends State<NewProductScreen> {
                                 ),
                                 isExpanded: true,
                                 iconSize: 30.0,
-                                items: _dimensions.map(
+                                items: _weight.map(
                                   (value) {
                                     return DropdownMenuItem<String>(
                                       value: value,
@@ -314,6 +342,9 @@ class _NewProductScreenState extends State<NewProductScreen> {
                                     );
                                   },
                                 ).toList(),
+                                onChanged: (value) => {
+                                  // signupService.changeBusinessCategory(value),
+                                },
                               ),
                             ),
                           ],
@@ -329,7 +360,7 @@ class _NewProductScreenState extends State<NewProductScreen> {
                             Icon(Icons.add_circle),
                             SizedBox(width:20),
                             Container(
-                              width: 600,
+                              width: 620,
                               child: TextFormField(
                                 decoration: InputDecoration(
                                   filled: true,
@@ -373,7 +404,9 @@ class _NewProductScreenState extends State<NewProductScreen> {
                             SizedBox(width:20),
                             Checkbox(
                               value: false, 
-                              onChanged: (va){ }
+                              onChanged: (va){ 
+
+                              }
                             ),
                             Text(
                               ' [Age Verified] Does this product need to be age verified? ')
@@ -431,7 +464,7 @@ class _NewProductScreenState extends State<NewProductScreen> {
                           padding: EdgeInsets.fromLTRB(0, 12.0, 0, 0.0),
                           child: RaisedButton(
                             child: const Text(
-                              'Continue',
+                              'CONTINUE',
                               style: TextStyle(
                                 fontSize: 25.0,
                                 letterSpacing: 7.5,
@@ -447,7 +480,7 @@ class _NewProductScreenState extends State<NewProductScreen> {
                               borderRadius: BorderRadius.circular(30),
                             ),
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 243.0, vertical: 25.0),
+                                horizontal: 235.0, vertical: 25.0),
                             color: Theme.of(context).primaryColor,
                             textColor: Theme.of(context)
                                 .primaryTextTheme
