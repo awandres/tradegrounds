@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import '../models/product.dart';
-import 'package:intl/intl.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
+import '../../global/widgets/dialog_box.dart';
+
 
 
 class NewProductScreen extends StatefulWidget {
@@ -14,13 +17,14 @@ class NewProductScreen extends StatefulWidget {
 
 class _NewProductScreenState extends State<NewProductScreen> {
   static GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+
   // ----------------------
   // ---- Product Object
   // ----------------------
   var _product =  Product(
-    name:'',
-    cost:'',
-    sku:'',
+    name:null,
+    cost:null,
+    sku:null,
     active:false,
     amountInsured:0,
     amountDelivered: 0,
@@ -60,12 +64,24 @@ class _NewProductScreenState extends State<NewProductScreen> {
   ];
 
   var _isLoading =false;
+  
 
   // ----------------------------
   // --- On Submit Function 
   // ----------------------------
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      // custom dialog box box
+      builder: (ctx) => CustomDialogBox(
+          title: 'Uh Oh!',
+          errorMsg: message,
+          btnText: 'back',
+        )
+      );
+  }
 
-  Future<void> _saveForm() async {
+  Future<void> _submit() async {
     final isValid = _formKey.currentState.validate();
     if (!isValid) {
       return;
@@ -73,6 +89,43 @@ class _NewProductScreenState extends State<NewProductScreen> {
     _formKey.currentState.save();
     setState(() {
       _isLoading = true;
+    });
+    try{
+      // print('Name ${_product.name}');
+      // print('Cost ${_product.cost}');
+      // print('SKU ${_product.sku}');
+      // print('Active ${_product.active}');
+      // print('Signature Required ${_product.signatureNeeded}');
+      // print('Insurance ${_product.insured}');
+      // print('Signature Required ${_product.signatureNeeded}');
+      // print('Age Verified ${_product.ageVerified}');
+      // print('Amount Insured ${_product.amountInsured}');
+      // print('Amount Delivered ${_product.amountDelivered}');
+      // print('Delivery Cost ${_product.deliveryCost}');
+
+      await Firestore.instance
+      .collection('productCenter')
+      .document('kZ4sfVH81MRX0m91UcRkJlI949q1')
+      .collection('activeProductList')
+      .add({
+        // product properties provided on creation
+        'name': _product.name,
+        'cost': _product.cost,
+        'dimensions': _product.dimensions,
+        'weight':_product.weight,
+        'sku': _product.sku,
+        'ageVerification': _product.ageVerified,
+        'insurance': _product.insured,
+        // properties utilized by courier app
+        'active': _product.active,
+        'amountDelivered': _product.amountDelivered,
+        'deliveryCost': _product.deliveryCost,
+      });
+    }catch(error){
+      _showErrorDialog('something went wrong');
+    }
+    setState(() {
+      _isLoading = false;
     });
   }
 
@@ -194,8 +247,8 @@ class _NewProductScreenState extends State<NewProductScreen> {
                             SizedBox(width:20),
                             Container(
                               width: 620,
-                              child: TextFormField(
-                              
+                              child: 
+                              TextFormField(
                                 keyboardType: TextInputType.number,
                                 decoration: InputDecoration(
                                   filled: true,
@@ -217,7 +270,9 @@ class _NewProductScreenState extends State<NewProductScreen> {
                                   _product.setCost(value);
                                 },
                                 inputFormatters: [
-                                  LengthLimitingTextInputFormatter(5),
+                                  CurrencyTextInputFormatter(
+                                    symbol: '\$',
+                                  )
                                 ],
                               ),
                             ),
@@ -447,7 +502,7 @@ class _NewProductScreenState extends State<NewProductScreen> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            onPressed: () => _saveForm(),
+                            onPressed: () => _submit(),
                             elevation: 5,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30),

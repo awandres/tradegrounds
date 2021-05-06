@@ -47,26 +47,26 @@ class Product {
 
   void setName(value){
     name=value;
-    print(name);
+    
   }
 
   void setCost(value){
     cost=value;
-    print(cost);
+    
   }
 
   void setDimensions(value){
     dimensions=value;
-    print(dimensions);
+    
   }
 
   void setWeight(value){
     weight=value;
-    print(weight);
+    
   }
 
   void setSku(value){
     sku=value;
-    print(sku);
+    
   }
 }
