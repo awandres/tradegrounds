@@ -1,9 +1,5 @@
 import 'package:latlng/latlng.dart';
-
-class Product {
-  String name;
-  String cost;
-}
+import '../../product_center/models/product.dart';
 
 class Delivery {
   var items = new List<Product>();

@@ -1,80 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:storegrounds/delivery_dashboard/models/delivery.dart';
+import '../models/product.dart';
+import 'package:intl/intl.dart';
+import 'package:flutter/services.dart';
 
-
-// efedec
-// bigger back button
-// New product in the top bar 
-
-class Product {
-  String name;
-  String cost;
-  String dimensions;
-  String weight;
-  String sku;
-  // set to false on instantiation
-  bool ageVerified;
-  int amountInsured;
-  bool insured;
-  bool signatureNeeded;
-
-  bool active;
-  double deliveryCost;
-  int amountDelivered;
-
-  Product ({
-    @required this.name,
-    @required this.cost,
-    @required this.sku,
-    @required this.amountInsured,
-    @required this.amountDelivered,
-    @required this.deliveryCost,
-
-    this.ageVerified =false,
-    this.insured=false,
-    this.signatureNeeded=false,
-    this.active=false,
-    
-
-  });
-
-  void toggleAgeVerified(){
-    ageVerified= !this.ageVerified;
-  }
-
-  void toggleInsurance(){
-    insured= !this.insured;
-  }
-
-  void toggleSignature(){
-    signatureNeeded= !this.signatureNeeded;
-  }
-
-  void setName(value){
-    name=value;
-    print(name);
-  }
-
-  void setCost(value){
-    cost=value;
-    print(cost);
-  }
-
-  void setDimensions(value){
-    dimensions=value;
-    print(dimensions);
-  }
-
-  void setWeight(value){
-    weight=value;
-    print(weight);
-  }
-
-  void setSku(value){
-    sku=value;
-    print(sku);
-  }
-}
 
 class NewProductScreen extends StatefulWidget {
   // -----------------------------------
@@ -249,6 +177,7 @@ class _NewProductScreenState extends State<NewProductScreen> {
                             }
                             return null;
                           },
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           onSaved: (value) {
                             _product.setName(value);
                           },
@@ -266,7 +195,8 @@ class _NewProductScreenState extends State<NewProductScreen> {
                             Container(
                               width: 620,
                               child: TextFormField(
-                                keyboardType: TextInputType.datetime,
+                              
+                                keyboardType: TextInputType.number,
                                 decoration: InputDecoration(
                                   filled: true,
                                   labelText: 'Cost of Product',
@@ -282,9 +212,13 @@ class _NewProductScreenState extends State<NewProductScreen> {
                                   }
                                   return null;
                                 },
+                                autovalidateMode: AutovalidateMode.onUserInteraction,
                                 onSaved: (value) {
                                   _product.setCost(value);
                                 },
+                                inputFormatters: [
+                                  LengthLimitingTextInputFormatter(5),
+                                ],
                               ),
                             ),
                           ],
@@ -332,6 +266,7 @@ class _NewProductScreenState extends State<NewProductScreen> {
                                   }
                                   return null;
                                 },
+                                autovalidateMode: AutovalidateMode.onUserInteraction,
                               ),
                             ),
                           ],
@@ -379,6 +314,7 @@ class _NewProductScreenState extends State<NewProductScreen> {
                                   }
                                   return null;
                                 },
+                                autovalidateMode: AutovalidateMode.onUserInteraction,
                               ),
                             ),
                           ],

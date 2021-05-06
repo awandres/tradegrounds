@@ -2,7 +2,7 @@ import 'package:latlng/latlng.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:storegrounds/delivery_dashboard/widgets/status.dart';
-
+import '../../product_center/models/product.dart';
 import '../models/delivery.dart';
 import '../models/dashboard.dart';
 import 'package:flutter/material.dart';
