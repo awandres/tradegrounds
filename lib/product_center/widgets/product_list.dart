@@ -8,14 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../providers/product_provider.dart';
 import './product_list_item.dart';
 
-class ProductList extends StatefulWidget {
-  final AsyncSnapshot productSnapshotData;
-  const ProductList({this.productSnapshotData});
-  @override
-  _ProductListState createState() => _ProductListState();
-}
-
-class _ProductListState extends State<ProductList> {
+class ProductList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final device = MediaQuery.of(context).size;
@@ -46,19 +39,42 @@ class _ProductListState extends State<ProductList> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(10),
-                child: TextButton(
-                    onPressed: () {
-                      print('showing full list');
-                    },
-                    child: Text(
-                      'Product Log',
-                      style: TextStyle(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Align(
+                      alignment: Alignment.topCenter,
+                      child: TextButton(
+                        onPressed: () {
+                          print('showing full list');
+                        },
+                        child: Text(
+                          'Product Log',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 35,
+                              fontWeight: FontWeight.w900,
+                              fontFamily: 'Quicksand',
+                              letterSpacing: 1),
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: FlatButton.icon(
+                        onPressed: () => ({productService.toggleListMode()}),
+                        icon: Icon(
+                          Icons.list,
                           color: Colors.white,
-                          fontSize: 35,
-                          fontWeight: FontWeight.w900,
-                          fontFamily: 'Quicksand',
-                          letterSpacing: 1),
-                    )),
+                          size: 34.0,
+                          semanticLabel:
+                              'Text to announce in accessibility modes',
+                        ),
+                        label: Text(''),
+                      ),
+                    )
+                  ],
+                ),
               ),
               Expanded(
                 child: ListView(children: [
