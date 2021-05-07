@@ -25,7 +25,7 @@ class _NewProductScreenState extends State<NewProductScreen> {
     name:null,
     cost:null,
     sku:null,
-    active:false,
+    active:true,
     amountInsured:0,
     amountDelivered: 0,
     deliveryCost: 0,
@@ -423,6 +423,7 @@ class _NewProductScreenState extends State<NewProductScreen> {
                             Icon(Icons.add_circle),
                             SizedBox(width:20),
                             Checkbox(
+                              activeColor: Color(0xFF009A9A),
                               value: _product.ageVerified, 
                               onChanged: (va){ 
                                 setState(() {
@@ -445,6 +446,7 @@ class _NewProductScreenState extends State<NewProductScreen> {
                             Icon(Icons.add_circle),
                             SizedBox(width:20),
                             Checkbox(
+                              activeColor: Color(0xFF009A9A),
                               value: _product.insured, 
                               onChanged: (va){
                                 setState(() {
@@ -466,6 +468,7 @@ class _NewProductScreenState extends State<NewProductScreen> {
                             Icon(Icons.add_circle),
                             SizedBox(width:20),
                             Checkbox(
+                              activeColor: Color(0xFF009A9A),
                               value: _product.signatureNeeded, 
                               onChanged: (va){ 
                                 setState(() {

@@ -10,11 +10,11 @@ class NewOrder extends StatelessWidget {
         children: <Widget>[
           Expanded(
               child: Container(
-                margin: EdgeInsets.only(bottom:30, left:20),
+                margin: EdgeInsets.only(bottom:10, left:10),
                 child: Material(
                   elevation: 10,
                   type: MaterialType.card,
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
                   child: Stack(
                     alignment: AlignmentDirectional.center,
                     fit: StackFit.expand,

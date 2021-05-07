@@ -90,7 +90,7 @@ class Status extends StatelessWidget {
           flex:1,
             child: Container(
               // color: Colors.red,
-            padding: EdgeInsets.only(left:15, right: 15),
+            padding: EdgeInsets.only(left:35, right: 35),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
