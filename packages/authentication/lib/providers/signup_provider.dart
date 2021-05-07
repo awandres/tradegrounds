@@ -1,3 +1,6 @@
+import 'package:authentication/docs/dummy_delivery_list.dart';
+import 'package:authentication/docs/dummy_product_list.dart';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -253,7 +256,7 @@ class SignupProvider with ChangeNotifier {
     return _authenticate(email, password, 'accounts:signUp');
   }
 
-  void submitData( ) async {
+  void submitData() async {
     AuthResult authResult;
 
     if (!_termsAgreed) {
@@ -296,6 +299,102 @@ class SignupProvider with ChangeNotifier {
         'category': _userData.businessCategory,
         'phoneNumber': _userData.phoneNumber,
       });
+      await Firestore.instance
+          .collection('dashboard')
+          .document(authResult.user.uid)
+          .setData({
+        'orderCount': 7,
+      });
+      await Firestore.instance
+          .collection('productCenter')
+          .document(authResult.user.uid)
+          .setData({
+        'activeProducts': 7,
+        'inactiveProducts': 3,
+        'deliveriesThisWeek': 22,
+        'totalDeliveries': 180,
+      });
+      var db = await Firestore.instance;
+
+      // await Firestore.instance
+      //     .collection('dashboard')
+      //     .document(authResult.user.uid)
+      //     .collection('deliveriesInProgress')
+      //     .add({
+      //   // 'itemCount': dummyDeliveriesInProgress[0].itemCount,
+      //   'recipient': dummyDeliveriesInProgress[0]['recipient'],
+      //   'deliveredAtTime': dummyDeliveriesInProgress[0].deliveredAtTime,
+      //   'estimatedDeliveryTime':
+      //       dummyDeliveriesInProgress[0].estimatedDeliveryTime,
+      //   'fulfilled': dummyDeliveriesInProgress[0].fulfilled,
+      // });
+
+      print('added one');
+
+      dummyDeliveriesInProgress.forEach((delivery) {
+        Firestore.instance
+            .collection('dashboard')
+            .document(authResult.user.uid)
+            .collection('deliveriesInProgress')
+            .add({
+          'itemCount': delivery['itemCount'],
+          'recipient': delivery['recipient'],
+          'deliveredAtTime': delivery['deliveredAtTime'],
+          'estimatedDeliveryTime': delivery['estimatedDeliveryTime'],
+          'fulfilled': delivery['fulfilled'],
+        });
+      });
+      dummyCompletedDeliveries.forEach((delivery) {
+        Firestore.instance
+            .collection('dashboard')
+            .document(authResult.user.uid)
+            .collection('completedDeliveries')
+            .add({
+          'itemCount': delivery['itemCount'],
+          'recipient': delivery['recipient'],
+          'deliveredAtTime': delivery['deliveredAtTime'],
+          'fulfilled': delivery['fulfilled'],
+        });
+      });
+
+      dummyActiveProductList.forEach((product) {
+        Firestore.instance
+            .collection('productCenter')
+            .document(authResult.user.uid)
+            .collection('activeProductList')
+            .add({
+          'name': product['name'],
+          'cost': product['cost'],
+          'sku': product['sku'],
+          'active': product['active'],
+          'amountInsured': product['amountInsured'],
+          'amountDelivered': product['amountDelivered'],
+          'deliveryCost': product['deliveryCost'],
+        });
+      });
+      dummyInactiveProductList.forEach((product) {
+        Firestore.instance
+            .collection('productCenter')
+            .document(authResult.user.uid)
+            .collection('inactiveProductList')
+            .add({
+          'name': product['name'],
+          'cost': product['cost'],
+          'sku': product['sku'],
+          'active': product['active'],
+          'amountInsured': product['amountInsured'],
+          'amountDelivered': product['amountDelivered'],
+          'deliveryCost': product['deliveryCost'],
+        });
+      });
+      // await Firestore.instance
+      //     .collection('dashboard')
+      //     .document(authResult.user.uid)
+      //     .collection('deliveriesInProgress')
+      //     .document('testDeliveries')
+      //     .setData({
+      //   'orderCount': 10,
+      // });
     } on HttpException catch (error) {
       var errorMessage = 'Authentication Failed';
       if (error.toString().contains('EMAIL_EXISTS')) {
