@@ -127,6 +127,8 @@ class _NewProductScreenState extends State<NewProductScreen> {
     setState(() {
       _isLoading = false;
     });
+
+    Navigator.of(context).pop();
   }
 
   @override
