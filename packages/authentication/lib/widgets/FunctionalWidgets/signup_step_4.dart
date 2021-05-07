@@ -18,7 +18,6 @@ class _SignupStep4State extends State<SignupStep4> {
     final signupService = Provider.of<SignupProvider>(context);
     final deviceSize = MediaQuery.of(context).size;
     final terms = termsObject;
-    print('terms object is $terms');
 
     return Column(
       children: [

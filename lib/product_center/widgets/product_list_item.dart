@@ -17,13 +17,12 @@ class _OrderListItemState extends State<ProductListItem> {
   @override
   Widget build(BuildContext context) {
     final device = MediaQuery.of(context).size;
-
     return Opacity(
-      opacity: widget.product.active ? 1 : .9,
+      opacity: widget.product['active'] ? 1 : .9,
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(20.0)),
-            color: widget.product.active ? Colors.white : Color(0xFFE0E0E0),
+            color: widget.product['active'] ? Colors.white : Color(0xFFE0E0E0),
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.5),
@@ -51,7 +50,9 @@ class _OrderListItemState extends State<ProductListItem> {
                   ConstrainedBox(
                     constraints: BoxConstraints(maxHeight: 150, maxWidth: 180),
                     child: Image.asset(
-                      'assets/images/storegroundsLogo.png',
+                      widget.product['imageUrl'] != null
+                          ? widget.product['imageUrl']
+                          : 'assets/images/storegroundsLogo.png',
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -62,7 +63,7 @@ class _OrderListItemState extends State<ProductListItem> {
                       FittedBox(
                         fit: BoxFit.scaleDown,
                         child: Text(
-                          widget.product.name,
+                          widget.product['name'],
                           style: TextStyle(
                               fontSize: 28,
                               fontWeight: FontWeight.bold,
@@ -79,7 +80,7 @@ class _OrderListItemState extends State<ProductListItem> {
                               fontFamily: 'Quicksand',
                               color: Colors.green,
                             ),
-                            text: '${widget.product.cost}',
+                            text: '${widget.product['cost']}',
                             children: <TextSpan>[
                               TextSpan(
                                   text: ' + Tax',
@@ -96,7 +97,7 @@ class _OrderListItemState extends State<ProductListItem> {
                       FittedBox(
                         fit: BoxFit.scaleDown,
                         child: Text(
-                          'Delivery Cost Space + ${widget.product.deliveryCost}',
+                          'Delivery Cost Space + ${widget.product['deliveryCost']}',
                           style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -106,7 +107,7 @@ class _OrderListItemState extends State<ProductListItem> {
                       FittedBox(
                         fit: BoxFit.scaleDown,
                         child: Text(
-                          'SKU#${widget.product.sku}',
+                          'SKU#${widget.product['sku']}',
                           style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -116,7 +117,7 @@ class _OrderListItemState extends State<ProductListItem> {
                       FittedBox(
                         fit: BoxFit.scaleDown,
                         child: Text(
-                          '${widget.product.amountDelivered} delivered',
+                          '${widget.product['amountDelivered']} delivered',
                           style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -163,7 +164,7 @@ class _OrderListItemState extends State<ProductListItem> {
                   FittedBox(
                     fit: BoxFit.scaleDown,
                     child: Text(
-                      'Insured \$${widget.product.amountInsured}',
+                      'Insured \$${widget.product['amountInsured']}',
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,

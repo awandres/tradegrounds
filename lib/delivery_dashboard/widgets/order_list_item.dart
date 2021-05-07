@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../models/delivery.dart';
+// import '../models/delivery.dart';
 
 class OrderListItem extends StatefulWidget {
   final delivery;
@@ -48,7 +48,7 @@ class _OrderListItemState extends State<OrderListItem> {
                     FittedBox(
                       fit: BoxFit.scaleDown,
                       child: Text(
-                        widget.delivery.recipient,
+                        widget.delivery['recipient'],
                         style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -58,7 +58,7 @@ class _OrderListItemState extends State<OrderListItem> {
                     FittedBox(
                       fit: BoxFit.cover,
                       child: Text(
-                        widget.delivery.itemCount.toString() + ' items',
+                        widget.delivery['itemCount'] + ' items',
                         style: TextStyle(
                             // fontSize: 17,
                             fontWeight: FontWeight.bold,
@@ -76,7 +76,7 @@ class _OrderListItemState extends State<OrderListItem> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    widget.delivery.fulfilled
+                    widget.delivery['fulfilled']
                         ? Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -88,7 +88,7 @@ class _OrderListItemState extends State<OrderListItem> {
                                     fontFamily: 'Quicksand'),
                               ),
                               Text(
-                                'at ${widget.delivery.deliveredAtTime.toString()}',
+                                'at ${widget.delivery['deliveredAtTime']}',
                                 style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
@@ -107,7 +107,7 @@ class _OrderListItemState extends State<OrderListItem> {
                                     fontFamily: 'Quicksand'),
                               ),
                               Text(
-                                'at ${widget.delivery.estimatedDeliveryTime.toString()}',
+                                'at ${widget.delivery['estimatedDeliveryTime']}',
                                 style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
@@ -116,7 +116,7 @@ class _OrderListItemState extends State<OrderListItem> {
                             ],
                           ),
                     SizedBox(width: 8),
-                    widget.delivery.fulfilled
+                    widget.delivery['fulfilled']
                         ? Icon(
                             Icons.check_circle,
                             color: Color(0xFF36814A),

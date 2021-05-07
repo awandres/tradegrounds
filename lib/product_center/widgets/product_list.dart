@@ -2,6 +2,8 @@ import 'dart:ui';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../providers/product_provider.dart';
 import './product_list_item.dart';
@@ -37,19 +39,44 @@ class ProductList extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(10),
-                child: TextButton(
-                    onPressed: () {
-                      print('showing full list');
-                    },
-                    child: Text(
-                      'Product Log',
-                      style: TextStyle(
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(width: 60),
+                    Align(
+                      alignment: Alignment.topCenter,
+                      child: TextButton(
+                        onPressed: () {
+                          print('showing full list');
+                        },
+                        child: Text(
+                          'Product Log',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 35,
+                              fontWeight: FontWeight.w900,
+                              fontFamily: 'Quicksand',
+                              letterSpacing: 1),
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: FlatButton.icon(
+                        onPressed: () => ({productService.toggleListMode()}),
+                        icon: Icon(
+                          Icons.view_carousel_rounded,
                           color: Colors.white,
-                          fontSize: 35,
-                          fontWeight: FontWeight.w900,
-                          fontFamily: 'Quicksand',
-                          letterSpacing: 1),
-                    )),
+                          size: 34.0,
+                          semanticLabel:
+                              'Text to announce in accessibility modes',
+                        ),
+                        label: Text(''),
+                      ),
+                    )
+                  ],
+                ),
               ),
               Expanded(
                 child: ListView(children: [
@@ -65,14 +92,31 @@ class ProductList extends StatelessWidget {
                             fontFamily: 'Quicksand',
                             letterSpacing: 1),
                       ),
-                      Column(
-                        children:
-                            productService.activeProductList.map((_product) {
-                          return ProductListItem(
-                            product: _product,
-                          );
-                        }).toList(),
-                      ),
+                      StreamBuilder<Object>(
+                          stream: Firestore.instance
+                              .collection('productCenter')
+                              .document('kZ4sfVH81MRX0m91UcRkJlI949q1')
+                              .collection('activeProductList')
+                              .snapshots(),
+                          builder:
+                              (context, AsyncSnapshot productCenterSnapshot) {
+                            if (productCenterSnapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return Center(
+                                child: CircularProgressIndicator(
+                                  backgroundColor: Colors.lightBlueAccent,
+                                ),
+                              );
+                            } else
+                              return Column(
+                                children: productCenterSnapshot.data.documents
+                                    .map<Widget>((_product) {
+                                  return ProductListItem(
+                                    product: _product,
+                                  );
+                                }).toList(),
+                              );
+                          }),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 30, 0, 10),
                         child: Text(
@@ -85,14 +129,31 @@ class ProductList extends StatelessWidget {
                               letterSpacing: 1),
                         ),
                       ),
-                      Column(
-                        children:
-                            productService.inactiveProductList.map((_product) {
-                          return ProductListItem(
-                            product: _product,
-                          );
-                        }).toList(),
-                      ),
+                      StreamBuilder<Object>(
+                          stream: Firestore.instance
+                              .collection('productCenter')
+                              .document('kZ4sfVH81MRX0m91UcRkJlI949q1')
+                              .collection('inactiveProductList')
+                              .snapshots(),
+                          builder:
+                              (context, AsyncSnapshot productCenterSnapshot) {
+                            if (productCenterSnapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return Center(
+                                child: CircularProgressIndicator(
+                                  backgroundColor: Colors.lightBlueAccent,
+                                ),
+                              );
+                            } else
+                              return Column(
+                                children: productCenterSnapshot.data.documents
+                                    .map<Widget>((_product) {
+                                  return ProductListItem(
+                                    product: _product,
+                                  );
+                                }).toList(),
+                              );
+                          }),
                     ],
                   ),
                 ]),
