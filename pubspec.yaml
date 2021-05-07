@@ -44,6 +44,8 @@ dependencies:
   flutter_launcher_icons: ^0.8.0
   # intl: ^0.17.0
   percent_indicator: ^2.1.9+1
+  currency_text_input_formatter: ^2.0.1
+  
 
 flutter_icons:
   image_path: "assets/images/storegroundsLogo1.png"
@@ -102,3 +104,5 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+dependency_overrides:
+  intl: ^0.17.0
