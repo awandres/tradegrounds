@@ -45,7 +45,7 @@ class _ProductCenterScreenState extends State<ProductCenterScreen>
                       title: 'Products',
                       products: productService.activeProductList,
                     )),
-          if (!productService.productListExpanded)
+          if (!productService.productListExpanded || !productService.listMode)
             Expanded(
               flex: 2,
               child: Padding(

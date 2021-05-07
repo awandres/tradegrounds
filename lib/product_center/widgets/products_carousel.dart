@@ -167,7 +167,7 @@ class ProductsCarousel extends StatelessWidget {
                       offset: Offset(0, 0),
                     ),
                   ]),
-              padding: EdgeInsets.fromLTRB(30, 10, 30, 0),
+              padding: EdgeInsets.fromLTRB(10, 0, 30, 0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[

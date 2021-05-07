@@ -18,7 +18,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   // ---------------------------------------------------------------------
-  // -------Statefull widget that Handles Login Screen functionality 
+  // -------Statefull widget that Handles Login Screen functionality
   // ---------------------------------------------------------------------
   final GlobalKey<FormState> _loginKey = GlobalKey();
   Map<String, String> _authData = {
@@ -33,18 +33,17 @@ class _LoginScreenState extends State<LoginScreen> {
   // ----------------------------------------------------------------------
   void _showErrorDialog(String message) {
     showDialog(
-      context: context,
-      // custom dialog box box
-      builder: (ctx) => CustomDialogBox(
-          title: 'Uh Oh!',
-          errorMsg: message,
-          btnText: 'back',
-        )
-      );
+        context: context,
+        // custom dialog box box
+        builder: (ctx) => CustomDialogBox(
+              title: 'Uh Oh!',
+              errorMsg: message,
+              btnText: 'back',
+            ));
   }
 
   // ----------------------------------------------------------------------
-  // --- Submit Function is defined below which returns a future 
+  // --- Submit Function is defined below which returns a future
   // ----------------------------------------------------------------------
   Future<void> _submit() async {
     if (!_loginKey.currentState.validate()) {
@@ -93,9 +92,9 @@ class _LoginScreenState extends State<LoginScreen> {
     final isPhone = deviceSize.width < 490 ? true : false;
 
     return Scaffold(
-  // ---------------------------------------------------------------
-  // --- Body begins here. Wrapped in a single child scroll view
-  // ---------------------------------------------------------------
+      // ---------------------------------------------------------------
+      // --- Body begins here. Wrapped in a single child scroll view
+      // ---------------------------------------------------------------
       body: SingleChildScrollView(
         child: Center(
           child: Container(
@@ -106,9 +105,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 left: 40,
                 right: 40,
                 top: (deviceSize.height * 0.10)),
-      // ------------------------------------------------------------------------------
-      // --------- Layout builder passes down constraints to child widgets here
-      // ------------------------------------------------------------------------------
+            // ------------------------------------------------------------------------------
+            // --------- Layout builder passes down constraints to child widgets here
+            // ------------------------------------------------------------------------------
             child: LayoutBuilder(builder: (ctx, constraints) {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -146,9 +145,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           style: Theme.of(context).textTheme.title,
                         ),
                       )),
-          // ---------------------------------------------------
-          // ---- Container that wraps custom Auth Form fields
-          // --------------------------------------------------
+                  // ---------------------------------------------------
+                  // ---- Container that wraps custom Auth Form fields
+                  // --------------------------------------------------
                   Container(
                     height: constraints.maxHeight * 0.40,
                     width: constraints.maxWidth * 0.7,
@@ -157,27 +156,27 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: SingleChildScrollView(
                         child: Column(
                           children: <Widget>[
-                          // ----------------
-                          // -- Email Input
-                          // ----------------
+                            // ----------------
+                            // -- Email Input
+                            // ----------------
                             AuthFormField(
-                                valueKey: 'email',
-                                labelText: 'Email',
-                                keyboardType: TextInputType.emailAddress,
-                                textInputAction: TextInputAction.next,
-                                onSavedFunction: (String value) {
-                                  _authData['email'] = value;
-                                },
-                                validatorFunction: emailValidation,
-                                validatorErrorMessage:
-                                    'Please enter a valid email',
+                              valueKey: 'email',
+                              labelText: 'Email',
+                              keyboardType: TextInputType.emailAddress,
+                              textInputAction: TextInputAction.next,
+                              onSavedFunction: (String value) {
+                                _authData['email'] = value;
+                              },
+                              validatorFunction: emailValidation,
+                              validatorErrorMessage:
+                                  'Please enter a valid email',
                             ),
                             SizedBox(
-                              height: 30,
+                              height: 10,
                             ),
-                          // ----------------
-                          // -- Password
-                          // ----------------
+                            // ----------------
+                            // -- Password
+                            // ----------------
                             AuthFormField(
                               valueKey: 'password',
                               labelText: 'Password',
@@ -192,9 +191,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             SizedBox(
                               height: 10,
                             ),
-                          // -----------------------------------------------------------
-                          // ---  Route to Register screen
-                          // -----------------------------------------------------------
+                            // -----------------------------------------------------------
+                            // ---  Route to Register screen
+                            // -----------------------------------------------------------
                             Padding(
                               padding: EdgeInsets.all(10.0),
                               child: FlatButton(
@@ -231,9 +230,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             if (_isLoading)
                               CircularProgressIndicator()
                             else
-                            // ------------------------
-                            // ----- Login Button
-                            // ------------------------
+                              // ------------------------
+                              // ----- Login Button
+                              // ------------------------
                               Padding(
                                 padding: EdgeInsets.fromLTRB(0, 20.0, 0, 0.0),
                                 child: RaisedButton(
