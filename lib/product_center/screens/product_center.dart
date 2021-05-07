@@ -37,7 +37,7 @@ class _ProductCenterScreenState extends State<ProductCenterScreen>
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Expanded(
-              flex: 4,
+              flex: 8,
               child: productService.listMode
                   ? ProductList()
                   : ProductsCarousel(
@@ -47,7 +47,7 @@ class _ProductCenterScreenState extends State<ProductCenterScreen>
                     )),
           if (!productService.productListExpanded || !productService.listMode)
             Expanded(
-              flex: 2,
+              flex: 3,
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Row(children: [

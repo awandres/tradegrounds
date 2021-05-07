@@ -15,9 +15,9 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final dash = Provider.of<DashboardProvider>(context);
     double height = MediaQuery.of(context).size.height;
-    int _flex1 = dash.orderListExpanded ? 0 : 3,
-        _flex2 = dash.orderListExpanded ? 8 : 6,
-        _flex3 = dash.orderListExpanded ? 0 : 8;
+    int _flex1 = dash.orderListExpanded ? 0 : 4,
+        _flex2 = dash.orderListExpanded ? 8 : 7,
+        _flex3 = dash.orderListExpanded ? 0 : 9;
 
     var height1 = (_flex1 * height) / (_flex1 + _flex2 + _flex3);
     var height2 = (_flex2 * height) / (_flex1 + _flex2 + _flex3);
@@ -75,7 +75,7 @@ class MainScreen extends StatelessWidget {
                       // ),
                       AnimatedContainer(
                         constraints:
-                            BoxConstraints(maxHeight: isLandscape ? 150 : 270),
+                            BoxConstraints(maxHeight: isLandscape ? 150 : 200),
                         duration: _duration,
                         curve: Curves.easeOut,
                         height: height3,
