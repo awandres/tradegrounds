@@ -61,9 +61,9 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter:
   assets:
-    - assets/images/storegroundsLogo.png
-    - assets/images/tradegroundsIg.png
-    - assets/images/storegrounds_swoop.png
+    - assets/
+    - assets/images/
+
 
   fonts:
     - family: Pacifico

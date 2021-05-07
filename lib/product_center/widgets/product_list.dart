@@ -40,8 +40,10 @@ class ProductList extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(10),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    SizedBox(width: 60),
                     Align(
                       alignment: Alignment.topCenter,
                       child: TextButton(
@@ -64,7 +66,7 @@ class ProductList extends StatelessWidget {
                       child: FlatButton.icon(
                         onPressed: () => ({productService.toggleListMode()}),
                         icon: Icon(
-                          Icons.list,
+                          Icons.view_carousel_rounded,
                           color: Colors.white,
                           size: 34.0,
                           semanticLabel:

@@ -12,13 +12,14 @@ class ProductProvider with ChangeNotifier {
 //Products
   List<Product> _activeProductList = [
     Product(
-      name: 'Wolfneck Blazer',
+      name: 'Boots',
       cost: '150.00',
       sku: '15ADU7C126',
       active: true,
       amountInsured: 150,
       amountDelivered: 13,
       deliveryCost: 4.25,
+      imageUrl: 'assets/images/boots.jpg',
     ),
     Product(
       name: 'Harlequin Blazer',
@@ -28,6 +29,7 @@ class ProductProvider with ChangeNotifier {
       amountInsured: 130,
       amountDelivered: 11,
       deliveryCost: 3.25,
+      imageUrl: 'assets/images/shirt.jpg',
     ),
     Product(
       name: 'Wolfneck Blazer',
@@ -37,6 +39,7 @@ class ProductProvider with ChangeNotifier {
       amountInsured: 90,
       amountDelivered: 13,
       deliveryCost: 1.25,
+      imageUrl: 'assets/images/blazer.jpg',
     ),
   ];
 
@@ -49,6 +52,7 @@ class ProductProvider with ChangeNotifier {
       amountInsured: 90,
       amountDelivered: 13,
       deliveryCost: 1.25,
+      imageUrl: 'assets/images/blazer.jpg',
     ),
     Product(
       name: 'Craft Bidet',
@@ -58,6 +62,7 @@ class ProductProvider with ChangeNotifier {
       amountInsured: 90,
       amountDelivered: 13,
       deliveryCost: 1.25,
+      imageUrl: 'assets/images/sweater.jpg',
     ),
   ];
 

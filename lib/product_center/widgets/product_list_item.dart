@@ -50,7 +50,7 @@ class _OrderListItemState extends State<ProductListItem> {
                   ConstrainedBox(
                     constraints: BoxConstraints(maxHeight: 150, maxWidth: 180),
                     child: Image.asset(
-                      'assets/images/storegroundsLogo.png',
+                      widget.product['imageUrl'],
                       fit: BoxFit.cover,
                     ),
                   ),

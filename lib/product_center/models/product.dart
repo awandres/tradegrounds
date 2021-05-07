@@ -2,7 +2,7 @@ import 'package:latlng/latlng.dart';
 import 'package:flutter/foundation.dart';
 
 class Product {
-  final String productUrl;
+  // final String productUrl;
   final String name;
   final String cost;
   final String sku;
@@ -10,9 +10,10 @@ class Product {
   final double deliveryCost;
   final int amountInsured;
   final int amountDelivered;
+  final String imageUrl;
 
-  Product ({
-    @required this.productUrl,
+  Product({
+    // @required this.productUrl,
     @required this.name,
     @required this.cost,
     @required this.sku,
@@ -20,5 +21,6 @@ class Product {
     @required this.amountInsured,
     @required this.amountDelivered,
     @required this.deliveryCost,
+    @required this.imageUrl,
   });
 }

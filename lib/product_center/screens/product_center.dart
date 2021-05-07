@@ -12,7 +12,18 @@ class ProductCenterScreen extends StatefulWidget {
   _ProductCenterScreenState createState() => _ProductCenterScreenState();
 }
 
-class _ProductCenterScreenState extends State<ProductCenterScreen> {
+class _ProductCenterScreenState extends State<ProductCenterScreen>
+    with SingleTickerProviderStateMixin {
+  TabController _tabController;
+  PageController _pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+    _pageController = PageController(initialPage: 0, viewportFraction: 0.8);
+  }
+
   @override
   Widget build(BuildContext context) {
     var expandedList = false;
@@ -27,7 +38,13 @@ class _ProductCenterScreenState extends State<ProductCenterScreen> {
         children: <Widget>[
           Expanded(
               flex: 4,
-              child: productService.listMode ? ProductList() : PostsCarousel()),
+              child: productService.listMode
+                  ? ProductList()
+                  : ProductsCarousel(
+                      pageController: _pageController,
+                      title: 'Products',
+                      products: productService.activeProductList,
+                    )),
           if (!productService.productListExpanded)
             Expanded(
               flex: 2,
