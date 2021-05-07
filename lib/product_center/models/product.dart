@@ -7,6 +7,7 @@ class Product {
   String dimensions;
   String weight;
   String sku;
+  String imageUrl;
   // set to false on instantiation
   bool ageVerified;
   int amountInsured;
@@ -25,49 +26,42 @@ class Product {
     @required this.amountInsured,
     @required this.amountDelivered,
     @required this.deliveryCost,
-
-    this.ageVerified =false,
-    this.insured=false,
-    this.signatureNeeded=false,
-    this.active=false,
-    
-
+    @required this.imageUrl,
+    this.ageVerified = false,
+    this.insured = false,
+    this.signatureNeeded = false,
+    this.active = false,
   });
 
-  void toggleAgeVerified(){
-    ageVerified= !this.ageVerified;
+  void toggleAgeVerified() {
+    ageVerified = !this.ageVerified;
   }
 
-  void toggleInsurance(){
-    insured= !this.insured;
+  void toggleInsurance() {
+    insured = !this.insured;
   }
 
-  void toggleSignature(){
-    signatureNeeded= !this.signatureNeeded;
+  void toggleSignature() {
+    signatureNeeded = !this.signatureNeeded;
   }
 
-  void setName(value){
-    name=value;
-    
+  void setName(value) {
+    name = value;
   }
 
-  void setCost(value){
-    cost=value;
-    
+  void setCost(value) {
+    cost = value;
   }
 
-  void setDimensions(value){
-    dimensions=value;
-    
+  void setDimensions(value) {
+    dimensions = value;
   }
 
-  void setWeight(value){
-    weight=value;
-    
+  void setWeight(value) {
+    weight = value;
   }
 
-  void setSku(value){
-    sku=value;
-    
+  void setSku(value) {
+    sku = value;
   }
 }

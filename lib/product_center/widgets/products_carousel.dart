@@ -48,7 +48,9 @@ class ProductsCarousel extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(15.0),
               child: Image.asset(
-                product.imageUrl,
+                product.imageUrl != null
+                    ? product.imageUrl
+                    : 'assets/images/storegroundsLogo.png',
                 fit: BoxFit.fill,
                 height: double.infinity,
               ),
