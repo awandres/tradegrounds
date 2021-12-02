@@ -1,4 +1,4 @@
-# storegrounds
+# tradegrounds
 E-Commerce and Delivery app tailored to local merchants and vendors
 
 ## Getting Started
