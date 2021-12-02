@@ -1,6 +1,5 @@
 # storegrounds
-
-A local merchants dream in spreading thier ideas, store front an commerece within thier little niches. 
+E-Commerce and Delivery app tailored to local merchants and vendors
 
 ## Getting Started
 
